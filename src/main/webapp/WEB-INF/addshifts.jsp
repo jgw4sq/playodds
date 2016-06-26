@@ -1,5 +1,5 @@
-<form name="f2" method="post" action="RequestOff" id="f2">
-		Pool: <input type="text" name="pool" placeholder="Pool">
+<form name="f2" method="post" action="AddShifts" id="f2">
+		Pool: <input type="text" name="pool" placeholder="Pool"><br>
 		StartTime: <input type="text" name="year" placeholder="year"><input
 			type="text" name="month" placeholder="month(01)"><input
 			type="text" name="day" placeholder="day(01)"><input
