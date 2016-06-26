@@ -55,8 +55,33 @@ public class Login extends HttpServlet {
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 						stmt = con.createStatement();
-			String sql = "SELECT * FROM SHIFTS WHERE guard='Jake Weber';";
-			ResultSet rs = stmt.executeQuery(sql);
+						String username = (String) request.getParameter("username");
+						 String sql = "SELECT * FROM GUARDS WHERE name='"+username+"';";
+						 String password = (String) request.getParameter("password");
+						 int passw = hash(password);
+						 ResultSet rs = stmt.executeQuery(sql);
+						if(rs.next()){
+							int pass = rs.getInt("password");
+							if(pass==passw){
+								System.out.println("Create user");
+								int age =rs.getInt("age");
+								String pool=rs.getString("mainPool");
+								boolean otherpools=rs.getBoolean("otherPools");
+								int rank=rs.getInt("rank");
+								String position =rs.getString("position");
+								USER = new User( "Jake Weber",  position,  pool,  myshifts,
+										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
+							}else{
+						        request.getRequestDispatcher("/WEB-INF/wrongpass.jsp").forward(request, response);
+
+							}
+							}else{
+						        request.getRequestDispatcher("/WEB-INF/singup.jsp").forward(request, response);
+
+							}
+							
+			 sql = "SELECT * FROM SHIFTS WHERE guard='Jake Weber';";
+			 rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				String guard = rs.getString("guard");
 				Timestamp startTime= rs.getTimestamp("startTime");
@@ -81,25 +106,23 @@ public class Login extends HttpServlet {
 				}
 				
 			}
-			stmt = con.createStatement();
-			 sql = "SELECT * FROM GUARDS WHERE name='Jake Weber';";
-			 rs = stmt.executeQuery(sql);
-			if(rs.next()){
-				System.out.println("Create user");
-				int age =rs.getInt("age");
-				String pool=rs.getString("mainPool");
-				boolean otherpools=rs.getBoolean("otherPools");
-				int rank=rs.getInt("rank");
-				String position =rs.getString("position");
-				USER = new User( "Jake Weber",  position,  pool,  myshifts,
-						 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
-			}
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
         request.getRequestDispatcher("/WEB-INF/hompage.jsp").forward(request, response);
 
+	}
+	
+	public static int hash(String password){
+		int x = 0;
+		String [] pass = password.split("");
+		for (int i=0; i<password.length();i++){
+			 x +=  password.charAt(i);
+		}
+		return x;
+		
 	}
 
 }

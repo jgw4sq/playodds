@@ -34,6 +34,7 @@
     </head>
 
     <body>
+    	The username of password you entered was incorrect.
         <div id="login_form">
             <div class="new"><span>enter login details</span></div>  <!-- This is your header text-->
             <form name="f1" method="post" action="Login" id="f1">
@@ -56,6 +57,5 @@
                 </table>
             </form> 
         </div>
-        <a href="<%=request.getContextPath()%>/SignUp">No Account? Sign Up!</a>
     </body>
 </html>
