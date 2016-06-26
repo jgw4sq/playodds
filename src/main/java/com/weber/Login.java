@@ -73,10 +73,12 @@ public class Login extends HttpServlet {
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 							}else{
 								response.sendRedirect("/WEB-INF/wrongpass.jsp");
+								return;
 
 							}
 							}else{
 								response.sendRedirect("/WEB-INF/signup.jsp");
+								return;
 
 							}
 							
