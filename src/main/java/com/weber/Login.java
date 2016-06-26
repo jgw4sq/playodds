@@ -54,22 +54,29 @@ public class Login extends HttpServlet {
 			  
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+			 /**
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+						*/
 						stmt = con.createStatement();
 						String username = (String) request.getParameter("username");
-						 String sql = "SELECT * FROM GUARDS WHERE name='"+username+"';";
+						 String sql = "SELECT * FROM GUARDS WHERE email='"+username+"';";
 						 String password = (String) request.getParameter("password");
 						 int passw = hash(password);
 						 ResultSet rs = stmt.executeQuery(sql);
 						if(rs.next()){
 							int pass = rs.getInt("password");
+							System.out.println(pass);
+							System.out.println(passw);
 							if(pass==passw){
 								System.out.println("Create user");
+								String name = rs.getString("name");
 								int age =rs.getInt("age");
 								String pool=rs.getString("mainPool");
 								boolean otherpools=rs.getBoolean("otherPools");
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
-								USER = new User( "Jake Weber",  position,  pool,  myshifts,
+								USER = new User( name,  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 							}else{
 								response.sendRedirect("/WrongPass");
@@ -82,7 +89,7 @@ public class Login extends HttpServlet {
 
 							}
 							
-			 sql = "SELECT * FROM SHIFTS WHERE guard='Jake Weber';";
+			 sql = "SELECT * FROM SHIFTS WHERE guard='"+Login.USER.getName()+"';";
 			 rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				String guard = rs.getString("guard");
@@ -93,7 +100,7 @@ public class Login extends HttpServlet {
 				myshifts.add(new Shift(startTime,endTime,pool,length,guard));
 			}
 			stmt = con.createStatement();
-			 sql = "SELECT * FROM TIMEOFF WHERE guard='Jake Weber';";
+			 sql = "SELECT * FROM TIMEOFF WHERE guard='"+Login.USER.getName()+"';";
 			 rs = stmt.executeQuery(sql);
 			while (rs.next()){
 				String guard = rs.getString("guard");
