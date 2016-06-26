@@ -36,39 +36,15 @@ public class RequestOff extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Statement stmt =null;
-		ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
-		ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
+		
 
-		try{
-			Class.forName("com.mysql.jdbc.Driver");  
-			  
-			Connection con=DriverManager.getConnection(  
-			"jdbc:mysql://localhost:3306/test2","root","password"); 
-			
-			stmt = con.createStatement();
-			String sql = "SELECT * FROM TIMEOFF WHERE guard='Jake Weber';";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()){
-				String guard = rs.getString("guard");
-				Timestamp startTime = rs.getTimestamp("startTime");
-				Timestamp endTime = rs.getTimestamp("endTime");
-				boolean approved = rs.getBoolean("approved");
-				if(approved){
-					approvedtimesoff.add(new TimeOff(startTime,endTime,0,guard,true));
-				}
-				else{
-					notapprovedtimesoff.add(new TimeOff(startTime,endTime,0,guard,false));
-				}
-				
-			}
-			request.setAttribute("approvedtimesoff", approvedtimesoff);
-			request.setAttribute("notapprovedtimesoff", notapprovedtimesoff);
+	
+			request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
+			request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
 
 	        request.getRequestDispatcher("/WEB-INF/requestoff.jsp").forward(request, response);
 
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			
 
 		
 
@@ -110,7 +86,9 @@ public class RequestOff extends HttpServlet {
 		try{
 			 stmt =null;
 
-
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+						stmt = con.createStatement();
 			
 				
 				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());

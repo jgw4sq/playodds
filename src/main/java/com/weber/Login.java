@@ -52,9 +52,9 @@ public class Login extends HttpServlet {
 			ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
 			Class.forName("com.mysql.jdbc.Driver");  
 			  
-			Connection con=DriverManager.getConnection(  
-			"jdbc:mysql://localhost:3306/test2","jake","weber"); 
-			stmt = con.createStatement();
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+						stmt = con.createStatement();
 			String sql = "SELECT * FROM Shifts WHERE guard='Jake Weber';";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
