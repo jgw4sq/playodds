@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 						stmt = con.createStatement();
-			String sql = "SELECT * FROM Shifts WHERE guard='Jake Weber';";
+			String sql = "SELECT * FROM SHIFTS WHERE guard='Jake Weber';";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				String guard = rs.getString("guard");
@@ -85,6 +85,7 @@ public class Login extends HttpServlet {
 			 sql = "SELECT * FROM GUARDS WHERE name='Jake Weber';";
 			 rs = stmt.executeQuery(sql);
 			if(rs.next()){
+				System.out.println("Create user");
 				int age =rs.getInt("age");
 				String pool=rs.getString("mainPool");
 				boolean otherpools=rs.getBoolean("otherPools");
@@ -93,6 +94,7 @@ public class Login extends HttpServlet {
 				USER = new User( "Jake Weber",  position,  pool,  myshifts,
 						 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
