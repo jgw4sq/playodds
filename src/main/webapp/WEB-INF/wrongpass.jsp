@@ -57,5 +57,7 @@
                 </table>
             </form> 
         </div>
+                <a href="<%=request.getContextPath()%>/SignUp">No Account? Sign Up!</a>
+        
     </body>
 </html>
