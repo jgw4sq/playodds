@@ -22,6 +22,6 @@ for(Shift shift : list) {
 %>
 
 
-<a href = "/Testwebapp/ScheduledShifts">View my Scheduled Shifts</a>
-<a href = "/Testwebapp/RequestOff">View/Enter Time Requested Off</a>
+<a href = "<%=request.getContextPath()%>/ScheduledShifts">View my Scheduled Shifts</a>
+<a href = "<%=request.getContextPath()%>/RequestOff">View/Enter Time Requested Off</a>
 </body>
