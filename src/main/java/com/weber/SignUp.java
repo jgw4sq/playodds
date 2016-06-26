@@ -55,7 +55,7 @@ public class SignUp extends HttpServlet {
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 					stmt = con.createStatement();
-					String sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+",'"+position+"', '"+email+"',"+passwords+");";
+					String sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
 					stmt.executeUpdate(sql);
 			        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 
