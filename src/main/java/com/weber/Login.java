@@ -72,12 +72,12 @@ public class Login extends HttpServlet {
 								USER = new User( "Jake Weber",  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 							}else{
-								response.sendRedirect("/WEB-INF/wrongpass.jsp");
+								response.sendRedirect("/WrongPass.jsp");
 								return;
 
 							}
 							}else{
-								response.sendRedirect("/WEB-INF/signup.jsp");
+								response.sendRedirect("/SignUp");
 								return;
 
 							}
