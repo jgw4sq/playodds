@@ -1,22 +1,23 @@
 <html>
 <body>
 	<form name="f2" method="post" action="SignUp" id="content">
-		Email: <input type="text" name="email" placeholder="example@gmail.com"><br>
-		Name: <input type="text" name="name" placeholder="First Last"><br>
-		Age: <input type="number" name="age" placeholder="Age"><br>
-		Main Pool: <input type="text" name="pool" placeholder="Pool"><br>
+		Email: <input type="text" name="email" placeholder="example@gmail.com"
+			required>><br> Name: <input type="text" name="name"
+			placeholder="First Last" required>><br> Age: <input
+			type="number" name="age" placeholder="Age" required>><br>
+		Main Pool: <input type="text" name="pool" placeholder="Pool" required>><br>
 		Can you work at other pools?: <input type="radio" name="otherPools"
-			placeholder="yes"><br> Position: <select id="mySelect"
-			onchange="myFunction()">
+			placeholder="yes" required><br> Position: <select
+			id="mySelect" onchange="myFunction()">
 			<option value="Guard">Guard
 			<option value="Head Guard">Head Guard
 			<option value="Assistant Manager">Assistant Manager
 			<option value="Manager">Manager
-		</select><br> <span id="para">Password:</span> <input id="password" type="password" name="password"
-			placeholder="Password"><br> Confirm Password: <input
-			type="password" name="password2" placeholder="Confirm Password"><br>
-
-		<input type="submit" value="submit">
+		</select><br> <span id="para">Password:</span> <input id="password"
+			type="password" name="password" placeholder="Password" required>><br>
+		Confirm Password: <input type="password" name="password2"
+			placeholder="Confirm Password" required>><br> <input
+			type="submit" value="submit">
 	</form>
 
 	<script>
@@ -32,8 +33,7 @@
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
 				return;
-			}
-			else {
+			} else {
 				if (0 < intTextBox) {
 					document.getElementById('content').removeChild(
 							document.getElementById('div_' + intTextBox));
@@ -50,8 +50,7 @@
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
 				return;
-			}
-			else {
+			} else {
 				if (0 < intTextBox) {
 					document.getElementById('content').removeChild(
 							document.getElementById('div_' + intTextBox));
@@ -67,8 +66,7 @@
 						+ ': <input type="text" id="tb_' + '" name="tb_' + intTextBox + '"/><br>';
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
-			}
-			else {
+			} else {
 				if (0 < intTextBox) {
 					document.getElementById('content').removeChild(
 							document.getElementById('div_' + intTextBox));

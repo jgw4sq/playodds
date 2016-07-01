@@ -77,6 +77,7 @@ public class Login extends HttpServlet {
 								boolean otherpools=rs.getBoolean("otherPools");
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
+								loggedin=true;
 								USER = new User( name,  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 							}else{
