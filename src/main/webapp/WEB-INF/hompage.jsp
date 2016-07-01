@@ -9,6 +9,8 @@
 <%if (Login.USER.getPosition().equals("Manager")){
 	%>
 	<a href = "<%=request.getContextPath()%>/AddShifts">Add Shifts </a>
+	<a href = "<%=request.getContextPath()%>/ScheduleManager"> Schedule Manager </a>
+	
 	<%
 }%>
 

@@ -37,7 +37,12 @@ public class MyAccount extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setAttribute("user", Login.USER);
-        request.getRequestDispatcher("/WEB-INF/MyAccount.jsp").forward(request, response);
+		if(Login.loggedin==false){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}else{
+	        request.getRequestDispatcher("/WEB-INF/MyAccount.jsp").forward(request, response);
+		}
 
 		
 	}

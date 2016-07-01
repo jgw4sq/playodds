@@ -31,8 +31,12 @@ public class AddShifts extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);
+		if(Login.loggedin==false){
+			response.sendRedirect(request.getContextPath()+"/Login");
 
+		}else{
+        request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);
+		}
 	}
 
 	/**

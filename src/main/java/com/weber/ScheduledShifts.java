@@ -39,7 +39,12 @@ public class ScheduledShifts extends HttpServlet {
 		try{
 			
 		request.setAttribute("myshifts", Login.USER.getShifts());
-        request.getRequestDispatcher("/WEB-INF/myshifts.jsp").forward(request, response);
+		if(Login.loggedin==false){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}else{
+	        request.getRequestDispatcher("/WEB-INF/myshifts.jsp").forward(request, response);
+		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
