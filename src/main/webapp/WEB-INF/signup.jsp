@@ -3,9 +3,9 @@
 	<form name="f2" method="post" action="SignUp" id="content">
 		Email: <input type="text" name="email" placeholder="example@gmail.com"
 			required>><br> Name: <input type="text" name="name"
-			placeholder="First Last" required>><br> Age: <input
+			placeholder="First Last" required><br> Age: <input
 			type="number" name="age" placeholder="Age" required>><br>
-		Main Pool: <input type="text" name="pool" placeholder="Pool" required>><br>
+		Main Pool: <input type="text" name="pool" placeholder="Pool" required><br>
 		Can you work at other pools?: <input type="radio" name="otherPools"
 			placeholder="yes" required><br> Position: <select
 			id="mySelect" onchange="myFunction()">
@@ -14,9 +14,9 @@
 			<option value="Assistant Manager">Assistant Manager
 			<option value="Manager">Manager
 		</select><br> <span id="para">Password:</span> <input id="password"
-			type="password" name="password" placeholder="Password" required>><br>
+			type="password" name="password" placeholder="Password" required><br>
 		Confirm Password: <input type="password" name="password2"
-			placeholder="Confirm Password" required>><br> <input
+			placeholder="Confirm Password" onchange="validatepassword()" required><br> <input
 			type="submit" value="submit">
 	</form>
 
