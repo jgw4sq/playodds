@@ -8,13 +8,13 @@
 			placeholder="First Last" required><br> Age: <input
 			type="number" name="age" placeholder="Age" required><br>
 		Main Pool: <select
-			id="poolSelect">
+			id="poolSelect" name="poolSelect">
 			<option value="Glen Allen">Glen Allen
 			<option value="Magnolia Ridge">Magnolia Ridge
 		</select><br>
 		Can you work at other pools?: <input type="radio" name="otherPools"
 			placeholder="yes" required><br> Position: <select
-			id="mySelect" onchange="myFunction()">
+			id="mySelect" onchange="myFunction()" name="mySelect">
 			<option value="Guard">Guard
 			<option value="Head Guard">Head Guard
 			<option value="Assistant Manager">Assistant Manager

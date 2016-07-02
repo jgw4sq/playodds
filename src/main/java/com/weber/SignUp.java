@@ -45,9 +45,11 @@ public class SignUp extends HttpServlet {
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
 		String pool = request.getParameter("poolSelect");
-		String position = request.getParameter("position");
+		String position = request.getParameter("mySelect");
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
+		System.out.println(pool);
+		System.out.println(position);
 		int passwords= Login.hash(password);
 		try{
 		Class.forName("com.mysql.jdbc.Driver");  
