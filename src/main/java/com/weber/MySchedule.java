@@ -36,16 +36,17 @@ public class MySchedule extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		try{
 		
-		request.setAttribute("shifts", Login.USER.getShifts());
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 		if(Login.loggedin==false){
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{
+			try{
+				
+				request.setAttribute("shifts", Login.USER.getShifts());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 	        request.getRequestDispatcher("/WEB-INF/myschedule.jsp").forward(request, response);
 		}
 

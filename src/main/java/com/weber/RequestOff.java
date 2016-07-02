@@ -39,12 +39,13 @@ public class RequestOff extends HttpServlet {
 		
 
 	
-			request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
-			request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
 			if(Login.loggedin==false){
 				response.sendRedirect(request.getContextPath()+"/Login");
 
 			}else{
+
+				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
+				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
 	        request.getRequestDispatcher("/WEB-INF/requestoff.jsp").forward(request, response);
 			}
 			
