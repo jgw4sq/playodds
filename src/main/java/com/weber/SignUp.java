@@ -63,7 +63,7 @@ public class SignUp extends HttpServlet {
 		Class.forName("com.mysql.jdbc.Driver");  
 		  
 		 Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 					stmt = con.createStatement();
 					String sql ="SELECT COUNT(email) AS user FROM GUARDS WHERE email='"+email+"'";
 					ResultSet rs = stmt.executeQuery(sql);
