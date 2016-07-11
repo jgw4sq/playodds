@@ -78,6 +78,32 @@ public class Login extends HttpServlet {
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
 								loggedin=true;
+								 sql = "SELECT * FROM SHIFTS WHERE email='"+Login.USER.getEmail()+"';";
+								 rs = stmt.executeQuery(sql);
+								while(rs.next()){
+									String guard = rs.getString("guard");
+									Timestamp startTime= rs.getTimestamp("startTime");
+									Timestamp endTime = rs.getTimestamp("endTime");
+									String poolshift = rs.getString("pool");
+									int length = rs.getInt("length");
+									myshifts.add(new Shift(startTime,endTime,poolshift,length,guard));
+								}
+								stmt = con.createStatement();
+								 sql = "SELECT * FROM TIMEOFF WHERE email='"+Login.USER.getEmail()+"';";
+								 rs = stmt.executeQuery(sql);
+								while (rs.next()){
+									String guard = rs.getString("guard");
+									Timestamp startTime2 = rs.getTimestamp("startTime");
+									Timestamp endTime2 = rs.getTimestamp("endTime");
+									boolean approved = rs.getBoolean("approved");
+									if(approved==true){
+										approvedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,true));
+									}
+									else{
+										notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,false));
+									}
+									
+								}
 								USER = new User( name,  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools);
 							}else{
@@ -91,32 +117,7 @@ public class Login extends HttpServlet {
 
 							}
 							
-			 sql = "SELECT * FROM SHIFTS WHERE guard='"+Login.USER.getName()+"';";
-			 rs = stmt.executeQuery(sql);
-			while(rs.next()){
-				String guard = rs.getString("guard");
-				Timestamp startTime= rs.getTimestamp("startTime");
-				Timestamp endTime = rs.getTimestamp("endTime");
-				String pool = rs.getString("pool");
-				int length = rs.getInt("length");
-				myshifts.add(new Shift(startTime,endTime,pool,length,guard));
-			}
-			stmt = con.createStatement();
-			 sql = "SELECT * FROM TIMEOFF WHERE guard='"+Login.USER.getName()+"';";
-			 rs = stmt.executeQuery(sql);
-			while (rs.next()){
-				String guard = rs.getString("guard");
-				Timestamp startTime2 = rs.getTimestamp("startTime");
-				Timestamp endTime2 = rs.getTimestamp("endTime");
-				boolean approved = rs.getBoolean("approved");
-				if(approved==true){
-					approvedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,true));
-				}
-				else{
-					notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,false));
-				}
-				
-			}
+	
 			
 			
 		}catch(Exception e){

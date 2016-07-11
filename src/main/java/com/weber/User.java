@@ -6,10 +6,17 @@ public class User {
 private String name;
 private String position;
 private String pool;
+private String email;
 private ArrayList<Shift> shifts;
 private ArrayList<TimeOff> approvedtimeoff;
 private ArrayList<TimeOff> notapprovedtimeoff;
 
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
 private int age;
 private int rank;
 private boolean otherpools;
