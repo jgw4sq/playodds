@@ -74,7 +74,7 @@ function validateemail(){
 				var objNewDiv = document.createElement('div');
 				objNewDiv.setAttribute('id', 'div_' + intTextBox);
 				objNewDiv.innerHTML = 'Manager Code '
-						+ ': <input type="text" id="tb_' + '" name="tb_' + intTextBox + '"/><br>';
+						+ ': <input type="text" id="tb_' + '" name="positioncode"/><br>';
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
 				return;
@@ -91,7 +91,7 @@ function validateemail(){
 				var objNewDiv = document.createElement('div');
 				objNewDiv.setAttribute('id', 'div_' + intTextBox);
 				objNewDiv.innerHTML = 'Assistant Manager Code '
-						+ ': <input type="text" id="tb_' + '" name="tb_' + intTextBox + '"/><br>';
+						+ ': <input type="text" id="tb_' + '" name="positioncode"/><br>';
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
 				return;
@@ -108,7 +108,7 @@ function validateemail(){
 				var objNewDiv = document.createElement('div');
 				objNewDiv.setAttribute('id', 'div_' + intTextBox);
 				objNewDiv.innerHTML = 'Head Guard Code '
-						+ ': <input type="text" id="tb_' + '" name="tb_' + intTextBox + '"/><br>';
+						+ ': <input type="text" id="tb_' + '" name="positioncode"/><br>';
 				document.getElementById('content').insertBefore(objNewDiv,
 						document.getElementById("para"));
 			} else {

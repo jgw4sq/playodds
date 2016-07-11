@@ -3,6 +3,7 @@ package com.weber;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/SignUp")
 public class SignUp extends HttpServlet {
+	private String managercode = "manageR";
+	private String assmanagercode = "assistmanageR";
+	private String headcode = "headguarD";
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -48,21 +53,39 @@ public class SignUp extends HttpServlet {
 		String position = request.getParameter("mySelect");
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
+		String positioncode = request.getParameter("positioncode");
 		System.out.println(pool);
 		System.out.println(position);
+		System.out.println(positioncode);
 		int passwords= Login.hash(password);
+		if((position.equals("Manager")&&positioncode.equals(managercode))||(position.equals("Assistant Manager")&&positioncode.equals(assmanagercode))||(position.equals("Head Guard")&&positioncode.equals(headcode))||position.equals(("Guard"))){
 		try{
 		Class.forName("com.mysql.jdbc.Driver");  
 		  
 		 Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+					"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 					stmt = con.createStatement();
-					String sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
+					String sql ="SELECT COUNT(email) AS user FROM GUARDS WHERE email='"+email+"'";
+					ResultSet rs = stmt.executeQuery(sql);
+					if(rs.next()){
+					int count = rs.getInt("user");
+					if (count<1){
+						System.out.println("Inserting into guards table");
+
+					 sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
 					stmt.executeUpdate(sql);
 			        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+					}else{
+						response.getWriter().append("This email already has an account. To try again please press the back button.");
 
+					}}
 			}catch(Exception e){
 			e.printStackTrace();
+		}
+		
+		}else{
+			System.out.println("wrong position code");
+			response.getWriter().append("You entered the wrong position code. Please press the back button to try again");
 		}
 		
 	}
