@@ -78,7 +78,7 @@ public class Login extends HttpServlet {
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
 								loggedin=true;
-								 sql = "SELECT * FROM SHIFTS WHERE email='"+Login.USER.getEmail()+"';";
+								 sql = "SELECT * FROM SHIFTS WHERE email='"+username+"';";
 								 rs = stmt.executeQuery(sql);
 								while(rs.next()){
 									String guard = rs.getString("guard");
@@ -89,7 +89,7 @@ public class Login extends HttpServlet {
 									myshifts.add(new Shift(startTime,endTime,poolshift,length,guard));
 								}
 								stmt = con.createStatement();
-								 sql = "SELECT * FROM TIMEOFF WHERE email='"+Login.USER.getEmail()+"';";
+								 sql = "SELECT * FROM TIMEOFF WHERE email='"+username+"';";
 								 rs = stmt.executeQuery(sql);
 								while (rs.next()){
 									String guard = rs.getString("guard");
