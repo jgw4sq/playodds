@@ -8,14 +8,22 @@ public class TimeOff {
 	private int length;
 	private String guard;
 	private boolean approved;
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public TimeOff(Timestamp startTime, Timestamp endTime, int length,
-			String guard, boolean approved) {
+			String guard, boolean approved, String email) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.length = length;
 		this.guard = guard;
 		this.approved = approved;
+		this.email=email;
 	}
 	public Timestamp getStartTime() {
 		return startTime;

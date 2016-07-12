@@ -100,7 +100,7 @@ public class RequestOff extends HttpServlet {
 				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
 				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
 
-		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false);";
+		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+Login.USER.getEmail()+"');";
 		int rs2 = stmt.executeUpdate(sql);
         request.getRequestDispatcher("/WEB-INF/requestoff.jsp").forward(request, response);
 

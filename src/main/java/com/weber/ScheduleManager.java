@@ -1,6 +1,7 @@
 package com.weber;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,12 @@ public class ScheduleManager extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(Login.loggedin==false){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}else{
+	        request.getRequestDispatcher("/WEB-INF/ScheduleManager.jsp").forward(request, response);
+		}
 	}
 
 	/**

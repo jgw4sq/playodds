@@ -1,6 +1,14 @@
 package com.weber;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +35,7 @@ public class MakeSchedule extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		makeScheduleBasedOnRank("Glen Allen");
 	}
 
 	/**
@@ -35,5 +44,161 @@ public class MakeSchedule extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
+	
+	public static void makeScheduleBasedOnRank(String pool){
+		ArrayList<Shift> shift = populateShifts(pool);
+		Collections.sort(shift);
+		ArrayList<User> guards = populateUsers(pool);
+		Collections.sort(guards, User.SortUserRank);
+		for(int i=0; i<shift.size();i++){
+			System.out.println("Checking Shift");
+			if(shift.get(i).isManagerRequired()){
+				for(int j=0; j<guards.size();j++){
+					System.out.println("Checking Guard");
+
+					if(guards.get(j).isAvailable(shift.get(i))&&(guards.get(j).getPosition().equals("Manager")||guards.get(j).getPosition().equals("Assistant Manager")||guards.get(j).getPosition().equals("Head Guard"))){
+						System.out.println("Changing Shift");
+						
+						guards.get(j).addShift(shift.get(i));
+						guards.get(j).getShifts().add(shift.get(i));
+					}
+				}
+			}else{
+			for(int j=0; j<guards.size();j++){
+				System.out.println("Checking Guard");
+
+				if(guards.get(j).isAvailable(shift.get(i))){
+					System.out.println("Changing Shift");
+					guards.get(j).addShift(shift.get(i));
+					guards.get(j).getShifts().add(shift.get(i));
+
+				}
+			}
+			}
+		}
+		
+		
+	}
+	
+	public static ArrayList<Shift> populateShifts(String pool){
+		ArrayList<Shift> shifts = new ArrayList<Shift>();
+		Statement stmt = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");  
+			  /**
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+			 */
+			
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+						
+						stmt = con.createStatement();
+						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"';";
+						ResultSet rs = stmt.executeQuery(sql);
+						while(rs.next()){
+							int id = rs.getInt("id");
+							String guard = rs.getString("guard");
+							Timestamp startTime= rs.getTimestamp("startTime");
+							Timestamp endTime = rs.getTimestamp("endTime");
+							String poolshift = rs.getString("pool");
+							int length = rs.getInt("length");
+							String emailOfShift = rs.getString("email");
+							boolean managerRequired = rs.getBoolean("managerRequired");
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+
+							
+						}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return shifts;
+		
+		
+	}
+	
+	public static ArrayList<User> populateUsers(String pool){
+		Statement stmt = null;
+		ArrayList<User> poolEmployees = new ArrayList<User>();
+		
+		try{
+		Class.forName("com.mysql.jdbc.Driver");  
+		  /**
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+		 */
+		
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+					
+					stmt = con.createStatement();
+					String sql = "SELECT * FROM GUARDS WHERE mainPool='"+pool+"';";
+					ResultSet rs = stmt.executeQuery(sql);
+					while(rs.next()){
+						ArrayList<Shift> shifts = new ArrayList<Shift>();
+						ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
+						ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
+
+						String name = rs.getString("name");
+						String email = rs.getString("email");
+						System.out.println(email);
+						int age = rs.getInt("age");
+						String mainPool = rs.getString("mainPool");
+						boolean otherPools = rs.getBoolean("otherPools");
+						int rank = rs.getInt("rank");
+						String position = rs.getString("position");
+						Statement stmt2 = con.createStatement();
+						sql = "SELECT * FROM SHIFTS WHERE email='"+email+"';";
+						ResultSet rs2 = stmt2.executeQuery(sql);
+						while(rs2.next()){
+							String guard = rs2.getString("guard");
+							int id = rs2.getInt("id");
+							Timestamp startTime= rs2.getTimestamp("startTime");
+							Timestamp endTime = rs2.getTimestamp("endTime");
+							String poolshift = rs2.getString("pool");
+							int length = rs2.getInt("length");
+							String emailOfShift = rs2.getString("email");
+							boolean managerRequired = rs2.getBoolean("managerRequired");
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+						}
+						stmt = con.createStatement();
+						 sql = "SELECT * FROM TIMEOFF WHERE email='"+email+"';";
+						 ResultSet rs3 = stmt.executeQuery(sql);
+						while (rs3.next()){
+							String guard = rs3.getString("guard");
+							Timestamp startTime2 = rs3.getTimestamp("startTime");
+							Timestamp endTime2 = rs3.getTimestamp("endTime");
+							boolean approved = rs3.getBoolean("approved");
+							if(approved==true){
+								approvedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,true,email));
+							}
+							else{
+								notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,false,email));
+							}
+						
+
+
+					}
+						User user = new User( name,  position,  mainPool, shifts,
+								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email);
+						
+						poolEmployees.add(user);
+						System.out.println("Added employee"+user.getName());
+					
+		}
+					
+		
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return poolEmployees;
+		
+	}
+	
+	
+	
 
 }

@@ -8,13 +8,44 @@ public class Shift implements Comparable<Shift> {
 	private String pool;
 	private int length;
 	private String guard;
+	private String email;
+	private int Id;
+	private boolean managerRequired;
 	
-	public Shift(Timestamp startTime, Timestamp endTime, String pool, int length, String guard){
+	public boolean isManagerRequired() {
+		return managerRequired;
+	}
+
+	public void setManagerRequired(boolean managerRequired) {
+		this.managerRequired = managerRequired;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public Shift(Timestamp startTime, Timestamp endTime, String pool, int length, String guard,int id, String email, boolean managerRequired){
 		this.startTime= startTime;
 		this.endTime= endTime;
 		this.pool=pool;
 		this.length=length;
 		this.guard=guard;
+		this.email=email;
+		this.Id = id;
+		this.managerRequired=managerRequired;
+		
 	}
 
 	public Timestamp getStartTime() {
@@ -59,10 +90,10 @@ public class Shift implements Comparable<Shift> {
 
 	@Override
 	public int compareTo(Shift shift2) {
-		if(this.startTime.before(shift2.startTime)){
+		if(this.managerRequired==true&&shift2.managerRequired==false){
 			return -1;
 		}
-		else if(this.startTime.after(shift2.startTime)){
+		else if(this.managerRequired==false&&shift2.managerRequired==true){
 			return 1;
 		}
 		return 0;
