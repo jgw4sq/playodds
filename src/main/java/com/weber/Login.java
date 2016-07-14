@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Login.USER = null;
-        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
@@ -52,14 +52,14 @@ public class Login extends HttpServlet {
 			ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
 			ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
 			Class.forName("com.mysql.jdbc.Driver");  
-			  /**
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-			 */
-			
-			 Connection con=DriverManager.getConnection(  
-						"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-						
+						stmt = con.createStatement();
+						/*
+						 Connection con=DriverManager.getConnection(  
+									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+									stmt = con.createStatement();
+			*/
 						stmt = con.createStatement();
 						String username = (String) request.getParameter("username");
 						 String sql = "SELECT * FROM GUARDS WHERE email='"+username+"';";
@@ -128,7 +128,7 @@ public class Login extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-        request.getRequestDispatcher("/WEB-INF/hompage.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	}
 	

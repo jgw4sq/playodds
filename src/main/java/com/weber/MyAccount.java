@@ -42,7 +42,7 @@ public class MyAccount extends HttpServlet {
 		}else{
 			request.setAttribute("user", Login.USER);
 
-	        request.getRequestDispatcher("/WEB-INF/MyAccount.jsp").forward(request, response);
+	        request.getRequestDispatcher("MyAccount.jsp").forward(request, response);
 		}
 
 		

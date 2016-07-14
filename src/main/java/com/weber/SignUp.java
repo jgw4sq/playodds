@@ -36,8 +36,13 @@ public class SignUp extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+		if(Login.loggedin==false){
+			response.sendRedirect(request.getContextPath()+"/Login");
 
+		}else{
+
+        request.getRequestDispatcher("signup.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -65,6 +70,11 @@ public class SignUp extends HttpServlet {
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 					stmt = con.createStatement();
+					/*
+					 Connection con=DriverManager.getConnection(  
+								"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+								stmt = con.createStatement();
+		*/
 					String sql ="SELECT COUNT(email) AS user FROM GUARDS WHERE email='"+email+"'";
 					ResultSet rs = stmt.executeQuery(sql);
 					if(rs.next()){
@@ -74,7 +84,7 @@ public class SignUp extends HttpServlet {
 
 					 sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
 					stmt.executeUpdate(sql);
-			        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			        request.getRequestDispatcher("index.jsp").forward(request, response);
 					}else{
 						response.getWriter().append("This email already has an account. To try again please press the back button.");
 

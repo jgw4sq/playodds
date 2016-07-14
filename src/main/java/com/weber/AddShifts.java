@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,16 +76,35 @@ public class AddShifts extends HttpServlet {
 		String startTime = year+"-"+month+"-"+day+" "+hoursminutes+":00";
 		String endTime = year2+"-"+month2+"-"+day2+" "+hoursminutes2+":00";
 		Statement stmt= null;
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
+		Timestamp start = new Timestamp(timestamp.getTime());
+		Timestamp end = new Timestamp(timestamp.getTime());
+		start.setYear(Integer.parseInt(year)-1900);
+		start.setMonth(Integer.parseInt(month));
+		start.setDate(Integer.parseInt(day));
+		start.setHours(Integer.parseInt(hoursminutes.substring(0,2)));
+		start.setMinutes(Integer.parseInt(hoursminutes.substring(3, hoursminutes.length())));
+		end.setYear(Integer.parseInt(year2)-1900);
+		end.setMonth(Integer.parseInt(month2));
+		end.setDate(Integer.parseInt(day2));
+		end.setHours(Integer.parseInt(hoursminutes2.substring(0,2)));
+		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
+		int length = ((int) (end.getTime()-start.getTime()))/(1000*60*60);
 		try{
 			 stmt =null;
 
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 						stmt = con.createStatement();
-			
+						/*
+						 Connection con=DriverManager.getConnection(  
+									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+									stmt = con.createStatement();
+			*/
 		for(int i=0;i<numberofGuards;i++){
 
-		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"');";
+		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+");";
 		int rs2 = stmt.executeUpdate(sql);
 		}
         request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);

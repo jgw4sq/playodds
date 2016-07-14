@@ -47,7 +47,7 @@ public class MySchedule extends HttpServlet {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-	        request.getRequestDispatcher("/WEB-INF/myschedule.jsp").forward(request, response);
+	        request.getRequestDispatcher("myschedule.jsp").forward(request, response);
 		}
 
 	}

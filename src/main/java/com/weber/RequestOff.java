@@ -46,7 +46,7 @@ public class RequestOff extends HttpServlet {
 
 				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
 				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
-	        request.getRequestDispatcher("/WEB-INF/requestoff.jsp").forward(request, response);
+	        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 			}
 			
 
@@ -64,7 +64,9 @@ public class RequestOff extends HttpServlet {
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
-		String hoursminutes = request.getParameter("hour:minute");
+		String hour = request.getParameter("hour");
+		String minute = request.getParameter("minutes");
+		String hoursminutes = hour+":"+minute;
 		String ampm = request.getParameter("ampm");
 		if(ampm.equals("pm")){
 			String hours = hoursminutes.substring(0,2);
@@ -76,7 +78,9 @@ public class RequestOff extends HttpServlet {
 		String year2 = request.getParameter("year2");
 		String month2 = request.getParameter("month2");
 		String day2 = request.getParameter("day2");
-		String hoursminutes2 = request.getParameter("hour:minute2");
+		String hour2 = request.getParameter("hour2");
+		String minute2 = request.getParameter("minutes2");
+		String hoursminutes2 = hour2+":"+minute2;
 		String ampm2 = request.getParameter("ampm2");
 
 		if(ampm2.equals("pm")){
@@ -95,14 +99,18 @@ public class RequestOff extends HttpServlet {
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 						stmt = con.createStatement();
-			
+						/*
+						 Connection con=DriverManager.getConnection(  
+									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+									stmt = con.createStatement();
+			*/
 				
 				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
 				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
 
 		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+Login.USER.getEmail()+"');";
 		int rs2 = stmt.executeUpdate(sql);
-        request.getRequestDispatcher("/WEB-INF/requestoff.jsp").forward(request, response);
+        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 
 		}catch(Exception e){
 			e.printStackTrace();

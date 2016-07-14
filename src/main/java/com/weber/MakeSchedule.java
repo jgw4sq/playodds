@@ -54,23 +54,29 @@ public class MakeSchedule extends HttpServlet {
 			System.out.println("Checking Shift");
 			if(shift.get(i).isManagerRequired()){
 				for(int j=0; j<guards.size();j++){
-					System.out.println("Checking Guard");
+					System.out.println("Checking Guard"+guards.get(j).getName());
 
 					if(guards.get(j).isAvailable(shift.get(i))&&(guards.get(j).getPosition().equals("Manager")||guards.get(j).getPosition().equals("Assistant Manager")||guards.get(j).getPosition().equals("Head Guard"))){
-						System.out.println("Changing Shift");
+						System.out.println("Changing Shift"+shift.get(i).getId());
 						
 						guards.get(j).addShift(shift.get(i));
 						guards.get(j).getShifts().add(shift.get(i));
+						shift.remove(i);
+						i-=1;
+						break;
 					}
 				}
 			}else{
 			for(int j=0; j<guards.size();j++){
-				System.out.println("Checking Guard");
+				System.out.println("Checking Guard"+guards.get(j).getName());
 
 				if(guards.get(j).isAvailable(shift.get(i))){
-					System.out.println("Changing Shift");
+					System.out.println("Changing Shift"+shift.get(i).getId());
 					guards.get(j).addShift(shift.get(i));
 					guards.get(j).getShifts().add(shift.get(i));
+					shift.remove(i);
+					i-=1;
+					break;
 
 				}
 			}
@@ -85,14 +91,14 @@ public class MakeSchedule extends HttpServlet {
 		Statement stmt = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");  
-			  /**
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-			 */
-			
-			 Connection con=DriverManager.getConnection(  
-						"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-						
+						stmt = con.createStatement();
+						/*
+						 Connection con=DriverManager.getConnection(  
+									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+									stmt = con.createStatement();
+			*/
 						stmt = con.createStatement();
 						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"';";
 						ResultSet rs = stmt.executeQuery(sql);
@@ -124,15 +130,14 @@ public class MakeSchedule extends HttpServlet {
 		
 		try{
 		Class.forName("com.mysql.jdbc.Driver");  
-		  /**
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-		 */
-		
-		 Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-					
 					stmt = con.createStatement();
+					/*
+					 Connection con=DriverManager.getConnection(  
+								"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
+								stmt = con.createStatement();
+		*/
 					String sql = "SELECT * FROM GUARDS WHERE mainPool='"+pool+"';";
 					ResultSet rs = stmt.executeQuery(sql);
 					while(rs.next()){
