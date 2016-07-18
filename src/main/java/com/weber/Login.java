@@ -106,7 +106,7 @@ public class Login extends HttpServlet {
 									
 								}
 								System.out.println("Initializing User");
-								request.setAttribute("user", new User( name,  position,  pool,  myshifts,
+								request.getSession().setAttribute("user", new User( name,  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username));
 								System.out.println("Created User");
 
