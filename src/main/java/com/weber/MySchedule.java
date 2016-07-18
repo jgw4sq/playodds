@@ -43,7 +43,7 @@ public class MySchedule extends HttpServlet {
 		}else{
 			try{
 				
-				request.setAttribute("shifts", ((User)request.getAttribute("user")).getShifts());
+				request.setAttribute("shifts", ((User)request.getSession().getAttribute("user")).getShifts());
 				}catch(Exception e){
 					e.printStackTrace();
 				}
