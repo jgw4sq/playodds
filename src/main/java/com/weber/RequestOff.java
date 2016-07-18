@@ -39,13 +39,13 @@ public class RequestOff extends HttpServlet {
 		
 
 	
-			if(Login.loggedin==false){
+			if(((User)request.getSession().getAttribute("user"))==null){
 				response.sendRedirect(request.getContextPath()+"/Login");
 
 			}else{
 
-				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
-				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
+				request.setAttribute("approvedtimesoff", ((User)request.getSession().getAttribute("user")).getApprovedtimeoff());
+				request.setAttribute("notapprovedtimesoff", ((User)request.getSession().getAttribute("user")).getNotapprovedtimeoff());
 	        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 			}
 			
@@ -105,10 +105,10 @@ public class RequestOff extends HttpServlet {
 									stmt = con.createStatement();
 			*/
 				
-				request.setAttribute("approvedtimesoff", Login.USER.getApprovedtimeoff());
-				request.setAttribute("notapprovedtimesoff", Login.USER.getNotapprovedtimeoff());
+				request.setAttribute("approvedtimesoff", ((User)request.getSession().getAttribute("user")).getApprovedtimeoff());
+				request.setAttribute("notapprovedtimesoff", ((User)request.getSession().getAttribute("user")).getNotapprovedtimeoff());
 
-		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+Login.USER.getEmail()+"');";
+		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+((User)request.getSession().getAttribute("user")).getEmail()+"');";
 		int rs2 = stmt.executeUpdate(sql);
         request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 

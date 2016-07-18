@@ -88,7 +88,7 @@ span.myaccounttext{
         <div>
         <p>
 <%  
-User user = (User) request.getAttribute("user");
+User user = (User) session.getAttribute("user");
 String name = user.getName();
 
 String position = user.getPosition();

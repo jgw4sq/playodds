@@ -38,8 +38,8 @@ public class ScheduledShifts extends HttpServlet {
 		Statement stmt = null;
 		try{
 			
-		request.setAttribute("myshifts", Login.USER.getShifts());
-		if(Login.loggedin==false){
+		request.setAttribute("myshifts", ((User)request.getSession().getAttribute("user")).getShifts());
+		if(((User)request.getSession().getAttribute("user"))==null){
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{

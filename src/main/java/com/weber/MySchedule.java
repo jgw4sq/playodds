@@ -37,13 +37,13 @@ public class MySchedule extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		if(Login.loggedin==false){
+		if(((User)request.getSession().getAttribute("user"))==null){
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{
 			try{
 				
-				request.setAttribute("shifts", Login.USER.getShifts());
+				request.setAttribute("shifts", ((User)request.getAttribute("user")).getShifts());
 				}catch(Exception e){
 					e.printStackTrace();
 				}

@@ -36,11 +36,10 @@ public class MyAccount extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		if(Login.loggedin==false){
+		if(((User)request.getSession().getAttribute("user"))==null){
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{
-			request.setAttribute("user", Login.USER);
 
 	        request.getRequestDispatcher("MyAccount.jsp").forward(request, response);
 		}

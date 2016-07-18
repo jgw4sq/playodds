@@ -36,13 +36,10 @@ public class SignUp extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(Login.loggedin==false){
-			response.sendRedirect(request.getContextPath()+"/Login");
-
-		}else{
+	
 
         request.getRequestDispatcher("signup.jsp").forward(request, response);
-		}
+	
 	}
 
 	/**

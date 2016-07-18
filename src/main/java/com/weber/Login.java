@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static User USER = new User();
-	public static boolean loggedin;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,7 +35,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Login.USER = null;
+		request.getSession().setAttribute("user", null);
         request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
@@ -78,7 +76,7 @@ public class Login extends HttpServlet {
 								boolean otherpools=rs.getBoolean("otherPools");
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
-								loggedin=true;
+				
 								 sql = "SELECT * FROM SHIFTS WHERE email='"+username+"';";
 								 rs = stmt.executeQuery(sql);
 								while(rs.next()){
@@ -108,8 +106,8 @@ public class Login extends HttpServlet {
 									
 								}
 								System.out.println("Initializing User");
-								USER = new User( name,  position,  pool,  myshifts,
-										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username);
+								request.setAttribute("user", new User( name,  position,  pool,  myshifts,
+										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username));
 								System.out.println("Created User");
 
 							}
