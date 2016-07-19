@@ -1,7 +1,6 @@
 package com.weber;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ScheduleManager
+ * Servlet implementation class ApproveRequestOff
  */
-@WebServlet("/ScheduleManager")
-public class ScheduleManager extends HttpServlet {
+@WebServlet("/ApproveRequestOff")
+public class ApproveRequestOff extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScheduleManager() {
+    public ApproveRequestOff() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +27,6 @@ public class ScheduleManager extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(((User)request.getSession().getAttribute("user"))==null){
-			response.sendRedirect(request.getContextPath()+"/Login");
-
-		}else{
-	        request.getRequestDispatcher("ScheduleManager.jsp").forward(request, response);
-		}
 	}
 
 	/**

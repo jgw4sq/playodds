@@ -19,6 +19,7 @@ public class Logout extends HttpServlet {
      */
     public Logout() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -29,6 +30,7 @@ public class Logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getSession().setAttribute("user", null);
 		response.sendRedirect(request.getContextPath()+"/Login");
+		
 
 		
 		
