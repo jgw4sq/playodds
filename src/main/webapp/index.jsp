@@ -66,7 +66,7 @@ input[type=submit] {
 						<% User user = (User)request.getSession().getAttribute("user");
 			if(user!=null){
 				if(user.getPosition().equals("Manager")){%>
-						<li><a href="<%=request.getContextPath()%>/Schedule Manager">RequestOff</a></li>
+						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule Manager</a></li>
 						<%}} %>
 						<li class="login"><a data-toggle="modal" href="#loginForm"><i
 								class="icon-lock"></i> Sign In</a></li>
