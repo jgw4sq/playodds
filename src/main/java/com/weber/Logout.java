@@ -28,7 +28,7 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().setAttribute("user", null);
-        request.getRequestDispatcher("MyAccount.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/Login");
 
 		
 		
