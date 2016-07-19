@@ -64,9 +64,10 @@ input[type=submit] {
 								Schedule</a></li>
 						<li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
 						<% User user = (User)request.getSession().getAttribute("user");
-		if(user.getPosition().equals("Manager")){%>
+			if(user!=null){
+				if(user.getPosition().equals("Manager")){%>
 						<li><a href="<%=request.getContextPath()%>/Schedule Manager">RequestOff</a></li>
-						<%} %>
+						<%}} %>
 						<li class="login"><a data-toggle="modal" href="#loginForm"><i
 								class="icon-lock"></i> Sign In</a></li>
 						<li><a href="<%=request.getContextPath()%>/Logout">Logout</a></li>
