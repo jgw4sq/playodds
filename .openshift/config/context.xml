@@ -30,7 +30,7 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
-
+<ResourceLink name="jdbc/jake" global="jdbc/jake" type="javax.sql.DataSource"/>
     <Resource name="jdbc/MySQLDS"
               url="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
               driverClassName="com.mysql.jdbc.Driver"
