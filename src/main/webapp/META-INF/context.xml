@@ -4,7 +4,7 @@
 
 <Resource name="jdbc/jake" auth="Container"
           type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://127.9.167.131:3306/jake"
+          url="jdbc:mysql://127.0.0.1:3306/jake"
           username="adminnHxi4B8" password="fWUk7PSKVlcV" maxActive="30" maxIdle="10"
 maxWait="-1"/>
 </Context>
