@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class User implements Comparable {
 private String name;
 private String position;
@@ -133,6 +137,12 @@ public void addShift(Shift shift){
 	Statement stmt = null;
 	//this.getShifts().add(shift);
 	try{
+		Context initContext = new InitialContext();
+		 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+		 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+		 Connection con = ds.getConnection();
+		stmt = con.createStatement();
+		/**
 		Class.forName("com.mysql.jdbc.Driver");  
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
@@ -144,6 +154,7 @@ public void addShift(Shift shift){
 		*/
 		String sql = "UPDATE SHIFTS SET guard='"+this.getName()+"', email='"+this.getEmail()+"' WHERE id="+shift.getId()+";";
 		stmt.executeUpdate(sql);
+		con.close();
 	}catch (Exception e){
 		e.printStackTrace();
 	}

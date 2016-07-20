@@ -7,11 +7,14 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Servlet implementation class AddShifts
@@ -91,27 +94,26 @@ public class AddShifts extends HttpServlet {
 		end.setHours(Integer.parseInt(hoursminutes2.substring(0,2)));
 		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
 		int length = ((int) (end.getTime()-start.getTime()))/(1000*60*60);
+		
 		try{
 			 stmt =null;
-
-			 Connection con=DriverManager.getConnection(  
-						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-						stmt = con.createStatement();
-						/*
-						 Connection con=DriverManager.getConnection(  
-									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-									stmt = con.createStatement();
-			*/
+			 Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+						
 		for(int i=0;i<numberofGuards;i++){
 
 		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+");";
 		int rs2 = stmt.executeUpdate(sql);
 		}
         request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);
-
+        con.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 	}
 
 }

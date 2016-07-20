@@ -9,11 +9,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Servlet implementation class MakeSchedule
@@ -90,16 +93,11 @@ public class MakeSchedule extends HttpServlet {
 		ArrayList<Shift> shifts = new ArrayList<Shift>();
 		Statement stmt = null;
 		try{
-			Class.forName("com.mysql.jdbc.Driver");  
-			 Connection con=DriverManager.getConnection(  
-						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-						stmt = con.createStatement();
-						/*
-						 Connection con=DriverManager.getConnection(  
-									"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
-									stmt = con.createStatement();
-			*/
-						stmt = con.createStatement();
+			Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
 						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"';";
 						ResultSet rs = stmt.executeQuery(sql);
 						while(rs.next()){
@@ -115,6 +113,7 @@ public class MakeSchedule extends HttpServlet {
 
 							
 						}
+						con.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

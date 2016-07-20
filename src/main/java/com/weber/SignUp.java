@@ -6,11 +6,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Servlet implementation class SignUp
@@ -62,6 +65,12 @@ public class SignUp extends HttpServlet {
 		int passwords= Login.hash(password);
 		if((position.equals("Manager")&&positioncode.equals(managercode))||(position.equals("Assistant Manager")&&positioncode.equals(assmanagercode))||(position.equals("Head Guard")&&positioncode.equals(headcode))||position.equals(("Guard"))){
 		try{
+			Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+			/**
 		Class.forName("com.mysql.jdbc.Driver");  
 		  
 		 Connection con=DriverManager.getConnection(  
@@ -86,6 +95,7 @@ public class SignUp extends HttpServlet {
 						response.getWriter().append("This email already has an account. To try again please press the back button.");
 
 					}}
+					con.close();
 			}catch(Exception e){
 			e.printStackTrace();
 		}

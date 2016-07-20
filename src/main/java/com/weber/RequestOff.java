@@ -9,11 +9,14 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Servlet implementation class RequestOff
@@ -95,7 +98,12 @@ public class RequestOff extends HttpServlet {
 		Statement stmt= null;
 		try{
 			 stmt =null;
-
+			 Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+/**
 			 Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 						stmt = con.createStatement();
@@ -111,7 +119,7 @@ public class RequestOff extends HttpServlet {
 		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+((User)request.getSession().getAttribute("user")).getEmail()+"');";
 		int rs2 = stmt.executeUpdate(sql);
         request.getRequestDispatcher("requestoff.jsp").forward(request, response);
-
+        con.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
