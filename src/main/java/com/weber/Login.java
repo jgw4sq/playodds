@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 			ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
 			Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 						String username = (String) request.getParameter("username");

@@ -100,7 +100,7 @@ public class RequestOff extends HttpServlet {
 			 stmt =null;
 			 Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			 DataSource ds = (DataSource)envContext.lookup("jdbc/jake");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 /**
