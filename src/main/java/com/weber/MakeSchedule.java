@@ -174,11 +174,12 @@ public class MakeSchedule extends HttpServlet {
 							Timestamp startTime2 = rs3.getTimestamp("startTime");
 							Timestamp endTime2 = rs3.getTimestamp("endTime");
 							boolean approved = rs3.getBoolean("approved");
+							int id= rs.getInt("id");
 							if(approved==true){
-								approvedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,true,email));
+								approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id));
 							}
 							else{
-								notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,0,guard,false,email));
+								notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id));
 							}
 						
 
