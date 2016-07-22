@@ -36,6 +36,11 @@ public class ApproveRequestOff extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(((User)request.getSession().getAttribute("user"))==null){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}
+		
 		Statement stmt = null;
 		User user = (User) request.getSession().getAttribute("user");
 		ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
