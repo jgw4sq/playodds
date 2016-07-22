@@ -9,21 +9,24 @@ public class TimeOff {
 	private String guard;
 	private boolean approved;
 	private String email;
+	private String pool;
 	public String getEmail() {
 		return email;
 	}
+	private int id;
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public TimeOff(Timestamp startTime, Timestamp endTime, int length,
-			String guard, boolean approved, String email) {
+	public TimeOff(Timestamp startTime, Timestamp endTime,
+			String guard, boolean approved, String email, String pool,int id) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.length = length;
 		this.guard = guard;
 		this.approved = approved;
 		this.email=email;
+		this.setPool(pool);
+		this.id=id;
 	}
 	public Timestamp getStartTime() {
 		return startTime;
@@ -54,6 +57,18 @@ public class TimeOff {
 	}
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+	public String getPool() {
+		return pool;
+	}
+	public void setPool(String pool) {
+		this.pool = pool;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
