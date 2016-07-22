@@ -25,7 +25,7 @@ public class TimeOff {
 		this.guard = guard;
 		this.approved = approved;
 		this.email=email;
-		this.setPool(pool);
+		this.pool=pool;
 		this.id=id;
 	}
 	public Timestamp getStartTime() {
