@@ -78,8 +78,8 @@ try{
 	e.printStackTrace();
 }
 
-				request.setAttribute("approvedtimesoff", approvedtimesoff);
-				request.setAttribute("notapprovedtimesoff", notapprovedtimesoff);
+				request.getSession().setAttribute("approvedtimesoff", approvedtimesoff);
+				request.getSession().setAttribute("notapprovedtimesoff", notapprovedtimesoff);
 	        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 			}
 			
