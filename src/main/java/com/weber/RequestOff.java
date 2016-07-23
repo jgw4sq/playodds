@@ -149,8 +149,9 @@ try{
 				
 		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+email+"','"+pool+"');";
 		int rs2 = stmt.executeUpdate(sql);
-        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
         con.close();
+        response.sendRedirect("/RequestOff");
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
