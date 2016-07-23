@@ -128,6 +128,7 @@ try{
 		String endTime = year2+"-"+month2+"-"+day2+" "+hoursminutes2+":00";
 		Statement stmt= null;
 		try{
+			String name = ((User)request.getSession().getAttribute("user")).getName();
 			 stmt =null;
 			 Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
@@ -144,10 +145,7 @@ try{
 									stmt = con.createStatement();
 			*/
 				
-				request.setAttribute("approvedtimesoff", ((User)request.getSession().getAttribute("user")).getApprovedtimeoff());
-				request.setAttribute("notapprovedtimesoff", ((User)request.getSession().getAttribute("user")).getNotapprovedtimeoff());
-
-		 String sql = "INSERT INTO TIMEOFF VALUES ('Jake Weber', '"+startTime+"', '"+endTime+"', 'Cory Baldwin', false,'"+((User)request.getSession().getAttribute("user")).getEmail()+"');";
+		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+((User)request.getSession().getAttribute("user")).getEmail()+"');";
 		int rs2 = stmt.executeUpdate(sql);
         request.getRequestDispatcher("requestoff.jsp").forward(request, response);
         con.close();
