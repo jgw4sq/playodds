@@ -57,7 +57,7 @@ public class ApproveRequestOff extends HttpServlet {
 				String guard=rs.getString("guard");
 				int id= rs.getInt("id");
 				Timestamp startTime=rs.getTimestamp("startTime");
-				Timestamp endTime=rs.getTimestamp(2);
+				Timestamp endTime=rs.getTimestamp(3);
 				boolean approved=rs.getBoolean("approved");
 				String email=rs.getString("email");
 				String pool=rs.getString("pool");
@@ -81,6 +81,8 @@ public class ApproveRequestOff extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		System.out.println(request.getParameter("1"));
 	}
 
 }
