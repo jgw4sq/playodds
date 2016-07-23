@@ -56,7 +56,7 @@ public class ApproveRequestOff extends HttpServlet {
 			while(rs.next()){
 				String guard=rs.getString("guard");
 				int id= rs.getInt("id");
-				System.out.println(rs.getTimestamp("startTime"));
+				System.out.println(rs.getTimestamp("endTime"));
 				Timestamp startTime=rs.getTimestamp("startTime");
 				Timestamp endTime=rs.getTimestamp("endTime");
 				boolean approved=rs.getBoolean("approved");
