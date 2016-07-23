@@ -129,6 +129,8 @@ try{
 		Statement stmt= null;
 		try{
 			String name = ((User)request.getSession().getAttribute("user")).getName();
+			String email = ((User)request.getSession().getAttribute("user")).getEmail();
+			String pool = ((User)request.getSession().getAttribute("user")).getPool();
 			 stmt =null;
 			 Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
@@ -145,7 +147,7 @@ try{
 									stmt = con.createStatement();
 			*/
 				
-		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+((User)request.getSession().getAttribute("user")).getEmail()+"');";
+		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+email+"','"+pool+"');";
 		int rs2 = stmt.executeUpdate(sql);
         request.getRequestDispatcher("requestoff.jsp").forward(request, response);
         con.close();
