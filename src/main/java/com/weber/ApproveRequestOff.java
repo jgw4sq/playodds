@@ -72,7 +72,7 @@ public class ApproveRequestOff extends HttpServlet {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		request.setAttribute("notapprovedtimesoff", notapprovedtimesoff);
+		request.getSession().setAttribute("notapprovedtimesoff", notapprovedtimesoff);
         request.getRequestDispatcher("approverequestoff.jsp").forward(request, response);
 
 	}

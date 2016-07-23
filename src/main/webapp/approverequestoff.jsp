@@ -113,7 +113,7 @@ input[type=submit] {
 				</tr>
 				<%  
 // retrieve your list from the request, with casting 
-ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getAttribute("notapprovedtimesoff");
+ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("notapprovedtimesoff");
 if(list.size()<1){
 	%>
 	<span class= "normaltext">The are no requests off to approve!</span>
