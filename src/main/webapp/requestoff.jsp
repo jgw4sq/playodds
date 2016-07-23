@@ -104,8 +104,7 @@ input[type=submit] {
 
 			<%
 				// retrieve your list from the request, with casting 
-				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request
-						.getAttribute("approvedtimesoff");
+				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("approvedtimesoff");
 			%>
 			<table align="center" bordercolor="green" border="1" cellpadding="5"
 				cellspacing="5">
