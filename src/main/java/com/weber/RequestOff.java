@@ -38,7 +38,7 @@ public class RequestOff extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Statement stmt =null;
+
 		
 
 	
@@ -46,9 +46,40 @@ public class RequestOff extends HttpServlet {
 				response.sendRedirect(request.getContextPath()+"/Login");
 
 			}else{
+				Statement stmt =null;
+				ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
+				ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
+				String email = ((User)request.getSession().getAttribute("user")).getEmail();
+				String pool = ((User)request.getSession().getAttribute("user")).getPool();
+try{
+				Context initContext = new InitialContext();
+				 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+				 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
+				 Connection con = ds.getConnection();
+				
+				stmt = con.createStatement();
+				 String sql = "SELECT * FROM TIMEOFF WHERE email='"+email+"';";
+				 ResultSet rs = stmt.executeQuery(sql);
+				while (rs.next()){
+					String guard = rs.getString("guard");
+					Timestamp startTime2 = rs.getTimestamp("startTime");
+					Timestamp endTime2 = rs.getTimestamp("endTime");
+					int id = rs.getInt("id");
+					boolean approved = rs.getBoolean("approved");
+					if(approved==true){
+						approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id));
+					}
+					else{
+						notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id));
+					}
+					
+				}
+}catch(Exception e){
+	e.printStackTrace();
+}
 
-				request.setAttribute("approvedtimesoff", ((User)request.getSession().getAttribute("user")).getApprovedtimeoff());
-				request.setAttribute("notapprovedtimesoff", ((User)request.getSession().getAttribute("user")).getNotapprovedtimeoff());
+				request.setAttribute("approvedtimesoff", approvedtimesoff);
+				request.setAttribute("notapprovedtimesoff", notapprovedtimesoff);
 	        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
 			}
 			
