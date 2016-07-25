@@ -133,11 +133,8 @@ for(TimeOff timeoff : list) {
 						<%out.println(timeoff.getEndTime().toString());%>
 					</td>
 					<td>
-						<select>
-							<option>Don't Approve</option>
-							<option>Approve</option>
-
-						</select>
+					<input type="checkbox" name="approved" value="<%out.print(timeoff.getId()); %>">A<br>
+						
 					</td>
 				</tr>
 				<%
