@@ -54,30 +54,30 @@ input[type=submit] {
 <body>
 
 	<!--Header-->
-	   <header class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a id="logo" class="pull-left" href="index.jsp"></a>
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="<%=request.getContextPath()%>/MyAccount">My Account</a></li>
-                        <li><a href="<%=request.getContextPath()%>/MySchedule">My Schedule</a></li>
-                        <li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
-                        <li><a href="signup.jsp">Registration</a></li>
-                        <li class="login">
-                            <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i>  Sign In</a>
-                        </li>
-                    </ul>        
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </header>
+	<header class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a id="logo" class="pull-left" href="index.jsp"></a>
+				<div class="nav-collapse collapse pull-right">
+					<ul class="nav">
+						<li class="active"><a href="index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/MyAccount">My
+								Account</a></li>
+						<li><a href="<%=request.getContextPath()%>/MySchedule">My
+								Schedule</a></li>
+						<li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
+						<li><a href="signup.jsp">Registration</a></li>
+						<li class="login"><a data-toggle="modal" href="#loginForm"><i
+								class="icon-lock"></i> Sign In</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</header>
 	<!-- /header -->
 
 	<section class="title">
@@ -99,7 +99,7 @@ input[type=submit] {
 
 	<section id="portfolio" class="container main">
 		<div>
-			
+
 			<h3 align="center">Approved Time Off</h3>
 
 			<%
@@ -149,9 +149,9 @@ input[type=submit] {
 			<br> <br>
 		</div>
 		<div>
-			
+
 			<h3 align="center">Not Approved Time Requested Off</h3>
-			
+
 			<%
 			// retrieve your list from the request, with casting 
 			ArrayList<TimeOff> list2 = (ArrayList<TimeOff>) request.getSession()
@@ -204,164 +204,164 @@ input[type=submit] {
 			<h3 align="center">Request Off Time</h3>
 			<form name="f2" method="post" action="RequestOff" id="f2">
 				<span class="requestoffheader">Start Time:</span> <select
-						style="width: 150px;" name="year">
-							<option value="2016">2016</option>
-					</select><select name="month" style="width: 150px;">
-							<option value="" disabled selected>Month</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-					</select> <select name="day" style="width: 150px;">
-							<option value="" disabled selected>Day</option>
+					style="width: 150px;" name="year">
+					<option value="2016">2016</option>
+				</select><select name="month" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
 
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-							<option value="13">13</option>
-							<option value="14">14</option>
-							<option value="15">15</option>
-							<option value="16">16</option>
-							<option value="17">17</option>
-							<option value="18">18</option>
-							<option value="19">19</option>
-							<option value="20">20</option>
-							<option value="21">21</option>
-							<option value="22">22</option>
-							<option value="23">23</option>
-							<option value="24">24</option>
-							<option value="25">25</option>
-							<option value="26">26</option>
-							<option value="27">27</option>
-							<option value="28">28</option>
-							<option value="29">29</option>
-							<option value="30">30</option>
-							<option value="31">31</option>
-					</select> <select name="hour" style="width: 150px;">
-							<option value="" disabled selected>Hour</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select> <select name="hour" style="width: 150px;">
+					<option value="" disabled selected>Hour</option>
 
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-					</select> <select name="minutes" style="width: 150px;">
-							<option value="" disabled selected>Minutes</option>
-							<option value="00">00</option>
-							<option value="15">15</option>
-							<option value="30">30</option>
-							<option value="45">45</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="minutes" style="width: 150px;">
+					<option value="" disabled selected>Minutes</option>
+					<option value="00">00</option>
+					<option value="15">15</option>
+					<option value="30">30</option>
+					<option value="45">45</option>
 
-					</select> <select name="ampm" style="width: 150px;">
-							<option value="" disabled selected>AM/PM</option>
+				</select> <select name="ampm" style="width: 150px;">
+					<option value="" disabled selected>AM/PM</option>
 
-							<option value="am">AM</option>
-							<option value="pm">PM</option>
-					</select><br> <span class="requestoffheader">End Time: </span><select
-						style="width: 150px;" name="year2">
-							<option value="2016">2016</option>
-					</select><select name="month2" style="width: 150px;">
-							<option value="" disabled selected>Month</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-					</select> <select name="day2" style="width: 150px;">
-							<option value="" disabled selected>Day</option>
+					<option value="am">AM</option>
+					<option value="pm">PM</option>
+				</select><br> <span class="requestoffheader">End Time: </span><select
+					style="width: 150px;" name="year2">
+					<option value="2016">2016</option>
+				</select><select name="month2" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day2" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
 
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-							<option value="13">13</option>
-							<option value="14">14</option>
-							<option value="15">15</option>
-							<option value="16">16</option>
-							<option value="17">17</option>
-							<option value="18">18</option>
-							<option value="19">19</option>
-							<option value="20">20</option>
-							<option value="21">21</option>
-							<option value="22">22</option>
-							<option value="23">23</option>
-							<option value="24">24</option>
-							<option value="25">25</option>
-							<option value="26">26</option>
-							<option value="27">27</option>
-							<option value="28">28</option>
-							<option value="29">29</option>
-							<option value="30">30</option>
-							<option value="31">31</option>
-					</select> <select name="hour2" style="width: 150px;">
-							<option value="" disabled selected>Hour</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select> <select name="hour2" style="width: 150px;">
+					<option value="" disabled selected>Hour</option>
 
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-					</select> <select name="minutes2" style="width: 150px;">
-							<option value="" disabled selected>Minutes</option>
-							<option value="00">00</option>
-							<option value="15">15</option>
-							<option value="30">30</option>
-							<option value="45">45</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="minutes2" style="width: 150px;">
+					<option value="" disabled selected>Minutes</option>
+					<option value="00">00</option>
+					<option value="15">15</option>
+					<option value="30">30</option>
+					<option value="45">45</option>
 
-					</select> <select name="ampm2" style="width: 150px;">
-							<option value="" disabled selected>AM/PM</option>
+				</select> <select name="ampm2" style="width: 150px;">
+					<option value="" disabled selected>AM/PM</option>
 
-							<option value="am">AM</option>
-							<option value="pm">PM</option>
-					<br>
-					<span class="requestoffheader">Reason: </span><input type="text" placeholder="Reason" name="reason"/>
-					</select><br> </select><br> <input type="submit" value="Request Off">
+					<option value="am">AM</option>
+					<option value="pm">PM</option>
+				</select><br> <span class="requestoffheader">Reason: </span><input
+					type="text" placeholder="Reason" name="reason" /> <br> <input
+					type="submit" value="Request Off">
 			</form>
 		</div>
 

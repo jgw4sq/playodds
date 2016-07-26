@@ -104,14 +104,7 @@ input[type=submit] {
 		<h1 class="scheduleheader">Approve Request Off</h1>
 		<div>
 		<form action="ApproveRequestOff" method="post">
-			<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
-				<tr>
-					<th>Guard</th>
-					<th>Start Time</th>
-					<th>End Time</th>
-					<th>Reason </th>
-					<th>Approve</th>
-				</tr>
+			
 				<%  
 // retrieve your list from the request, with casting 
 ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("notapprovedtimesoff");
@@ -119,9 +112,18 @@ if(list.size()<1){
 	%>
 	<span class= "normaltext">The are no requests off to approve!</span>
 	<%
-}else{
+}else{%>
+	
+	<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
+	<tr>
+		<th>Guard</th>
+		<th>Start Time</th>
+		<th>End Time</th>
+		<th>Reason </th>
+		<th>Approve</th>
+	</tr>
 // print the information about every category of the list
-for(TimeOff timeoff : list) {
+<%for(TimeOff timeoff : list) {
 	%>
 				<tr id = "<%timeoff.getId(); %>">
 					<td>
