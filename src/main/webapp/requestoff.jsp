@@ -360,7 +360,7 @@ input[type=submit] {
 							<option value="am">AM</option>
 							<option value="pm">PM</option>
 					<br>
-					<input type="text" placeholder="Reason" name="reason"/>
+					<span class="requestoffheader">Reason: </span><input type="text" placeholder="Reason" name="reason"/>
 					</select><br> </select><br> <input type="submit" value="Request Off">
 			</form>
 		</div>

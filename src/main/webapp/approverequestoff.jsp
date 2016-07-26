@@ -119,7 +119,7 @@ if(list.size()<1){
 	%>
 	<span class= "normaltext">The are no requests off to approve!</span>
 	<%
-}
+}else{
 // print the information about every category of the list
 for(TimeOff timeoff : list) {
 	%>
@@ -142,7 +142,7 @@ for(TimeOff timeoff : list) {
 					</td>
 				</tr>
 				<%
-}
+}}
 %>
 			</table>
 			<input type="submit" value="submit"/>
