@@ -147,7 +147,8 @@ if(list.size()<1){
 }}
 %>
 			</table>
-			<input type="submit" value="submit"/>
+			<br>
+			<input type="submit" value="Approve Selected TimeOff"/>
 			</form>
 		</div>
 	</section>
