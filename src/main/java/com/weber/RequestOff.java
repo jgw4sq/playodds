@@ -66,11 +66,12 @@ try{
 					Timestamp endTime2 = rs.getTimestamp("endTime");
 					int id = rs.getInt("id");
 					boolean approved = rs.getBoolean("approved");
+					String reason = rs.getString("reason");
 					if(approved==true){
-						approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id));
+						approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id,reason));
 					}
 					else{
-						notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id));
+						notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id,reason));
 					}
 					
 				}
@@ -102,6 +103,7 @@ try{
 		String minute = request.getParameter("minutes");
 		String hoursminutes = hour+":"+minute;
 		String ampm = request.getParameter("ampm");
+		String reason = request.getParameter("reason");
 		if(ampm.equals("pm")){
 			String hours = hoursminutes.substring(0,2);
 			int inthours = Integer.parseInt(hours);
@@ -147,7 +149,7 @@ try{
 									stmt = con.createStatement();
 			*/
 				
-		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+email+"','"+pool+"');";
+		 String sql = "INSERT INTO TIMEOFF (guard,startTime,endTime,approved,email,pool,reason) VALUES ('"+name+"', '"+startTime+"', '"+endTime+"',false,'"+email+"','"+pool+"','"+reason+"');";
 		int rs2 = stmt.executeUpdate(sql);
         con.close();
         response.sendRedirect("/RequestOff");

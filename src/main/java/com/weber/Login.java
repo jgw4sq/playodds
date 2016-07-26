@@ -95,12 +95,13 @@ public class Login extends HttpServlet {
 									Timestamp startTime2 = rs.getTimestamp("startTime");
 									Timestamp endTime2 = rs.getTimestamp("endTime");
 									int id = rs.getInt("id");
+									String reason = rs.getString("reason");
 									boolean approved = rs.getBoolean("approved");
 									if(approved==true){
-										approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,username,pool,id));
+										approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,username,pool,id,reason));
 									}
 									else{
-										notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,username,pool,id));
+										notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,username,pool,id,reason));
 									}
 									
 								}

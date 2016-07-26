@@ -61,7 +61,8 @@ public class ApproveRequestOff extends HttpServlet {
 				boolean approved=rs.getBoolean("approved");
 				String email=rs.getString("email");
 				String pool=rs.getString("pool");
-				notapprovedtimesoff.add(new TimeOff(startTime,endTime,guard,approved,email,pool,id));
+				String reason= rs.getString("reason");
+				notapprovedtimesoff.add(new TimeOff(startTime,endTime,guard,approved,email,pool,id,reason));
 				
 
 				

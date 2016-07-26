@@ -109,6 +109,7 @@ input[type=submit] {
 					<th>Guard</th>
 					<th>Start Time</th>
 					<th>End Time</th>
+					<th>Reason </th>
 					<th>Approve</th>
 				</tr>
 				<%  
@@ -131,6 +132,9 @@ for(TimeOff timeoff : list) {
 					</td>
 					<td>
 						<%out.println(timeoff.getEndTime().toString());%>
+					</td>
+					<td>
+						<%out.println(timeoff.getReason());%>
 					</td>
 					<td>
 					<input type="checkbox" name="approved" value="<%out.print(timeoff.getId()); %>">Approve<br>

@@ -14,11 +14,12 @@ public class TimeOff {
 		return email;
 	}
 	private int id;
+	private String reason;
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	public TimeOff(Timestamp startTime, Timestamp endTime,
-			String guard, boolean approved, String email, String pool,int id) {
+			String guard, boolean approved, String email, String pool,int id,String reason) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -27,6 +28,13 @@ public class TimeOff {
 		this.email=email;
 		this.pool=pool;
 		this.id=id;
+		this.reason=reason;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 	public Timestamp getStartTime() {
 		return startTime;

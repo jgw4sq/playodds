@@ -203,7 +203,7 @@ input[type=submit] {
 		<div>
 			<h3 align="center">Request Off Time</h3>
 			<form name="f2" method="post" action="RequestOff" id="f2">
-				<span class="requestoffheader">Start Time:<span> <select
+				<span class="requestoffheader">Start Time:</span> <select
 						style="width: 150px;" name="year">
 							<option value="2016">2016</option>
 					</select><select name="month" style="width: 150px;">
@@ -359,6 +359,8 @@ input[type=submit] {
 
 							<option value="am">AM</option>
 							<option value="pm">PM</option>
+					<br>
+					<input type="text" placeholder="Reason" name="reason"/>
 					</select><br> </select><br> <input type="submit" value="Request Off">
 			</form>
 		</div>

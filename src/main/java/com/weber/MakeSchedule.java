@@ -38,7 +38,8 @@ public class MakeSchedule extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		makeScheduleBasedOnRank("Glen Allen");
+		String pool = ((User)request.getSession().getAttribute("user")).getPool();
+		makeScheduleBasedOnRank(pool);
 	}
 
 	/**
@@ -174,12 +175,13 @@ public class MakeSchedule extends HttpServlet {
 							Timestamp startTime2 = rs3.getTimestamp("startTime");
 							Timestamp endTime2 = rs3.getTimestamp("endTime");
 							boolean approved = rs3.getBoolean("approved");
+							String reason = rs3.getString("reason");
 							int id= rs.getInt("id");
 							if(approved==true){
-								approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id));
+								approvedtimesoff.add(new TimeOff(startTime2,endTime2,guard,true,email,pool,id,reason));
 							}
 							else{
-								notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id));
+								notapprovedtimesoff.add(new TimeOff(startTime2,endTime2,guard,false,email,pool,id,reason));
 							}
 						
 
