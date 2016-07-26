@@ -82,10 +82,31 @@ public class ApproveRequestOff extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String [] approved =request.getParameterValues("approved");
-		for (int i=0; i<approved.length;i++){
-			System.out.println(approved[i]);
+		Statement stmt = null;
+		
+		try{  
+			Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+			for(int i=0; i<approved.length;i++){
+				String sql= "UPDATE TIMEOFF SET approved=true WHERE id="+approved[i]+";";
+				int rs= stmt.executeUpdate(sql);
+			}
+			
+
+				
+				
+				
+			stmt.close();
+			con.close();
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		System.out.println(request.getParameter("1"));
+		response.sendRedirect("ApproveRequestOff");
+		
+		
 	}
 
 }
