@@ -34,6 +34,7 @@ public class EditUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("edit");
+		name=name.replace("Edit ", "");
 		Statement stmt =null;
 		try{
 			Context initContext = new InitialContext();
