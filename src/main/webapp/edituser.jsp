@@ -104,9 +104,9 @@ input[type=submit] {
 		<h1 class="scheduleheader">Edit User</h1>
 		<div>
 		<form action="EditUser" method="post">
-			<span>Name: </span><input type=text value="<%request.getAttribute("name"); %>"/>
-			<span>Rank: </span><input type=text value="<%request.getAttribute("rank"); %>"/>
-			<span>Min Hours Per Week: </span><input type=text value="<%request.getAttribute("managerMinHours"); %>"/>
+			<span>Name: </span><input type=text value="<%out.print(request.getAttribute("name")); %>"/><br>
+			<span>Rank: </span><input type=text value="<%out.print(request.getAttribute("rank")); %>"/><br>
+			<span>Min Hours Per Week: </span><input type=text value="<%out.print(request.getAttribute("managerMinHours")); %>"/><br>
 
 			<input align="center" type="submit" value="Edit User"/>
 			</form>
