@@ -74,6 +74,7 @@ public class Login extends HttpServlet {
 								boolean otherpools=rs.getBoolean("otherPools");
 								int rank=rs.getInt("rank");
 								String position =rs.getString("position");
+								int managerMinHours = rs.getInt("managerMinHours");
 				
 								 sql = "SELECT * FROM SHIFTS WHERE email='"+username+"';";
 								 rs = stmt.executeQuery(sql);
@@ -107,7 +108,7 @@ public class Login extends HttpServlet {
 								}
 								System.out.println("Initializing User");
 								request.getSession().setAttribute("user", new User( name,  position,  pool,  myshifts,
-										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username));
+										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username,managerMinHours));
 								System.out.println("Created User");
 
 							}

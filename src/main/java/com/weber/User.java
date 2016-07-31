@@ -20,6 +20,15 @@ private String email;
 private ArrayList<Shift> shifts;
 private ArrayList<TimeOff> approvedtimeoff;
 private ArrayList<TimeOff> notapprovedtimeoff;
+private int managerMinHours;
+
+public int getManagerMinHours() {
+	return managerMinHours;
+}
+
+public void setManagerMinHours(int managerMinHours) {
+	this.managerMinHours = managerMinHours;
+}
 
 public User(int rank){
 	this.rank=rank;
@@ -46,7 +55,7 @@ private int age;
 private int rank;
 private boolean otherpools;
 public User(String name, String position, String pool, ArrayList<Shift> shifts,
-		ArrayList<TimeOff> approvedtimeoff,ArrayList<TimeOff> notapprovedtimeoff, int age, int rank, boolean otherpools,String email) {
+		ArrayList<TimeOff> approvedtimeoff,ArrayList<TimeOff> notapprovedtimeoff, int age, int rank, boolean otherpools,String email,int managerMinHours) {
 	super();
 	this.name = name;
 	this.position = position;
@@ -58,6 +67,7 @@ public User(String name, String position, String pool, ArrayList<Shift> shifts,
 	this.rank = rank;
 	this.otherpools = otherpools;
 	this.email=email;
+	this.managerMinHours=managerMinHours;
 }
 public ArrayList<TimeOff> getApprovedtimeoff() {
 	return approvedtimeoff;

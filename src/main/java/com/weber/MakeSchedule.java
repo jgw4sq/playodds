@@ -152,6 +152,7 @@ public class MakeSchedule extends HttpServlet {
 						String mainPool = rs.getString("mainPool");
 						boolean otherPools = rs.getBoolean("otherPools");
 						int rank = rs.getInt("rank");
+						int managerMinHours= rs.getInt("managerMinHours");
 						String position = rs.getString("position");
 						Statement stmt2 = con.createStatement();
 						sql = "SELECT * FROM SHIFTS WHERE email='"+email+"';";
@@ -188,7 +189,7 @@ public class MakeSchedule extends HttpServlet {
 
 					}
 						User user = new User( name,  position,  mainPool, shifts,
-								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email);
+								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email,managerMinHours);
 						
 						poolEmployees.add(user);
 						System.out.println("Added employee"+user.getName());
