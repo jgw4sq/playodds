@@ -31,6 +31,7 @@ public class ManageUsers extends HttpServlet {
 		// TODO Auto-generated method stub
 		User user = ((User)request.getSession().getAttribute("user"));
 		ArrayList<User> users =MakeSchedule.populateUsers(user.getPool());
+		System.out.println("Users size: "+users.size());
 		request.setAttribute("users", users);
 		request.getRequestDispatcher("manageusers.jsp").forward(request, response);
 	}
