@@ -68,6 +68,24 @@ public class EditUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String name = request.getParameter("name");
+		int rank=Integer.parseInt(request.getParameter("rank"));
+		int managerMinHours= Integer.parseInt(request.getParameter("managerMinHours"));
+		Statement stmt=null;
+		try{
+			Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+			String sql= "UPDATE GUARDS SET rank="+rank+",managerMinHours="+managerMinHours+"WHERE name='"+name+"';";
+			int rs = stmt.executeUpdate(sql);
+			stmt.close();
+			con.close();
+			response.sendRedirect("ManageUsers");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
