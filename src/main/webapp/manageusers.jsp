@@ -107,7 +107,7 @@ input[type=submit] {
 			
 				<%  
 // retrieve your list from the request, with casting 
-ArrayList<User> list = (ArrayList<User>) request.getSession().getAttribute("users");
+ArrayList<User> list = (ArrayList<User>) request.getAttribute("users");
 if(list.size()<1){
 	%>
 	<span class= "normaltext">The are no requests off to approve!</span>
