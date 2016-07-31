@@ -41,7 +41,7 @@ public class EditUser extends HttpServlet {
 			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
-			String sql= "SELECT * FROM GUADS WHERE name='"+name+"';";
+			String sql= "SELECT * FROM GUARDS WHERE name='"+name+"';";
 			ResultSet rs = stmt.executeQuery(sql);
 			int rank=0;
 			int managerMinHours=0;
@@ -51,6 +51,7 @@ public class EditUser extends HttpServlet {
 			}
 			request.setAttribute("rank", rank);
 			request.setAttribute("managerMinHours", managerMinHours);
+			request.setAttribute("name", name);
 			stmt.close();
 			con.close();
 			request.getRequestDispatcher("edituser.jsp").forward(request, response);
