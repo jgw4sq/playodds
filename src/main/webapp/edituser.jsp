@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="com.weber.User"%>
+<%@ page import="com.weber.TimeOff"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -28,7 +28,7 @@ input[type=submit] {
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Manage Users | ScheduleMe</title>
+<title>Edit User | ScheduleMe</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 
@@ -101,49 +101,14 @@ input[type=submit] {
 
 
 	<section>
-		<h1 class="scheduleheader">Manage Users</h1>
+		<h1 class="scheduleheader">Edit User</h1>
 		<div>
-		<form action="EditUser" method="get">
-			
-				<%  
-// retrieve your list from the request, with casting 
-ArrayList<User> list = (ArrayList<User>) request.getAttribute("users");
-if(list.size()<1){
-	%>
-	<span class= "normaltext">The are no requests off to approve!</span>
-	<%
-}else{%>
-	
-	<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
-	<tr>
-		<th>Guard</th>
-		<th>Rank</th>
-		<th>Min Hours</th>
-		<th>Edit</th>
-	</tr>
-// print the information about every category of the list
-<%for(User user : list) {
-	%>
-				<tr id = "<%user.getEmail(); %>">
-					<td>
-						<%out.println(user.getName());%>
-					</td>
-					<td>
-						<%out.println(user.getRank());%>
-					</td>
-					<td>
-						<%out.println(user.getManagerMinHours());%>
-					</td>
-					<td>
-					<input type="submit" name="edit" value="Edit <%out.print(user.getName()); %>"><br>
-						
-					</td>
-				</tr>
-				<%
-}}
-%>
-			</table>
-			<br>
+		<form action="EditUser" method="post">
+			<span>Name: </span><input type=text value="<%request.getAttribute("name"); %>"/>
+			<span>Rank: </span><input type=text value="<%request.getAttribute("rank"); %>"/>
+			<span>Min Hours Per Week: </span><input type=text value="<%request.getAttribute("managerMinHours"); %>"/>
+
+			<input align="center" type="submit" value="Edit User"/>
 			</form>
 		</div>
 	</section>
