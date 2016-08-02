@@ -78,7 +78,7 @@ public class EditUser extends HttpServlet {
 			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
-			String sql= "UPDATE GUARDS SET rank="+rank+",managerMinHours="+managerMinHours+"WHERE name='"+name+"';";
+			String sql= "UPDATE GUARDS SET rank="+rank+",managerMinHours="+managerMinHours+" WHERE name='"+name+"';";
 			int rs = stmt.executeUpdate(sql);
 			stmt.close();
 			con.close();
