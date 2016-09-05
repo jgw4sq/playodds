@@ -84,12 +84,12 @@ input[type=submit] {
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span6">
-					<h1>Request Off</h1>
+					<h1>Manage</h1>
 				</div>
 				<div class="span6">
 					<ul class="breadcrumb pull-right">
 						<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-						<li class="active">Request Off</li>
+						<li class="active">Manage</li>
 					</ul>
 				</div>
 			</div>
@@ -99,9 +99,13 @@ input[type=submit] {
 
 	<section id="portfolio" class="container main">
 		This is the Schedule Manager Page
-<a href = "makeschedule.jsp">Make Schedules </a>
-<a href = "<%=request.getContextPath()%>/AddShifts">Add Shifts </a>
-<a href = "<%=request.getContextPath()%>/ApproveRequestOff">Approve Request Off </a>
+		<br>
+		
+<a href = "<%=request.getContextPath()%>/View Schedule">View Schedule </a><br>
+<a href = "<%=request.getContextPath()%>/MakeSchedule">Make Schedule </a><br>
+<a href = "<%=request.getContextPath()%>/AddShifts">Add Shifts </a><br>
+<a href = "<%=request.getContextPath()%>/ApproveRequestOff">Approve Request Off </a><br>
+<a href = "<%=request.getContextPath()%>/ManageUsers">Manage Users </a><br>
 
 
 
