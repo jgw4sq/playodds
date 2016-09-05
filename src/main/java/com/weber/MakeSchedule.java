@@ -52,7 +52,7 @@ public class MakeSchedule extends HttpServlet {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		Timestamp startDate = new Timestamp(0,0,0,0,0,0,0);
-		startDate.setYear(Integer.parseInt(year));
+		startDate.setYear(Integer.parseInt(year)-1900);
 		startDate.setMonth(Integer.parseInt(month));
 		startDate.setDate(Integer.parseInt(day));
 		
@@ -61,7 +61,7 @@ public class MakeSchedule extends HttpServlet {
 		String month2 = request.getParameter("month2");
 		String day2 = request.getParameter("day2");
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
-		endDate.setYear(Integer.parseInt(year));
+		endDate.setYear(Integer.parseInt(year)-1900);
 		endDate.setMonth(Integer.parseInt(month));
 		endDate.setDate(Integer.parseInt(day));
 		System.out.println(startDate.toString());
