@@ -15,6 +15,9 @@ h1.scheduleheader {
 	font-weight: bold;
 	text-align: center;
 }
+div.maindiv {  
+    text-align: center;
+}
 </style>
 <head>
 <meta charset="utf-8">
@@ -101,7 +104,7 @@ h1.scheduleheader {
 
 	<section>
 		<h1 class="scheduleheader">Scheduled Shifts</h1>
-		<div>
+		<div class="maindiv">
 			<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
 				<tr>
 					<th>Guard</th>
