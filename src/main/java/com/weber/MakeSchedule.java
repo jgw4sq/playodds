@@ -64,6 +64,8 @@ public class MakeSchedule extends HttpServlet {
 		endDate.setYear(Integer.parseInt(year));
 		endDate.setMonth(Integer.parseInt(month));
 		endDate.setDate(Integer.parseInt(day));
+		System.out.println(startDate.toString());
+		System.out.println(endDate.toString());
 		makeScheduleBasedOnRank(pool,startDate, endDate);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
@@ -111,6 +113,8 @@ public class MakeSchedule extends HttpServlet {
 	}
 	
 	public static ArrayList<Shift> populateShifts(String pool,Timestamp startDate, Timestamp endDate){
+		System.out.println(startDate.toString());
+		System.out.println(endDate.toString());
 		ArrayList<Shift> shifts = new ArrayList<Shift>();
 		Statement stmt = null;
 		try{
