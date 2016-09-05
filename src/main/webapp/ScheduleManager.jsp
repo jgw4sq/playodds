@@ -101,7 +101,7 @@ input[type=submit] {
 		This is the Schedule Manager Page
 		<br>
 		
-<a href = "<%=request.getContextPath()%>/View Schedule">View Schedule </a><br>
+<a href = "<%=request.getContextPath()%>/ViewSchedule">View Schedule </a><br>
 <a href = "<%=request.getContextPath()%>/MakeSchedule">Make Schedule </a><br>
 <a href = "<%=request.getContextPath()%>/AddShifts">Add Shifts </a><br>
 <a href = "<%=request.getContextPath()%>/ApproveRequestOff">Approve Request Off </a><br>
