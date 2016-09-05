@@ -102,23 +102,165 @@ input[type=submit] {
 		<div>
 			<h3 align="center">Add Shifts</h3>
 			<form name="f2" method="post" action="AddShifts" id="f2">
-					Pool: <input type="text" name="pool" placeholder="Pool"><br>
-		StartTime: <input type="text" name="year" placeholder="year"><input
-			type="text" name="month" placeholder="month(01)"><input
-			type="text" name="day" placeholder="day(01)"><input
-			type="text" name="hour:minute" placeholder="hour:minute(10:30)"><select name="ampm">
-			<option value="am">AM</option>
-			<option value="pm">PM</option>
-		</select><br> 
-		EndTime: <input type="text" name="year2" placeholder="year"><input
-			type="text" name="month2" placeholder="month(01)"><input
-			type="text" name="day2" placeholder="day(01)"><input
-			type="text" name="hour:minute2" placeholder="hour:minute(10:30)"><select name="ampm2">
-			<option value="am" >AM</option>
-			<option value="pm" >PM</option>
-		</select><br> 
-		How many guards are needed for this shift? <input type="number" name="numberofguards" placeholder="#ofGuards">
-		<input type="submit" value="Add Shifts"> 
+			<span class="requestoffheader">Start Time:</span> <select
+					style="width: 150px;" name="year">
+					<option value="2016">2016</option>
+				</select><select name="month" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select> <select name="hour" style="width: 150px;">
+					<option value="" disabled selected>Hour</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="minutes" style="width: 150px;">
+					<option value="" disabled selected>Minutes</option>
+					<option value="00">00</option>
+					<option value="15">15</option>
+					<option value="30">30</option>
+					<option value="45">45</option>
+
+				</select> <select name="ampm" style="width: 150px;">
+					<option value="" disabled selected>AM/PM</option>
+
+					<option value="am">AM</option>
+					<option value="pm">PM</option>
+				</select><br> <span class="requestoffheader">End Time: </span><select
+					style="width: 150px;" name="year2">
+					<option value="2016">2016</option>
+				</select><select name="month2" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day2" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select> <select name="hour2" style="width: 150px;">
+					<option value="" disabled selected>Hour</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="minutes2" style="width: 150px;">
+					<option value="" disabled selected>Minutes</option>
+					<option value="00">00</option>
+					<option value="15">15</option>
+					<option value="30">30</option>
+					<option value="45">45</option>
+
+				</select> <select name="ampm2" style="width: 150px;">
+					<option value="" disabled selected>AM/PM</option>
+
+					<option value="am">AM</option>
+					<option value="pm">PM</option>
+				</select><br> <span class="requestoffheader">Number of Employees Needed: </span><input
+					type="text" placeholder="#ofEmployees" name="#ofEmployees" /> <br> <input
+					type="submit" value="Add Shifts">
 			</form>
 		</div>
 

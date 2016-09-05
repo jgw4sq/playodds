@@ -49,13 +49,17 @@ public class AddShifts extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String pool = request.getParameter("pool");
-		int numberofGuards = Integer.parseInt(request.getParameter("numberofguards"));
+		int numberofEmployees = Integer.parseInt(request.getParameter("#ofEmployees"));
+		String pool = ((User)request.getSession().getAttribute("user")).getPool();
+
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
-		String hoursminutes = request.getParameter("hour:minute");
+		String hour = request.getParameter("hour");
+		String minute = request.getParameter("minutes");
+		String hoursminutes = hour+":"+minute;
 		String ampm = request.getParameter("ampm");
+		String reason = request.getParameter("reason");
 		if(ampm.equals("pm")){
 			String hours = hoursminutes.substring(0,2);
 			int inthours = Integer.parseInt(hours);
@@ -66,7 +70,9 @@ public class AddShifts extends HttpServlet {
 		String year2 = request.getParameter("year2");
 		String month2 = request.getParameter("month2");
 		String day2 = request.getParameter("day2");
-		String hoursminutes2 = request.getParameter("hour:minute2");
+		String hour2 = request.getParameter("hour2");
+		String minute2 = request.getParameter("minutes2");
+		String hoursminutes2 = hour2+":"+minute2;
 		String ampm2 = request.getParameter("ampm2");
 
 		if(ampm2.equals("pm")){
@@ -103,7 +109,7 @@ public class AddShifts extends HttpServlet {
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 						
-		for(int i=0;i<numberofGuards;i++){
+		for(int i=0;i<numberofEmployees;i++){
 
 		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+");";
 		int rs2 = stmt.executeUpdate(sql);
