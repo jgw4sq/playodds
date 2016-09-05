@@ -40,7 +40,7 @@ public class AddShifts extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{
-        request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);
+        request.getRequestDispatcher("addshifts.jsp").forward(request, response);
 		}
 	}
 
@@ -108,7 +108,7 @@ public class AddShifts extends HttpServlet {
 		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+");";
 		int rs2 = stmt.executeUpdate(sql);
 		}
-        request.getRequestDispatcher("/WEB-INF/addshifts.jsp").forward(request, response);
+        request.getRequestDispatcher("addshifts.jsp").forward(request, response);
         con.close();
 		}catch(Exception e){
 			e.printStackTrace();
