@@ -126,7 +126,7 @@ public class MakeSchedule extends HttpServlet {
 			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
-						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"' AND startTime >= '"+startDate.toString()+"' AND endTime<= '"+endDate.toString()+"';";
+						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"' AND startTime >= '"+startDate.toString()+"' AND endTime<= '"+endDate.toString()+"' AND guard= IS NULL;";
 						ResultSet rs = stmt.executeQuery(sql);
 						while(rs.next()){
 							int id = rs.getInt("id");
