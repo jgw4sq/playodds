@@ -84,12 +84,12 @@ input[type=submit] {
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span6">
-					<h1>Request Off</h1>
+					<h1>Create Schedule</h1>
 				</div>
 				<div class="span6">
 					<ul class="breadcrumb pull-right">
 						<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-						<li class="active">Request Off</li>
+						<li class="active">Create Schedule</li>
 					</ul>
 				</div>
 			</div>
@@ -208,7 +208,7 @@ input[type=submit] {
 			</select>
 				
 				 <br> <input
-					type="submit" value="Request Off">
+					type="submit" value="Create Schedule">
 			</form>
 		</div>
 
