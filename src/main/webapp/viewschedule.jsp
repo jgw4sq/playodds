@@ -101,7 +101,7 @@ input[type=submit] {
 		
 		<div>
 			<h3 align="center">View Schedule</h3>
-			<form style="text-align:center;display:inline-block;" name="f2" method="post" action="MakeSchedule" id="f2">
+			<form style="text-align:center;display:inline-block;" name="f2" method="post" action="ViewSchedule" id="f2">
 				<span class="requestoffheader">Start Date:</span> <select
 					style="width: 150px;" name="year">
 					<option value="2016">2016</option>
