@@ -54,30 +54,30 @@ input[type=submit] {
 <body>
 
 	<!--Header-->
-	   <header class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a id="logo" class="pull-left" href="index.jsp"></a>
-                <div class="nav-collapse collapse pull-right">
-                    <ul class="nav">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="<%=request.getContextPath()%>/MyAccount">My Account</a></li>
-                        <li><a href="<%=request.getContextPath()%>/MySchedule">My Schedule</a></li>
-                        <li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
-                        <li><a href="signup.jsp">Registration</a></li>
-                        <li class="login">
-                            <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i>  Sign In</a>
-                        </li>
-                    </ul>        
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </header>
+	<header class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a id="logo" class="pull-left" href="index.jsp"></a>
+				<div class="nav-collapse collapse pull-right">
+					<ul class="nav">
+						<li class="active"><a href="index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath()%>/MyAccount">My
+								Account</a></li>
+						<li><a href="<%=request.getContextPath()%>/MySchedule">My
+								Schedule</a></li>
+						<li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
+						<li><a href="signup.jsp">Registration</a></li>
+						<li class="login"><a data-toggle="modal" href="#loginForm"><i
+								class="icon-lock"></i> Sign In</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</header>
 	<!-- /header -->
 
 	<section class="title">
@@ -98,12 +98,220 @@ input[type=submit] {
 	<!-- / .title -->
 
 	<section id="portfolio" class="container main">
-		This is the Schedule Manager Page
-<a href = "makeschedule.jsp">Make Schedules </a>
-<a href = "<%=request.getContextPath()%>/AddShifts">Add Shifts </a>
-<a href = "<%=request.getContextPath()%>/ApproveRequestOff">Approve Request Off </a>
+		<div>
+
+			<h3 align="center">Approved Time Off</h3>
+
+			<%
+				// retrieve your list from the request, with casting 
+				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("approvedtimesoff");
+			%>
+			<table align="center" bordercolor="green" border="1" cellpadding="5"
+				cellspacing="5">
+				<tr>
+					<th>Period</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+				</tr>
+
+				<%
+					int x = 0;
+					// print the information about every category of the list
+					for (TimeOff timeoff : list) {
+						TimeOff timeoff1 = timeoff;
+						x += 1;
+				%>
+
+				<tr>
+					<td>
+						<%
+							out.print(x);
+						%>
+					</td>
+					<td>
+						<%
+							out.print(timeoff1.getStartTime().toString());
+						%>
+					</td>
+					<td>
+						<%
+							out.print(timeoff1.getEndTime().toString());
+						%>
+					</td>
 
 
+				</tr>
+
+				<%
+					}
+				%>
+			</table>
+			<br> <br>
+		</div>
+		<div>
+
+			<h3 align="center">Not Approved Time Requested Off</h3>
+
+			<%
+			// retrieve your list from the request, with casting 
+			ArrayList<TimeOff> list2 = (ArrayList<TimeOff>) request.getSession()
+					.getAttribute("notapprovedtimesoff");
+%>
+			<table align="center" bordercolor="green" border="1" cellpadding="5"
+				cellspacing="5">
+				<tr>
+					<th>Period</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+				</tr>
+
+				<%
+					int y = 0;
+					// print the information about every category of the list
+					for (TimeOff timeoff : list2) {
+						TimeOff timeoff1 = timeoff;
+						y += 1;
+				%>
+
+				<tr>
+					<td>
+						<%
+							out.print(y);
+						%>
+					</td>
+
+					<td>
+						<%
+							out.print(timeoff1.getStartTime().toString());
+						%>
+					</td>
+					<td>
+						<%
+							out.print(timeoff1.getEndTime().toString());
+						%>
+					</td>
+
+
+				</tr>
+
+				<%
+					}
+				%>
+			</table>
+			<br> <br>
+		</div>
+		<div>
+			<h3 align="center">Create Schedule</h3>
+			<form name="f2" method="post" action="RequestOff" id="f2">
+				<span class="requestoffheader">Start Date:</span> <select
+					style="width: 150px;" name="year">
+					<option value="2016">2016</option>
+				</select><select name="month" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+		
+				</select><br> <span class="requestoffheader">End Date: </span><select
+					style="width: 150px;" name="year2">
+					<option value="2016">2016</option>
+				</select><select name="month2" style="width: 150px;">
+					<option value="" disabled selected>Month</option>
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select> <select name="day2" style="width: 150px;">
+					<option value="" disabled selected>Day</option>
+
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+			</select>
+				
+				 <br> <input
+					type="submit" value="Request Off">
+			</form>
+		</div>
 
 	</section>
 

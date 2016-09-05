@@ -3,6 +3,7 @@ package com.weber;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +22,16 @@ private ArrayList<Shift> shifts;
 private ArrayList<TimeOff> approvedtimeoff;
 private ArrayList<TimeOff> notapprovedtimeoff;
 private int managerMinHours;
+private int hours;
+
+
+public int getHours() {
+	return hours;
+}
+
+public void setHours(int hours) {
+	this.hours = hours;
+}
 
 public int getManagerMinHours() {
 	return managerMinHours;
@@ -168,12 +179,22 @@ public void addShift(Shift shift){
 	}catch (Exception e){
 		e.printStackTrace();
 	}
+	this.setHours(this.getHours()+shift.getLength());
 }
-public static Comparator<User> SortUserRank = new Comparator<User>() {
+public static Comparator<User> SortUserTimeRank = new Comparator<User>() {
 
 	public int compare(User user1, User user2) {
-
-	   int rank1 = user1.getRank();
+		int hourDifference1= user1.getManagerMinHours()-user1.getHours();
+		int hourDifference2= user2.getManagerMinHours()-user2.getHours();
+if(hourDifference1>hourDifference2){
+	return -1;
+}
+else if (hourDifference2>hourDifference1){
+	return 1;
+}
+else{
+		
+		int rank1 = user1.getRank();
 	   int rank2 = user2.getRank();
 
 	   /*For ascending order*/
@@ -181,7 +202,7 @@ public static Comparator<User> SortUserRank = new Comparator<User>() {
 
 	   /*For descending order*/
 	   //rollno2-rollno1;
-  }};
+  }}};
 
 public static void main(String[] args){
 	ArrayList<User> users = new ArrayList<User>();
@@ -191,7 +212,7 @@ public static void main(String[] args){
 	for(int i=0; i<users.size();i++){
 		System.out.println(users.get(i).getRank());
 	}
-	Collections.sort(users, User.SortUserRank);
+	Collections.sort(users, User.SortUserTimeRank);
 	for(int i=0; i<users.size();i++){
 		System.out.println(users.get(i).getRank());
 	}
@@ -202,6 +223,7 @@ public int compareTo(Object arg0) {
 	// TODO Auto-generated method stub
 	return 0;
 }
+
 
 	
 }
