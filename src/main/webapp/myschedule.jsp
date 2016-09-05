@@ -123,10 +123,10 @@ for(Shift shift : list) {
 	%>
 				<tr>
 					<td>
-						<%out.println(shift.getPool());%>
+						<%out.println(shift.getGuard());%>
 					</td>
 					<td>
-						<%out.println(shift.getGuard());%>
+						<%out.println(shift.getPool());%>
 					</td>
 					<td>
 						<%out.println(shift.getStartTime().toString());%>
