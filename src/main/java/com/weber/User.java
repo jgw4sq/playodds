@@ -198,7 +198,7 @@ else{
 	   int rank2 = user2.getRank();
 
 	   /*For ascending order*/
-	   return rank2-rank1;
+	   return rank1-rank2;
 
 	   /*For descending order*/
 	   //rollno2-rollno1;
