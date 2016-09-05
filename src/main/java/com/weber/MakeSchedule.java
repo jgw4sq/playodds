@@ -61,9 +61,9 @@ public class MakeSchedule extends HttpServlet {
 		String month2 = request.getParameter("month2");
 		String day2 = request.getParameter("day2");
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
-		endDate.setYear(Integer.parseInt(year)-1900);
-		endDate.setMonth(Integer.parseInt(month));
-		endDate.setDate(Integer.parseInt(day));
+		endDate.setYear(Integer.parseInt(year2)-1900);
+		endDate.setMonth(Integer.parseInt(month2));
+		endDate.setDate(Integer.parseInt(day2));
 		System.out.println(startDate.toString());
 		System.out.println(endDate.toString());
 		makeScheduleBasedOnRank(pool,startDate, endDate);
