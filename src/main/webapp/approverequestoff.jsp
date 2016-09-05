@@ -25,6 +25,9 @@ input[type=submit] {
 	display: inline-block;
 	font-size: 16px;
 }
+div.maindiv {  
+    text-align: center;
+}
 </style>
 <head>
 <meta charset="utf-8">
@@ -111,7 +114,7 @@ input[type=submit] {
 
 	<section>
 		<h1 class="scheduleheader">Approve Request Off</h1>
-		<div>
+		<div class="maindiv">
 		<form action="ApproveRequestOff" method="post">
 			
 				<%  

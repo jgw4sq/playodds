@@ -129,7 +129,6 @@ if(list.size()<1){
 		<th>Min Hours</th>
 		<th>Edit</th>
 	</tr>
-// print the information about every category of the list
 <%for(User user1 : list) {
 	%>
 				<tr id = "<%user1.getEmail(); %>">
