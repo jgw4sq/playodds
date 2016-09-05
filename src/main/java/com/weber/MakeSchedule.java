@@ -53,7 +53,7 @@ public class MakeSchedule extends HttpServlet {
 		String day = request.getParameter("day");
 		Timestamp startDate = new Timestamp(0,0,0,0,0,0,0);
 		startDate.setYear(Integer.parseInt(year)-1900);
-		startDate.setMonth(Integer.parseInt(month));
+		startDate.setMonth(Integer.parseInt(month)-1);
 		startDate.setDate(Integer.parseInt(day));
 		
 	
@@ -62,7 +62,7 @@ public class MakeSchedule extends HttpServlet {
 		String day2 = request.getParameter("day2");
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
 		endDate.setYear(Integer.parseInt(year2)-1900);
-		endDate.setMonth(Integer.parseInt(month2));
+		endDate.setMonth(Integer.parseInt(month2)-1);
 		endDate.setDate(Integer.parseInt(day2));
 		System.out.println(startDate.toString());
 		System.out.println(endDate.toString());
@@ -75,6 +75,9 @@ public class MakeSchedule extends HttpServlet {
 		Collections.sort(shift);
 		ArrayList<User> guards = populateUsers(pool,startDate,endDate);
 		Collections.sort(guards, User.SortUserTimeRank);
+		for(int i=0; i<guards.size();i++){
+			System.out.println(guards.get(i).getName());
+		}
 		for(int i=0; i<shift.size();i++){
 			Collections.sort(guards, User.SortUserTimeRank);
 			System.out.println("Checking Shift");
