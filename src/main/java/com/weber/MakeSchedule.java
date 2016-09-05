@@ -150,6 +150,41 @@ public class MakeSchedule extends HttpServlet {
 		
 		
 	}
+	public static ArrayList<Shift> populateAllShifts(String pool,Timestamp startDate, Timestamp endDate){
+		System.out.println(startDate.toString());
+		System.out.println(endDate.toString());
+		ArrayList<Shift> shifts = new ArrayList<Shift>();
+		Statement stmt = null;
+		try{
+			Context initContext = new InitialContext();
+			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
+			 Connection con = ds.getConnection();
+			stmt = con.createStatement();
+						String sql = "SELECT * FROM SHIFTS WHERE pool='"+pool+"' AND startTime >= '"+startDate.toString()+"' AND endTime<= '"+endDate.toString()+"';";
+						ResultSet rs = stmt.executeQuery(sql);
+						while(rs.next()){
+							int id = rs.getInt("id");
+							String guard = rs.getString("guard");
+							Timestamp startTime= rs.getTimestamp("startTime");
+							Timestamp endTime = rs.getTimestamp("endTime");
+							String poolshift = rs.getString("pool");
+							int length = rs.getInt("length");
+							String emailOfShift = rs.getString("email");
+							boolean managerRequired = rs.getBoolean("managerRequired");
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+
+							
+						}
+						con.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return shifts;
+		
+		
+	}
 	
 	public static ArrayList<User> populateUsers(String pool,Timestamp startdate, Timestamp endDate){
 		Statement stmt = null;
