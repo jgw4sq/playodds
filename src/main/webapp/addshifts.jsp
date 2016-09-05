@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.weber.TimeOff"%>
+<%@ page import="com.weber.User"%>
 <!DOCTYPE html>
 <style>
 span.requestoffheader {
@@ -69,9 +70,17 @@ input[type=submit] {
 						<li><a href="<%=request.getContextPath()%>/MySchedule">My
 								Schedule</a></li>
 						<li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
-						<li><a href="signup.jsp">Registration</a></li>
+						<% User user = (User)request.getSession().getAttribute("user");
+			if(user!=null){
+				if(user.getPosition().equals("Manager")){%>
+						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule Manager</a></li>
+						<%}} %>
 						<li class="login"><a data-toggle="modal" href="#loginForm"><i
 								class="icon-lock"></i> Sign In</a></li>
+						<li><a href="<%=request.getContextPath()%>/Logout">Logout</a></li>
+
+						<li><a href="signup.jsp">Registration</a></li>
+
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
