@@ -54,6 +54,7 @@ public class Shift implements Comparable<Shift> {
 		this.email=email;
 		this.Id = id;
 		this.managerRequired=managerRequired;
+		this.position=position;
 		
 	}
 
