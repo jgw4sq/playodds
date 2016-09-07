@@ -55,7 +55,7 @@ public class ViewSchedule extends HttpServlet {
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
 		endDate.setYear(Integer.parseInt(year2)-1900);
 		endDate.setMonth(Integer.parseInt(month2)-1);
-		endDate.setDate(Integer.parseInt(day2));
+		endDate.setDate(Integer.parseInt(day2)+1);
 		System.out.println(startDate.toString());
 		System.out.println(endDate.toString());
 		ArrayList<Shift> shifts = MakeSchedule.populateAllShifts(pool, startDate, endDate);

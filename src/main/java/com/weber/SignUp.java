@@ -41,7 +41,7 @@ public class SignUp extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 
-        request.getRequestDispatcher("signup.jsp").forward(request, response);
+        request.getRequestDispatcher("registration.jsp").forward(request, response);
 	
 	}
 
