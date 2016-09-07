@@ -91,7 +91,7 @@ public class ManagerSignUp extends HttpServlet {
 					if (count<1){
 						System.out.println("Inserting into guards table");
 
-					 sql = "INSERT INTO GUARDS VALUES ('"+firstName+"','"+lastName+"','"+age+", '"+company+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+",0);";
+					 sql = "INSERT INTO GUARDS VALUES ('"+firstName+"','"+lastName+"',"+age+",'"+company+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+",0);";
 					stmt.executeUpdate(sql);
 			        request.getRequestDispatcher("index.jsp").forward(request, response);
 					}else{
