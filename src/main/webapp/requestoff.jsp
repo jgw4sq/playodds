@@ -117,7 +117,11 @@ text-align:center;
 			<%
 				// retrieve your list from the request, with casting 
 				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("approvedtimesoff");
-			%>
+			if(list.size()<1){
+	%>
+	<span class= "normaltext">The are no requests off to approve!</span>
+	<%
+}else{%>
 			<table align="center" bordercolor="green" border="1" cellpadding="5"
 				cellspacing="5">
 				<tr>
@@ -162,8 +166,12 @@ text-align:center;
 
 				<%
 					}
-				%>
+%>					
 			</table>
+<%
+
+}
+				%>
 			<br> <br>
 		</div>
 		<div>
@@ -174,7 +182,12 @@ text-align:center;
 			// retrieve your list from the request, with casting 
 			ArrayList<TimeOff> list2 = (ArrayList<TimeOff>) request.getSession()
 					.getAttribute("notapprovedtimesoff");
-%>
+			if(list2.size()<1){
+				%>
+				<span class= "normaltext">The are no requests off to approve!</span>
+				<%
+			}else{%>
+
 			<table align="center" bordercolor="green" border="1" cellpadding="5"
 				cellspacing="5">
 				<tr>
@@ -220,8 +233,14 @@ text-align:center;
 
 				<%
 					}
+					%>
+								</table>
+					
+					<%
+					}
+					
+					
 				%>
-			</table>
 			<br> <br>
 		</div>
 		<div class="maindiv">

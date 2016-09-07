@@ -128,7 +128,7 @@ if(list.size()<1){
 	
 	<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
 	<tr>
-		<th>Guard</th>
+		<th>Employee</th>
 		<th>Start Time</th>
 		<th>End Time</th>
 		<th>Reason </th>
