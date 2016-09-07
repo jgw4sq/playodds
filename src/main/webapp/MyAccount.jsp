@@ -97,7 +97,7 @@ span.myaccounttext{
         <p>
 <%  
 User user1 = (User) session.getAttribute("user");
-String name = user1.getFirstName()+user1.getLastName();
+String name = user1.getFirstName()+" "+user1.getLastName();
 
 String position = user1.getPosition();
 String pool = user1.getPool();
@@ -109,7 +109,7 @@ boolean otherpools = user1.isOtherpools();
 <span class="myaccounttext">Name: </span> <% out.println(name); %> <br>
 <span class="myaccounttext">Age: </span><% out.println(age);  %><br>
 <span class="myaccounttext">Position: </span><% out.println(position);%> <br>
-<span class="myaccounttext">Main Pool: </span><% out.println(pool);%><br>
+<span class="myaccounttext">Company: </span><% out.println(pool);%><br>
 
 </p>
         

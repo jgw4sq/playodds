@@ -115,7 +115,6 @@ div.maindiv {
 	<section>
 		<h1 class="scheduleheader">Approve Request Off</h1>
 		<div class="maindiv">
-		<form action="ApproveRequestOff" method="post">
 			
 				<%  
 // retrieve your list from the request, with casting 
@@ -125,6 +124,7 @@ if(list.size()<1){
 	<span class= "normaltext">The are no requests off to approve!</span>
 	<%
 }else{%>
+	<form action="ApproveRequestOff" method="post">
 	
 	<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
 	<tr>
@@ -156,12 +156,15 @@ if(list.size()<1){
 					</td>
 				</tr>
 				<%
-}}
+}%>
+</table>
+<br>
+<input align="center" type="submit" value="Approve Selected TimeOff"/>
+</form>
+<%
+}
 %>
-			</table>
-			<br>
-			<input align="center" type="submit" value="Approve Selected TimeOff"/>
-			</form>
+			
 		</div>
 	</section>
 
