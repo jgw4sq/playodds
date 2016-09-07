@@ -124,12 +124,12 @@ font-size:24px;
 				</tr>
 				<tr>
 					<td><span class="registertablehead" id="namespan">First Name: </span></td>
-					<td><input id="name" type="text" name="firstName"
+					<td><input id="firstName" type="text" name="firstName"
 						placeholder="First Name" required></td>
 				</tr>
 				<tr>
 					<td><span class="registertablehead" id="namespan">Last Name: </span></td>
-					<td><input id="name" type="text" name="lastName"
+					<td><input id="lastName" type="text" name="lastName"
 						placeholder="Last Name" required></td>
 				</tr>
 				<tr>
