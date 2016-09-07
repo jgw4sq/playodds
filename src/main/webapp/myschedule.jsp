@@ -102,14 +102,7 @@ h1.scheduleheader {
 	<section>
 		<h1 class="scheduleheader">My Scheduled Shifts</h1>
 		<div>
-			<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
-				<tr>
-					<th>Employee</th>
-					<th>Location</th>
-					<th>Position</th>
-					<th>Start Time</th>
-					<th>End Time</th>
-				</tr>
+			
 				<%  
 // retrieve your list from the request, with casting 
 ArrayList<Shift> list = (ArrayList<Shift>) request.getAttribute("shifts");
@@ -117,7 +110,17 @@ if(list.size()<1){
 	%>
 	<span class= "normaltext">You have no scheduled shifts!</span>
 	<%
-}
+}else{%>
+	
+	<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
+	<tr>
+		<th>Employee</th>
+		<th>Location</th>
+		<th>Position</th>
+		<th>Start Time</th>
+		<th>End Time</th>
+	</tr>
+	<%
 // print the information about every category of the list
 for(Shift shift : list) {
 	Shift shift1 = shift;
@@ -139,10 +142,13 @@ for(Shift shift : list) {
 						<%out.println(shift.getEndTime().toString());%>
 					</td>
 				</tr>
-				><%
+				<%
+}%>
+	</table>
+<%
 }
 %>
-			</table>
+			
 		</div>
 	</section>
 

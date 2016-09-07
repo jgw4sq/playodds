@@ -98,12 +98,12 @@ div.maindiv {
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span6">
-					<h1>My Schedule</h1>
+					<h1>Approve Request Off</h1>
 				</div>
 				<div class="span6">
 					<ul class="breadcrumb pull-right">
 						<li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-						<li class="active">My Schedule</li>
+						<li class="active">Approve Request Off</li>
 					</ul>
 				</div>
 			</div>
@@ -134,7 +134,6 @@ if(list.size()<1){
 		<th>Reason </th>
 		<th>Approve</th>
 	</tr>
-// print the information about every category of the list
 <%for(TimeOff timeoff : list) {
 	%>
 				<tr id = "<%timeoff.getId(); %>">

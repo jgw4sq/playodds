@@ -18,6 +18,9 @@ input[type=submit] {
 	display: inline-block;
 	font-size: 16px;
 }
+div.maindiv{
+text-align:center;
+}
 </style>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -107,7 +110,7 @@ input[type=submit] {
 	<!-- / .title -->
 
 	<section id="portfolio" class="container main">
-		<div>
+		<div class="maindiv">
 
 			<h3 align="center">Approved Time Off</h3>
 

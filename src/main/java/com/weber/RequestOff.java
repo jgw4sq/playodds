@@ -130,7 +130,7 @@ try{
 		String endTime = year2+"-"+month2+"-"+day2+" "+hoursminutes2+":00";
 		Statement stmt= null;
 		try{
-			String name = ((User)request.getSession().getAttribute("user")).getName();
+			String name = ((User)request.getSession().getAttribute("user")).getFirstName()+" "+((User)request.getSession().getAttribute("user")).getLastName();
 			String email = ((User)request.getSession().getAttribute("user")).getEmail();
 			String pool = ((User)request.getSession().getAttribute("user")).getPool();
 			 stmt =null;
