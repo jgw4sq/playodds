@@ -107,8 +107,8 @@ div.maindiv {
 		<div class="maindiv">
 			<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
 				<tr>
-					<th>Guard</th>
-					<th>Pool</th>
+					<th>Location</th>
+					<th>Employee</th>
 					<th>Start Time</th>
 					<th>End Time</th>
 				</tr>
