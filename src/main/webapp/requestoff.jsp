@@ -124,6 +124,7 @@ text-align:center;
 					<th>Period</th>
 					<th>Start Time</th>
 					<th>End Time</th>
+					<th>Reason</th>
 				</tr>
 
 				<%
@@ -148,6 +149,11 @@ text-align:center;
 					<td>
 						<%
 							out.print(timeoff1.getEndTime().toString());
+						%>
+					</td>
+					<td>
+						<%
+							out.print(timeoff1.getReason());
 						%>
 					</td>
 
@@ -175,6 +181,7 @@ text-align:center;
 					<th>Period</th>
 					<th>Start Time</th>
 					<th>End Time</th>
+					<th>Reason</th>
 				</tr>
 
 				<%
@@ -202,6 +209,11 @@ text-align:center;
 							out.print(timeoff1.getEndTime().toString());
 						%>
 					</td>
+					<td>
+						<%
+							out.print(timeoff1.getReason());
+						%>
+					</td>
 
 
 				</tr>
@@ -212,7 +224,7 @@ text-align:center;
 			</table>
 			<br> <br>
 		</div>
-		<div>
+		<div class="maindiv">
 			<h3 align="center">Request Off Time</h3>
 			<form name="f2" method="post" action="RequestOff" id="f2">
 				<span class="requestoffheader">Start Time:</span> <select
