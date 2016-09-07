@@ -119,7 +119,7 @@ text-align:center;
 				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("approvedtimesoff");
 			if(list.size()<1){
 	%>
-	<span class= "normaltext">The are no requests off to approve!</span>
+	<span class= "normaltext">You have no approved requests off!</span>
 	<%
 }else{%>
 			<table align="center" bordercolor="green" border="1" cellpadding="5"
@@ -174,7 +174,7 @@ text-align:center;
 				%>
 			<br> <br>
 		</div>
-		<div>
+		<div class="maindiv">
 
 			<h3 align="center">Not Approved Time Requested Off</h3>
 
@@ -184,7 +184,7 @@ text-align:center;
 					.getAttribute("notapprovedtimesoff");
 			if(list2.size()<1){
 				%>
-				<span class= "normaltext">The are no requests off to approve!</span>
+				<span class= "normaltext">You have no unnaproved requests off!</span>
 				<%
 			}else{%>
 
