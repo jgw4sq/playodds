@@ -174,6 +174,7 @@ public class MakeSchedule extends HttpServlet {
 							String emailOfShift = rs.getString("email");
 							boolean managerRequired = rs.getBoolean("managerRequired");
 							String shiftPosition = rs.getString("position");
+							System.out.println(shiftPosition);
 							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 
 							
