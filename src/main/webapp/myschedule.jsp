@@ -104,8 +104,9 @@ h1.scheduleheader {
 		<div>
 			<table align="center" bordercolor="green" border="1" cellpadding="5" cellspacing="5">
 				<tr>
-					<th>Guard</th>
-					<th>Pool</th>
+					<th>Employee</th>
+					<th>Location</th>
+					<th>Position</th>
 					<th>Start Time</th>
 					<th>End Time</th>
 				</tr>
@@ -127,6 +128,9 @@ for(Shift shift : list) {
 					</td>
 					<td>
 						<%out.println(shift.getPool());%>
+					</td>
+					<td>
+						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
 						<%out.println(shift.getStartTime().toString());%>

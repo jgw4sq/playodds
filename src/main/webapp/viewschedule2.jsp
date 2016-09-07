@@ -109,6 +109,7 @@ div.maindiv {
 				<tr>
 					<th>Location</th>
 					<th>Employee</th>
+					<th>Position</th>
 					<th>Start Time</th>
 					<th>End Time</th>
 				</tr>
@@ -130,6 +131,9 @@ for(Shift shift : list) {
 					</td>
 					<td>
 						<%out.println(shift.getGuard());%>
+					</td>
+					<td>
+						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
 						<%out.println(shift.getStartTime().toString());%>

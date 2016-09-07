@@ -51,7 +51,7 @@ public class AddShifts extends HttpServlet {
 		// TODO Auto-generated method stub
 		int numberofEmployees = Integer.parseInt(request.getParameter("#ofEmployees"));
 		String pool = ((User)request.getSession().getAttribute("user")).getPool();
-
+		String shiftPosition = request.getParameter("shiftPosition");
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
@@ -111,7 +111,7 @@ public class AddShifts extends HttpServlet {
 						
 		for(int i=0;i<numberofEmployees;i++){
 
-		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+");";
+		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length,position)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+",'"+shiftPosition+"');";
 		int rs2 = stmt.executeUpdate(sql);
 		}
         request.getRequestDispatcher("addshifts.jsp").forward(request, response);

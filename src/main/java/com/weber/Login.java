@@ -86,7 +86,8 @@ public class Login extends HttpServlet {
 									String poolshift = rs.getString("pool");
 									int length = rs.getInt("length");
 									boolean managerRequired = rs.getBoolean("managerRequired");
-									myshifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,username,managerRequired));
+									String shiftPosition = rs.getString("position");
+									myshifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,username,managerRequired,shiftPosition));
 								}
 								stmt = con.createStatement();
 								 sql = "SELECT * FROM TIMEOFF WHERE email='"+username+"';";

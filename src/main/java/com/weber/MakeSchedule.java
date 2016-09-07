@@ -137,7 +137,8 @@ public class MakeSchedule extends HttpServlet {
 							int length = rs.getInt("length");
 							String emailOfShift = rs.getString("email");
 							boolean managerRequired = rs.getBoolean("managerRequired");
-							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+							String shiftPosition = rs.getString("position");
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 
 							
 						}
@@ -172,7 +173,8 @@ public class MakeSchedule extends HttpServlet {
 							int length = rs.getInt("length");
 							String emailOfShift = rs.getString("email");
 							boolean managerRequired = rs.getBoolean("managerRequired");
-							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+							String shiftPosition = rs.getString("position");
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 
 							
 						}
@@ -228,7 +230,9 @@ public class MakeSchedule extends HttpServlet {
 							int length = rs2.getInt("length");
 							String emailOfShift = rs2.getString("email");
 							boolean managerRequired = rs2.getBoolean("managerRequired");
-							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+							String shiftPosition = rs.getString("position");
+
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 						}
 						stmt = con.createStatement();
 						 sql = "SELECT * FROM TIMEOFF WHERE email='"+email+"';";
@@ -309,7 +313,9 @@ public class MakeSchedule extends HttpServlet {
 							int length = rs2.getInt("length");
 							String emailOfShift = rs2.getString("email");
 							boolean managerRequired = rs2.getBoolean("managerRequired");
-							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired));
+							String shiftPosition = rs.getString("position");
+
+							shifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 						}
 						stmt = con.createStatement();
 						 sql = "SELECT * FROM TIMEOFF WHERE email='"+email+"';";

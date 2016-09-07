@@ -64,7 +64,9 @@ public class MySchedule extends HttpServlet {
 					String poolshift = rs.getString("pool");
 					int length = rs.getInt("length");
 					boolean managerRequired = rs.getBoolean("managerRequired");
-					myshifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,email,managerRequired));
+					String shiftPosition = rs.getString("position");
+
+					myshifts.add(new Shift(startTime,endTime,poolshift,length,guard,id,email,managerRequired,shiftPosition));
 				}
 				
 				

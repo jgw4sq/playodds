@@ -270,7 +270,10 @@ div.maindiv {
 
 					<option value="am">AM</option>
 					<option value="pm">PM</option>
-				</select><br> <span class="requestoffheader">Number of Employees Needed: </span><input
+				</select><br> 
+				<span class="requestoffheader">Position: </span><input
+					type="text" placeholder="Shift Position" name="shiftPosition" /> <br>
+				<span class="requestoffheader">Number of Employees Needed: </span><input
 					type="text" placeholder="#ofEmployees" name="#ofEmployees" /> <br> <input
 					type="submit" value="Add Shifts">
 			</form>
