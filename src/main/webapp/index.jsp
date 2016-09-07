@@ -72,7 +72,7 @@ input[type=submit] {
 								class="icon-lock"></i> Sign In</a></li>
 						<li><a href="<%=request.getContextPath()%>/Logout">Logout</a></li>
 
-						<li><a href="signup.jsp">Registration</a></li>
+						<li><a href="<%=request.getContextPath()%>/SignUp">Registration</a></li>
 
 					</ul>
 				</div>

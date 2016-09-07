@@ -23,6 +23,9 @@ font-size:24px;
 	font-weight:bold;
 
 }
+div.maindiv{
+text-align:center;
+}
 </style>
 <head>
 <meta charset="utf-8">
@@ -109,12 +112,14 @@ font-size:24px;
 
 
 	<section id="registration-page" class="container">
+	<div class="maindiv">
 	<form action="managerregistration.jsp">
     <input type="submit" value="Manager Registration" />
 </form>
 		<form action="employeeregistration.jsp">
     <input type="submit" value="Employee Registration" />
 </form>
+</div>
 	</section>
 	<!-- /#registration-page -->
 
