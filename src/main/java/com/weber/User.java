@@ -65,10 +65,29 @@ public int compareTo(User user1) {
 private int age;
 private int rank;
 private boolean otherpools;
-public User(String name, String position, String pool, ArrayList<Shift> shifts,
+private String firstName;
+private String lastName;
+public String getFirstName() {
+	return firstName;
+}
+
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+
+public String getLastName() {
+	return lastName;
+}
+
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+
+public User(String firstName,String lastName, String position, String pool, ArrayList<Shift> shifts,
 		ArrayList<TimeOff> approvedtimeoff,ArrayList<TimeOff> notapprovedtimeoff, int age, int rank, boolean otherpools,String email,int managerMinHours) {
 	super();
-	this.name = name;
+	this.firstName = firstName;
+	this.lastName= lastName;
 	this.position = position;
 	this.pool = pool;
 	this.shifts = shifts;

@@ -210,7 +210,9 @@ public class MakeSchedule extends HttpServlet {
 						ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
 						ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
 
-						String name = rs.getString("name");
+						String firstName = rs.getString("firstName");
+						String lastName = rs.getString("lastName");
+
 						String email = rs.getString("email");
 						System.out.println(email);
 						int age = rs.getInt("age");
@@ -255,7 +257,7 @@ public class MakeSchedule extends HttpServlet {
 
 
 					}
-						User user = new User( name,  position,  mainPool, shifts,
+						User user = new User( firstName,lastName,  position,  mainPool, shifts,
 								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email,managerMinHours);
 						
 						poolEmployees.add(user);
@@ -293,7 +295,9 @@ public class MakeSchedule extends HttpServlet {
 						ArrayList<TimeOff> approvedtimesoff = new ArrayList<TimeOff>();
 						ArrayList<TimeOff> notapprovedtimesoff = new ArrayList<TimeOff>();
 
-						String name = rs.getString("name");
+						String firstName = rs.getString("firstName");
+						String lastName = rs.getString("lastName");
+
 						String email = rs.getString("email");
 						System.out.println(email);
 						int age = rs.getInt("age");
@@ -338,7 +342,7 @@ public class MakeSchedule extends HttpServlet {
 
 
 					}
-						User user = new User( name,  position,  mainPool, shifts,
+						User user = new User( firstName,lastName,  position,  mainPool, shifts,
 								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email,managerMinHours);
 						
 						poolEmployees.add(user);

@@ -68,7 +68,8 @@ public class Login extends HttpServlet {
 							System.out.println(passw);
 							if(pass==passw){
 								System.out.println("Create user");
-								String name = rs.getString("name");
+								String firstName = rs.getString("firstName");
+								String lastName = rs.getString("lastName");
 								int age =rs.getInt("age");
 								String pool=rs.getString("mainPool");
 								boolean otherpools=rs.getBoolean("otherPools");
@@ -108,7 +109,7 @@ public class Login extends HttpServlet {
 									
 								}
 								System.out.println("Initializing User");
-								request.getSession().setAttribute("user", new User( name,  position,  pool,  myshifts,
+								request.getSession().setAttribute("user", new User( firstName,lastName,  position,  pool,  myshifts,
 										 approvedtimesoff, notapprovedtimesoff,  age,  rank,  otherpools,username,managerMinHours));
 								System.out.println("Created User");
 

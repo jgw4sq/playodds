@@ -97,7 +97,7 @@ span.myaccounttext{
         <p>
 <%  
 User user1 = (User) session.getAttribute("user");
-String name = user1.getName();
+String name = user1.getFirstName()+user1.getLastName();
 
 String position = user1.getPosition();
 String pool = user1.getPool();
