@@ -118,7 +118,8 @@ div.maindiv {
 ArrayList<Shift> list = (ArrayList<Shift>) request.getAttribute("shifts");
 				String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 				String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
-
+				String startampm ="AM";
+				String endampm ="PM";
 if(list.size()<1){
 	%>
 	<span class= "normaltext">You have no scheduled shifts!</span>
@@ -127,6 +128,17 @@ if(list.size()<1){
 // print the information about every category of the list
 for(Shift shift : list) {
 	Shift shift1 = shift;
+	int starthour= shift.getStartTime().getHours();
+	int endhour= shift.getEndTime().getHours();
+
+	if (shift.getStartTime().getHours()>=12){
+		startampm="PM";
+		starthour-=12;
+	}
+	if (shift.getEndTime().getHours()>=12){
+		endampm="PM";
+		endhour-=12;
+	}
 	%>
 				<tr>
 					<td>
@@ -139,10 +151,10 @@ for(Shift shift : list) {
 						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
-						<%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth()+1)]+" "+shift.getStartTime().getDate()+", "+shift.getStartTime().getHours()+":"+String.format("%02d", shift.getStartTime().getMinutes()));%>
+						<%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth()+1)]+" "+shift.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
 					</td>
 					<td>
-						<%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth()+1)]+" "+shift.getEndTime().getDate()+", "+shift.getEndTime().getHours()+":"+String.format("%02d", shift.getEndTime().getMinutes()));%>
+						<%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth()+1)]+" "+shift.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 				</tr>
 				><%
