@@ -136,10 +136,10 @@ for(Shift shift : list) {
 						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
-						<%out.println(shift.getStartTime().toString());%>
+						<%out.println(shift.getStartTime().getDay()+" "+shift.getStartTime().getMonth()+" "+shift.getStartTime().getDate()+" "+shift.getStartTime().getHours()+":"+shift.getStartTime().getMinutes());%>
 					</td>
 					<td>
-						<%out.println(shift.getEndTime().toString());%>
+						<%out.println(shift.getEndTime().getDay()+" "+shift.getEndTime().getMonth()+" "+shift.getEndTime().getDate()+" "+shift.getEndTime().getHours()+":"+shift.getEndTime().getMinutes());%>
 					</td>
 				</tr>
 				><%
