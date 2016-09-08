@@ -117,6 +117,7 @@ div.maindiv {
 // retrieve your list from the request, with casting 
 ArrayList<Shift> list = (ArrayList<Shift>) request.getAttribute("shifts");
 				String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+				String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
 
 if(list.size()<1){
 	%>
@@ -138,10 +139,10 @@ for(Shift shift : list) {
 						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
-						<%out.println(days[shift.getStartTime().getDay()]+" "+(shift.getStartTime().getMonth()+1)+" "+shift.getStartTime().getDate()+" "+shift.getStartTime().getHours()+":"+shift.getStartTime().getMinutes());%>
+						<%out.println(days[shift.getStartTime().getDay()]+" "+months[(shift.getStartTime().getMonth()+1)]+" "+shift.getStartTime().getDate()+" "+shift.getStartTime().getHours()+":"+shift.getStartTime().getMinutes());%>
 					</td>
 					<td>
-						<%out.println(days[shift.getEndTime().getDay()]+" "+(shift.getEndTime().getMonth()+1)+" "+shift.getEndTime().getDate()+" "+shift.getEndTime().getHours()+":"+shift.getEndTime().getMinutes());%>
+						<%out.println(days[shift.getEndTime().getDay()]+" "+months[(shift.getEndTime().getMonth()+1)]+" "+shift.getEndTime().getDate()+" "+shift.getEndTime().getHours()+":"+shift.getEndTime().getMinutes());%>
 					</td>
 				</tr>
 				><%
