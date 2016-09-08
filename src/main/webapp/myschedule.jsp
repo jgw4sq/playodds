@@ -127,7 +127,7 @@ if(list.size()<1){
 	String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 	String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
 	String startampm ="AM";
-	String endampm ="PM";
+	String endampm ="AM";
 
 // print the information about every category of the list
 for(Shift shift : list) {
@@ -155,10 +155,10 @@ for(Shift shift : list) {
 						<%out.println(shift.getPosition());%>
 					</td>
 					<td>
-						<%out.println(days[shift.getStartTime().getDay()]+" "+months[(shift.getStartTime().getMonth()+1)]+" "+shift.getStartTime().getDate()+" "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
+						<%out.println(days[shift.getStartTime().getDay()]+" "+months[(shift.getStartTime().getMonth())]+" "+shift.getStartTime().getDate()+" "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
 					</td>
 					<td>
-						<%out.println(days[shift.getEndTime().getDay()]+" "+months[(shift.getEndTime().getMonth()+1)]+" "+shift.getEndTime().getDate()+" "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
+						<%out.println(days[shift.getEndTime().getDay()]+" "+months[(shift.getEndTime().getMonth())]+" "+shift.getEndTime().getDate()+" "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 				</tr>
 				<%
