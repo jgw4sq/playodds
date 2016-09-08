@@ -119,7 +119,7 @@ ArrayList<Shift> list = (ArrayList<Shift>) request.getAttribute("shifts");
 				String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 				String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
 				String startampm ="AM";
-				String endampm ="PM";
+				String endampm ="AM";
 if(list.size()<1){
 	%>
 	<span class= "normaltext">You have no scheduled shifts!</span>
@@ -157,7 +157,7 @@ for(Shift shift : list) {
 						<%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth())]+" "+shift.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 				</tr>
-				><%
+				<%
 }
 %>
 			</table>
