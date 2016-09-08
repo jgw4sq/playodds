@@ -119,7 +119,10 @@ div.maindiv {
 				<%  
 // retrieve your list from the request, with casting 
 ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("notapprovedtimesoff");
-if(list.size()<1){
+				String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+				String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
+				
+				if(list.size()<1){
 	%>
 	<span class= "normaltext">The are no requests off to approve!</span>
 	<%
@@ -135,16 +138,28 @@ if(list.size()<1){
 		<th>Approve</th>
 	</tr>
 <%for(TimeOff timeoff : list) {
+	String startampm ="AM";
+	String endampm ="AM";
+	int starthour= timeoff.getStartTime().getHours();
+	int endhour= timeoff.getEndTime().getHours();
+	if (timeoff.getStartTime().getHours()>=12){
+		startampm="PM";
+		starthour-=12;
+	}
+	if (timeoff.getEndTime().getHours()>=12){
+		endampm="PM";
+		endhour-=12;
+	}
 	%>
 				<tr id = "<%timeoff.getId(); %>">
 					<td>
 						<%out.println(timeoff.getGuard());%>
 					</td>
-					<td>
-						<%out.println(timeoff.getStartTime().toString());%>
+										<td>
+						<%out.println(days[timeoff.getStartTime().getDay()]+", "+months[(timeoff.getStartTime().getMonth())]+" "+timeoff.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", timeoff.getStartTime().getMinutes())+" "+startampm);%>
 					</td>
 					<td>
-						<%out.println(timeoff.getEndTime().toString());%>
+						<%out.println(days[timeoff.getEndTime().getDay()]+", "+months[(timeoff.getEndTime().getMonth())]+" "+timeoff.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", timeoff.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 					<td>
 						<%out.println(timeoff.getReason());%>

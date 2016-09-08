@@ -143,6 +143,14 @@ text-align:center;
 						String endampm ="AM";
 						int starthour= timeoff.getStartTime().getHours();
 						int endhour= timeoff.getEndTime().getHours();
+						if (timeoff.getStartTime().getHours()>=12){
+							startampm="PM";
+							starthour-=12;
+						}
+						if (timeoff.getEndTime().getHours()>=12){
+							endampm="PM";
+							endhour-=12;
+						}
 						x += 1;
 				%>
 
@@ -210,6 +218,14 @@ text-align:center;
 						String endampm ="AM";
 						int starthour= timeoff1.getStartTime().getHours();
 						int endhour= timeoff1.getEndTime().getHours();
+						if (timeoff1.getStartTime().getHours()>=12){
+							startampm="PM";
+							starthour-=12;
+						}
+						if (timeoff1.getEndTime().getHours()>=12){
+							endampm="PM";
+							endhour-=12;
+						}
 						y += 1;
 				%>
 
