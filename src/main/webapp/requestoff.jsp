@@ -117,6 +117,9 @@ text-align:center;
 			<%
 				// retrieve your list from the request, with casting 
 				ArrayList<TimeOff> list = (ArrayList<TimeOff>) request.getSession().getAttribute("approvedtimesoff");
+			String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+			String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
+			
 			if(list.size()<1){
 	%>
 	<span class= "normaltext">You have no approved requests off!</span>
@@ -136,6 +139,10 @@ text-align:center;
 					// print the information about every category of the list
 					for (TimeOff timeoff : list) {
 						TimeOff timeoff1 = timeoff;
+						String startampm ="AM";
+						String endampm ="AM";
+						int starthour= timeoff.getStartTime().getHours();
+						int endhour= timeoff.getEndTime().getHours();
 						x += 1;
 				%>
 
@@ -145,15 +152,11 @@ text-align:center;
 							out.print(x);
 						%>
 					</td>
-					<td>
-						<%
-							out.print(timeoff1.getStartTime().toString());
-						%>
+									<td>
+						<%out.println(days[timeoff1.getStartTime().getDay()]+", "+months[(timeoff1.getStartTime().getMonth())]+" "+timeoff1.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", timeoff1.getStartTime().getMinutes())+" "+startampm);%>
 					</td>
 					<td>
-						<%
-							out.print(timeoff1.getEndTime().toString());
-						%>
+						<%out.println(days[timeoff1.getEndTime().getDay()]+", "+months[(timeoff1.getEndTime().getMonth())]+" "+timeoff1.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", timeoff1.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 					<td>
 						<%
@@ -182,6 +185,7 @@ text-align:center;
 			// retrieve your list from the request, with casting 
 			ArrayList<TimeOff> list2 = (ArrayList<TimeOff>) request.getSession()
 					.getAttribute("notapprovedtimesoff");
+			
 			if(list2.size()<1){
 				%>
 				<span class= "normaltext">You have no unnaproved requests off!</span>
@@ -202,6 +206,10 @@ text-align:center;
 					// print the information about every category of the list
 					for (TimeOff timeoff : list2) {
 						TimeOff timeoff1 = timeoff;
+						String startampm ="AM";
+						String endampm ="AM";
+						int starthour= timeoff1.getStartTime().getHours();
+						int endhour= timeoff1.getEndTime().getHours();
 						y += 1;
 				%>
 
@@ -212,15 +220,11 @@ text-align:center;
 						%>
 					</td>
 
-					<td>
-						<%
-							out.print(timeoff1.getStartTime().toString());
-						%>
+				<td>
+						<%out.println(days[timeoff1.getStartTime().getDay()]+", "+months[(timeoff1.getStartTime().getMonth())]+" "+timeoff1.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", timeoff1.getStartTime().getMinutes())+" "+startampm);%>
 					</td>
 					<td>
-						<%
-							out.print(timeoff1.getEndTime().toString());
-						%>
+						<%out.println(days[timeoff1.getEndTime().getDay()]+", "+months[(timeoff1.getEndTime().getMonth())]+" "+timeoff1.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", timeoff1.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
 					<td>
 						<%
