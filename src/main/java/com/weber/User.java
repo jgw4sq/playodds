@@ -192,7 +192,7 @@ public void addShift(Shift shift){
 								"jdbc:mysql://127.0.0.1:3306/jake","adminnHxi4B8","fWUk7PSKVlcV"); 
 								stmt = con.createStatement();
 		*/
-		String sql = "UPDATE SHIFTS SET guard='"+this.getName()+"', email='"+this.getEmail()+"' WHERE id="+shift.getId()+";";
+		String sql = "UPDATE SHIFTS SET guard='"+this.getFirstName()+" "+this.getLastName()+"', email='"+this.getEmail()+"' WHERE id="+shift.getId()+";";
 		stmt.executeUpdate(sql);
 		con.close();
 	}catch (Exception e){

@@ -55,6 +55,7 @@ public class ApproveRequestOff extends HttpServlet {
 			ResultSet rs= stmt.executeQuery(sql);
 			while(rs.next()){
 				String guard=rs.getString("guard");
+				
 				int id= rs.getInt("id");
 				Timestamp startTime=rs.getTimestamp("startTime");
 				Timestamp endTime=rs.getTimestamp(3);
