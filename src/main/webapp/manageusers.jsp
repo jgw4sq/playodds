@@ -118,7 +118,7 @@ input[type=submit] {
 ArrayList<User> list = (ArrayList<User>) request.getAttribute("users");
 if(list.size()<1){
 	%>
-	<span class= "normaltext">The are no requests off to approve!</span>
+	<span class= "normaltext">The are no users to manage!</span>
 	<%
 }else{%>
 	
@@ -133,7 +133,7 @@ if(list.size()<1){
 	%>
 				<tr id = "<%user1.getEmail(); %>">
 					<td>
-						<%out.println(user1.getName());%>
+						<%out.println(user1.getFirstName()+" "+user1.getLastName());%>
 					</td>
 					<td>
 						<%out.println(user1.getRank());%>
