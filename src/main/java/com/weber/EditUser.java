@@ -75,6 +75,12 @@ public class EditUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
+		String [] splitname = name.split(" ");
+		String firstname = splitname[0];
+		String lastname=null;
+		if (splitname.length>1){
+			lastname=splitname[1];
+		}
 		int rank=Integer.parseInt(request.getParameter("rank"));
 		int managerMinHours= Integer.parseInt(request.getParameter("managerMinHours"));
 		Statement stmt=null;
@@ -84,7 +90,7 @@ public class EditUser extends HttpServlet {
 			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
-			String sql= "UPDATE GUARDS SET rank="+rank+",managerMinHours="+managerMinHours+" WHERE name='"+name+"';";
+			String sql= "UPDATE GUARDS SET rank="+rank+",managerMinHours="+managerMinHours+" WHERE firstName='"+firstname+"' AND lastName='"+lastname+"';";
 			int rs = stmt.executeUpdate(sql);
 			stmt.close();
 			con.close();
