@@ -35,6 +35,12 @@ public class EditUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("edit");
 		name=name.replace("Edit ", "");
+		String [] splitname = name.split(" ");
+		String firstname = splitname[0];
+		String lastname=null;
+		if (splitname.length>1){
+			lastname=splitname[1];
+		}
 		Statement stmt =null;
 		try{
 			Context initContext = new InitialContext();
@@ -42,7 +48,7 @@ public class EditUser extends HttpServlet {
 			 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
-			String sql= "SELECT * FROM GUARDS WHERE name='"+name+"';";
+			String sql= "SELECT * FROM GUARDS WHERE firstName='"+firstname+"' AND lastName='"+lastname+"';";
 			ResultSet rs = stmt.executeQuery(sql);
 			int rank=0;
 			int managerMinHours=0;
