@@ -53,6 +53,13 @@ public class SignUp extends HttpServlet {
 		Statement stmt =null;
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
+		String firstname=null;
+		String lastname=null;
+		String [] namesplit = name.split(" ");
+		if(namesplit.length>1){
+			firstname= namesplit[0];
+			lastname=namesplit[1];
+		}
 		int age = Integer.parseInt(request.getParameter("age"));
 		String pool = request.getParameter("poolSelect");
 		String position = request.getParameter("mySelect");
@@ -88,7 +95,7 @@ public class SignUp extends HttpServlet {
 					if (count<1){
 						System.out.println("Inserting into guards table");
 
-					 sql = "INSERT INTO GUARDS VALUES ('"+name+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
+					 sql = "INSERT INTO GUARDS VALUES ('"+firstname+"','"+lastname+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
 					stmt.executeUpdate(sql);
 			        request.getRequestDispatcher("index.jsp").forward(request, response);
 					}else{

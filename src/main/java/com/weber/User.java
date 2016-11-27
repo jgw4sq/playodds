@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class User implements Comparable {
-private String name;
 private String position;
 private String pool;
 private String email;
@@ -113,12 +112,6 @@ public void setNotapprovedtimeoff(ArrayList<TimeOff> notapprovedtimeoff) {
 }
 public User() {
 	// TODO Auto-generated constructor stub
-}
-public String getName() {
-	return name;
-}
-public void setName(String name) {
-	this.name = name;
 }
 public String getPosition() {
 	return position;

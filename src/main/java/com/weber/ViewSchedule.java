@@ -30,9 +30,13 @@ public class ViewSchedule extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(((User)request.getSession().getAttribute("user"))==null){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}else{
 		request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
 		
-	}
+	}}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

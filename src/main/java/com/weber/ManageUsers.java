@@ -29,12 +29,16 @@ public class ManageUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(((User)request.getSession().getAttribute("user"))==null){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}else{
 		User user = ((User)request.getSession().getAttribute("user"));
 		ArrayList<User> users =MakeSchedule.populateUsers(user.getPool());
 		System.out.println("Users size: "+users.size());
 		request.setAttribute("users", users);
 		request.getRequestDispatcher("manageusers.jsp").forward(request, response);
-	}
+	}}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

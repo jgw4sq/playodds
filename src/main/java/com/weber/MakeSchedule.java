@@ -76,14 +76,14 @@ public class MakeSchedule extends HttpServlet {
 		ArrayList<User> guards = populateUsers(pool,startDate,endDate);
 		Collections.sort(guards, User.SortUserTimeRank);
 		for(int i=0; i<guards.size();i++){
-			System.out.println(guards.get(i).getName());
+			System.out.println(guards.get(i).getFirstName()+" "+guards.get(i).getLastName());
 		}
 		for(int i=0; i<shift.size();i++){
 			Collections.sort(guards, User.SortUserTimeRank);
 			System.out.println("Checking Shift");
 			if(shift.get(i).isManagerRequired()){
 				for(int j=0; j<guards.size();j++){
-					System.out.println("Checking Guard"+guards.get(j).getName());
+					System.out.println("Checking Guard"+guards.get(j).getFirstName()+" "+guards.get(j).getLastName());
 
 					if(guards.get(j).isAvailable(shift.get(i))&&(guards.get(j).getPosition().equals("Manager")||guards.get(j).getPosition().equals("Assistant Manager")||guards.get(j).getPosition().equals("Head Guard"))){
 						System.out.println("Changing Shift"+shift.get(i).getId());
@@ -97,7 +97,6 @@ public class MakeSchedule extends HttpServlet {
 				}
 			}else{
 			for(int j=0; j<guards.size();j++){
-				System.out.println("Checking Guard"+guards.get(j).getName());
 
 				if(guards.get(j).isAvailable(shift.get(i))){
 					System.out.println("Changing Shift"+shift.get(i).getId());
@@ -261,7 +260,6 @@ public class MakeSchedule extends HttpServlet {
 								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email,managerMinHours);
 						
 						poolEmployees.add(user);
-						System.out.println("Added employee"+user.getName());
 					
 		}
 					
@@ -346,7 +344,6 @@ public class MakeSchedule extends HttpServlet {
 								approvedtimesoff,notapprovedtimesoff,  age,  rank, otherPools,email,managerMinHours);
 						
 						poolEmployees.add(user);
-						System.out.println("Added employee"+user.getName());
 					
 		}
 					
