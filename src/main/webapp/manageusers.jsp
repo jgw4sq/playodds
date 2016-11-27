@@ -142,7 +142,7 @@ if(list.size()<1){
 						<%out.println(user1.getManagerMinHours());%>
 					</td>
 					<td>
-					<input type="submit" name="edit" value="Edit <%out.print(user1.getName()); %>"><br>
+					<input type="submit" name="edit" value="Edit <%out.print(user1.getFirstName()+" "+user1.getLastName()); %>"><br>
 						
 					</td>
 				</tr>
