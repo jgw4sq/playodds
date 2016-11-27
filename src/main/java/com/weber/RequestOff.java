@@ -75,10 +75,12 @@ try{
 					}
 					
 				}
+				con.close();
 }catch(Exception e){
+	
 	e.printStackTrace();
 }
-
+		
 				request.getSession().setAttribute("approvedtimesoff", approvedtimesoff);
 				request.getSession().setAttribute("notapprovedtimesoff", notapprovedtimesoff);
 	        request.getRequestDispatcher("requestoff.jsp").forward(request, response);
