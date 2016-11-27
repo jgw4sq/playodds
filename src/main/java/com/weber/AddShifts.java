@@ -60,6 +60,7 @@ public class AddShifts extends HttpServlet {
 		String hoursminutes = hour+":"+minute;
 		String ampm = request.getParameter("ampm");
 		String reason = request.getParameter("reason");
+		String repeat = request.getParameter("repeat");
 		if(ampm.equals("pm")){
 			String hours = hoursminutes.substring(0,2);
 			int inthours = Integer.parseInt(hours);
@@ -99,9 +100,14 @@ public class AddShifts extends HttpServlet {
 		end.setDate(Integer.parseInt(day2));
 		end.setHours(Integer.parseInt(hoursminutes2.substring(0,2)));
 		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
+		
 		int length = ((int) (end.getTime()-start.getTime()))/(1000*60*60);
 		
 		try{
+			int numberofRepeat=1;
+			if(repeat.equals("Yes")){
+				numberofRepeat=52;
+			}
 			 stmt =null;
 			 Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
@@ -110,10 +116,14 @@ public class AddShifts extends HttpServlet {
 			stmt = con.createStatement();
 						
 		for(int i=0;i<numberofEmployees;i++){
-
+			for(int j=0;j<numberofRepeat; j++){
 		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length,position)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+",'"+shiftPosition+"');";
 		int rs2 = stmt.executeUpdate(sql);
-		}
+		start.setDate(start.getDate()+7);
+		end.setDate(end.getDate()+7);
+		 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
+		 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
+		}}
         request.getRequestDispatcher("addshifts.jsp").forward(request, response);
         con.close();
 		}catch(Exception e){
