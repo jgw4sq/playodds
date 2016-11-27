@@ -38,6 +38,10 @@ public class MakeSchedule extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(((User)request.getSession().getAttribute("user"))==null){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}
 		request.getRequestDispatcher("makeschedule.jsp").forward(request, response);
 		
 	}
@@ -67,7 +71,8 @@ public class MakeSchedule extends HttpServlet {
 		System.out.println(startDate.toString());
 		System.out.println(endDate.toString());
 		makeScheduleBasedOnRank(pool,startDate, endDate);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/ViewSchedule");
+		//request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	
 	public static void makeScheduleBasedOnRank(String pool,Timestamp startDate, Timestamp endDate){

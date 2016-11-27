@@ -33,6 +33,11 @@ public class EditUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(((User)request.getSession().getAttribute("user"))==null){
+			response.sendRedirect(request.getContextPath()+"/Login");
+
+		}
 		String name = request.getParameter("edit");
 		name=name.replace("Edit ", "");
 		String [] splitname = name.split(" ");
