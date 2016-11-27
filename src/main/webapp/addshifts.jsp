@@ -18,8 +18,9 @@ input[type=submit] {
 	display: inline-block;
 	font-size: 16px;
 }
-div.maindiv {  
-    text-align: center;
+
+div.maindiv {
+	text-align: center;
 }
 </style>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -76,7 +77,8 @@ div.maindiv {
 						<% User user = (User)request.getSession().getAttribute("user");
 			if(user!=null){
 				if(user.getPosition().equals("Manager")){%>
-						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule Manager</a></li>
+						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule
+								Manager</a></li>
 						<%}} %>
 						<li class="login"><a data-toggle="modal" href="#loginForm"><i
 								class="icon-lock"></i> Sign In</a></li>
@@ -110,11 +112,11 @@ div.maindiv {
 	<!-- / .title -->
 
 	<section id="portfolio" class="container main">
-		
+
 		<div class="maindiv">
 			<h3 align="center">Add Shifts</h3>
 			<form name="f2" method="post" action="AddShifts" id="f2">
-			<span class="requestoffheader">Start Time:</span> <select
+				<span class="requestoffheader">Start Time:</span> <select
 					style="width: 150px;" name="year">
 					<option value="2016">2016</option>
 				</select><select name="month" style="width: 150px;">
@@ -270,12 +272,16 @@ div.maindiv {
 
 					<option value="am">AM</option>
 					<option value="pm">PM</option>
-				</select><br> 
-				<span class="requestoffheader">Position: </span><input
+				</select><br> <span class="requestoffheader">Position: </span><input
 					type="text" placeholder="Shift Position" name="shiftPosition" /> <br>
 				<span class="requestoffheader">Number of Employees Needed: </span><input
-					type="text" placeholder="#ofEmployees" name="#ofEmployees" /> <br> <input
-					type="submit" value="Add Shifts">
+					type="text" placeholder="#ofEmployees" name="#ofEmployees" /><br>
+				<span class="requestoffheader">Repeat this shift every week?
+				</span> <span>Yes</span><input type="radio" name="repeat" value="Yes" checked>
+				No<br> <input type="radio" name="repeat" value="No">
+				<br> <br>
+				<br> <br> <br> <input type="submit"
+					value="Add Shifts">
 			</form>
 		</div>
 
