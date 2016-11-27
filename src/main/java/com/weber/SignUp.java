@@ -95,7 +95,7 @@ public class SignUp extends HttpServlet {
 					if (count<1){
 						System.out.println("Inserting into guards table");
 
-					 sql = "INSERT INTO GUARDS VALUES ('"+firstname+"','"+lastname+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+");";
+					 sql = "INSERT INTO GUARDS VALUES ('"+firstname+"','"+lastname+"',"+age+", '"+pool+"', "+true+","+Integer.parseInt("1")+",'"+position+"', '"+email+"',"+passwords+",5);";
 					stmt.executeUpdate(sql);
 			        request.getRequestDispatcher("index.jsp").forward(request, response);
 					}else{
