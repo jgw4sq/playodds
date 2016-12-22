@@ -47,7 +47,8 @@ public class DeleteUser extends HttpServlet {
 
 		}
 		String name = request.getParameter("name");
-		name=name.replace("Edit ", "");
+		System.out.println(name);
+		//name=name.replace("Edit ", "");
 		String [] splitname = name.split(" ");
 		String firstname = splitname[0];
 		String lastname=null;
