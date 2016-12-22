@@ -121,6 +121,8 @@ input[type=submit] {
 			</form>
 			
 			<form action="DeleteUser" method="post">
+			<input name ="name" type="hidden" value="<%out.print(request.getAttribute("name")); %>"/><br>
+			
 			<input type="submit" value="Delete User"/>
 			</form>
 		</div>
