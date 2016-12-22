@@ -66,10 +66,10 @@ public class DeleteUser extends HttpServlet {
 			ResultSet rs = stmt.executeQuery(sql);
 			stmt.close();
 			con.close();
-			request.getRequestDispatcher("edituser.jsp").forward(request, response);
-	
+response.sendRedirect(request.getContextPath()+"/ManageUsers");	
 	}catch (Exception e){
-		request.getRequestDispatcher("edituser.jsp").forward(request, response);
+		//request.getRequestDispatcher("edituser.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/ManageUsers");	
 
 	}
 
