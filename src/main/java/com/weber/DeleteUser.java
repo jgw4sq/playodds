@@ -65,6 +65,11 @@ public class DeleteUser extends HttpServlet {
 			String sql= "DELETE FROM GUARDS WHERE firstName='"+firstname+"' AND lastName='"+lastname+"';";
 			int rs = stmt.executeUpdate(sql);
 			stmt.close();
+			
+			stmt= con.createStatement();
+			sql ="UPDATE SHIFTS SET guard=null WHERE guard='"+firstname+" "+lastname+"';";
+			 rs = stmt.executeUpdate(sql);
+			 stmt.close();
 			con.close();
 response.sendRedirect(request.getContextPath()+"/ManageUsers");	
 	}catch (Exception e){
