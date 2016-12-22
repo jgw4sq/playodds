@@ -119,6 +119,10 @@ input[type=submit] {
 
 			<input align="center" type="submit" value="Edit User"/>
 			</form>
+			
+			<form action="DeleteUser" method="post">
+			<input type="submit" value="Delete User"/>
+			</form>
 		</div>
 	</section>
 

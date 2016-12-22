@@ -278,7 +278,7 @@ div.maindiv {
 					type="text" placeholder="#ofEmployees" name="#ofEmployees" /><br>
 				<span class="requestoffheader">Repeat this shift every week?
 				</span> <span>Yes</span><input type="radio" name="repeat" value="Yes" checked>
-				No<br> <input type="radio" name="repeat" value="No">
+				<span>No </span> <input type="radio" name="repeat" value="No">
 				<br> <br>
 				<br> <br> <br> <input type="submit"
 					value="Add Shifts">
