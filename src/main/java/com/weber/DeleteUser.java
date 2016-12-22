@@ -67,7 +67,7 @@ public class DeleteUser extends HttpServlet {
 			stmt.close();
 			
 			stmt= con.createStatement();
-			sql ="UPDATE SHIFTS SET guard=null AND email=null WHERE guard='"+firstname+" "+lastname+"';";
+			sql ="UPDATE SHIFTS SET guard=null , email=null WHERE guard='"+firstname+" "+lastname+"';";
 			 rs = stmt.executeUpdate(sql);
 			 stmt.close();
 			con.close();
