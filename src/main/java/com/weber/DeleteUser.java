@@ -63,7 +63,7 @@ public class DeleteUser extends HttpServlet {
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 			String sql= "DELETE FROM GUARDS WHERE firstName='"+firstname+"' AND lastName='"+lastname+"';";
-			ResultSet rs = stmt.executeQuery(sql);
+			int rs = stmt.executeUpdate(sql);
 			stmt.close();
 			con.close();
 response.sendRedirect(request.getContextPath()+"/ManageUsers");	
