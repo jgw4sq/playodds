@@ -46,7 +46,7 @@ public class DeleteUser extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}
-		String name = request.getParameter("edit");
+		String name = request.getParameter("name");
 		name=name.replace("Edit ", "");
 		String [] splitname = name.split(" ");
 		String firstname = splitname[0];
