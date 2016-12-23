@@ -295,7 +295,7 @@ input[type=submit] {
 			</form>
 			
 			<form action="DeleteShift" method="post">
-			<input name ="name" type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>"/><br>
+			<input name ="shiftid" type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>"/><br>
 			
 			<input type="submit" value="Delete Shift"/>
 			</form>
