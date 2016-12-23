@@ -123,7 +123,17 @@ input[type=submit] {
 		<div class="form">
 		<form action="EditShift" method="post">
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
-			<span class="fieldHeader">Employee: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/><br>
+			<span class="fieldHeader">Currently Assigned To: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
+			<span class="fieldHeader">Other Available Employees: </span><select
+					style="width: 150px;" name="year">
+					<%ArrayList<User> availableEmployees = (ArrayList<User>)request.getAttribute("avaiableUsers"); 
+					for(int i=0; i<availableEmployees.size(); i++){%>
+					<option value="<%=availableEmployees.get(i).getFirstName()+availableEmployees.get(i).getLastName() %>"><%=availableEmployees.get(i).getFirstName()+availableEmployees.get(i).getLastName() %></option>
+					<%} %>
+					</select>			
+			
+			
+			<br>
 			<span class="fieldHeader">Start Time:</span> <select
 					style="width: 150px;" name="year">
 					<option selected="selected" value="<%=(((Shift)request.getAttribute("editShift")).getStartTime().getYear()+1900) %>" ><%=(((Shift)request.getAttribute("editShift")).getStartTime().getYear()+1900) %></option>
@@ -299,7 +309,7 @@ input[type=submit] {
 					<%} %>
 				</select><br> <span class="fieldHeader">Position: </span><input
 					type="text" value="<%=((Shift)request.getAttribute("editShift")).getPosition() %>" placeholder="Shift Position" name="shiftPosition" /> <br>
-			<input align="center" type="submit" value="Edit Shift"/>
+			<input align="center" type="submit" value="Update Shift"/>
 			</form>
 			
 			<form action="DeleteShift" method="post">
