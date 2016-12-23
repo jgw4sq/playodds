@@ -158,7 +158,7 @@ public class EditShift extends HttpServlet {
 						
 		//for(int i=0;i<numberofEmployees;i++){
 		//	for(int j=0;j<numberofRepeat; j++){
-		 String sql = "UPDATE SHIFTS SET startTime="+startTime+", endTime="+endTime+" , guard='"+employee+"', length="+length+", position='"+shiftPosition+"'"+" WHERE id="+id+";";
+		 String sql = "UPDATE SHIFTS SET startTime='"+startTime+"', endTime='"+endTime+"', guard='"+employee+"', length="+length+", position='"+shiftPosition+"'"+" WHERE id="+id+";";
 		int rs2 = stmt.executeUpdate(sql);
 		start.setDate(start.getDate()+7);
 		end.setDate(end.getDate()+7);
