@@ -88,8 +88,8 @@ public class EditShift extends HttpServlet {
 		// TODO Auto-generated method stub
 		String employee = request.getParameter("employee");
 		int id = Integer.parseInt(request.getParameter("shiftid"));
-		int numberofEmployees = Integer.parseInt(request.getParameter("#ofEmployees"));
-		String pool = ((User)request.getSession().getAttribute("user")).getPool();
+		//int numberofEmployees = Integer.parseInt(request.getParameter("#ofEmployees"));
+		//String pool = ((User)request.getSession().getAttribute("user")).getPool();
 		String shiftPosition = request.getParameter("shiftPosition");
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
@@ -98,7 +98,7 @@ public class EditShift extends HttpServlet {
 		String minute = request.getParameter("minutes");
 		String hoursminutes = hour+":"+minute;
 		String ampm = request.getParameter("ampm");
-		String reason = request.getParameter("reason");
+		//String reason = request.getParameter("reason");
 		String repeat = request.getParameter("repeat");
 		if(ampm.equals("pm")){
 			String hours = hoursminutes.substring(0,2);
@@ -154,16 +154,17 @@ public class EditShift extends HttpServlet {
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 						
-		for(int i=0;i<numberofEmployees;i++){
-			for(int j=0;j<numberofRepeat; j++){
-		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,guard,length,position)VALUES ('"+startTime+"', '"+endTime+"','"+employee+"',"+length+",'"+shiftPosition+"') WHERE id="+id+";";
+		//for(int i=0;i<numberofEmployees;i++){
+		//	for(int j=0;j<numberofRepeat; j++){
+		 String sql = "UPDATE SHIFTS SET startTime="+startTime+", endTime="+endTime+" , guard='"+employee+"', length="+length+", position='"+shiftPosition+"'"+" WHERE id="+id+";";
 		int rs2 = stmt.executeUpdate(sql);
 		start.setDate(start.getDate()+7);
 		end.setDate(end.getDate()+7);
 		 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
 		 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
-		}}
+		//}}
         request.getRequestDispatcher("addshifts.jsp").forward(request, response);
+        stmt.close();
         con.close();
 		}catch(Exception e){
 			e.printStackTrace();
