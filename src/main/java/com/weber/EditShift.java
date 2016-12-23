@@ -165,7 +165,7 @@ public class EditShift extends HttpServlet {
 		 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
 		 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
 		//}}
-        request.getRequestDispatcher("viewschedule2.jsp").forward(request, response);
+        request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
         stmt.close();
         con.close();
 		}catch(Exception e){
