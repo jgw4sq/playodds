@@ -113,7 +113,8 @@ input[type=submit] {
 	<section>
 		<h1 class="scheduleheader">Edit Shift</h1>
 		<div>
-		<form action="EditUser" method="post">
+		<form action="EditShift" method="post">
+		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
 			<span>Employee: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/><br>
 			<span class="requestoffheader">Start Time:</span> <select
 					style="width: 150px;" name="year">
