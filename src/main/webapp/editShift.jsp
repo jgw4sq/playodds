@@ -10,6 +10,14 @@
 <html class="no-js">
 <!--<![endif]-->
 <style>
+div.form{
+    display: block;
+    text-align: center;
+}
+span.fieldHeader {
+	color: green;
+	font-size: 24px;
+}
 h1.scheduleheader {
 	font-size: 40px;
 	color: green;
@@ -112,11 +120,11 @@ input[type=submit] {
 
 	<section>
 		<h1 class="scheduleheader">Edit Shift</h1>
-		<div>
+		<div class="form">
 		<form action="EditShift" method="post">
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
-			<span>Employee: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/><br>
-			<span class="requestoffheader">Start Time:</span> <select
+			<span class="fieldHeader">Employee: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/><br>
+			<span class="fieldHeader">Start Time:</span> <select
 					style="width: 150px;" name="year">
 					<option selected="selected" value="<%=(((Shift)request.getAttribute("editShift")).getStartTime().getYear()+1900) %>" ><%=(((Shift)request.getAttribute("editShift")).getStartTime().getYear()+1900) %></option>
 					<option value="2016">2016</option>
@@ -202,7 +210,7 @@ input[type=submit] {
 	<%}else{ %>
 					<option selected="selected" value="am">AM</option>
 					<%} %>
-				</select><br> <span class="requestoffheader">End Time: </span><select
+				</select><br> <span class="fieldHeader">End Time: </span><select
 					style="width: 150px;" name="year2">
 										<option selected="selected" value="<%=(((Shift)request.getAttribute("editShift")).getEndTime().getYear()+1900) %>" ><%=(((Shift)request.getAttribute("editShift")).getEndTime().getYear()+1900) %></option>
 					
@@ -289,7 +297,7 @@ input[type=submit] {
 	<%}else{ %>
 					<option selected="selected" value="am">AM</option>
 					<%} %>
-				</select><br> <span class="requestoffheader">Position: </span><input
+				</select><br> <span class="fieldHeader">Position: </span><input
 					type="text" value="<%=((Shift)request.getAttribute("editShift")).getPosition() %>" placeholder="Shift Position" name="shiftPosition" /> <br>
 			<input align="center" type="submit" value="Edit Shift"/>
 			</form>
