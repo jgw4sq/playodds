@@ -144,9 +144,11 @@ public class EditShift extends HttpServlet {
 		
 		try{
 			int numberofRepeat=1;
+			/*
 			if(repeat.equals("Yes")){
 				numberofRepeat=52;
 			}
+			*/
 			 stmt =null;
 			 Context initContext = new InitialContext();
 			 Context envContext  = (Context)initContext.lookup("java:/comp/env");
