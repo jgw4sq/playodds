@@ -171,6 +171,7 @@ input[type=submit] {
 					<option value="31">31</option>
 				</select> <select name="hour" style="width: 150px;">
 					<option value="" disabled selected>Hour</option>
+					<option selected="selected" value="<%=((((Shift)request.getAttribute("editShift")).getStartTime().getHours())%12) %>" ><%=(((Shift)request.getAttribute("editShift")).getStartTime().getHours()%12) %></option>
 
 					<option value="01">01</option>
 					<option value="02">02</option>
@@ -186,6 +187,8 @@ input[type=submit] {
 					<option value="12">12</option>
 				</select> <select name="minutes" style="width: 150px;">
 					<option value="" disabled selected>Minutes</option>
+															<option selected="selected" value="<%=((Shift)request.getAttribute("editShift")).getStartTime().getMinutes() %>" ><%=((Shift)request.getAttribute("editShift")).getStartTime().getMinutes() %></option>
+					
 					<option value="00">00</option>
 					<option value="15">15</option>
 					<option value="30">30</option>
@@ -193,9 +196,11 @@ input[type=submit] {
 
 				</select> <select name="ampm" style="width: 150px;">
 					<option value="" disabled selected>AM/PM</option>
-
-					<option value="am">AM</option>
-					<option value="pm">PM</option>
+	<%if (((Shift)request.getAttribute("editShift")).getStartTime().getHours()>=12){ %>
+						<option selected="selected" value="pm">PM</option>
+	<%}else{ %>
+					<option selected="selected" value="am">AM</option>
+					<%} %>
 				</select><br> <span class="requestoffheader">End Time: </span><select
 					style="width: 150px;" name="year2">
 										<option selected="selected" value="<%=(((Shift)request.getAttribute("editShift")).getEndTime().getYear()+1900) %>" ><%=(((Shift)request.getAttribute("editShift")).getEndTime().getYear()+1900) %></option>
@@ -253,6 +258,7 @@ input[type=submit] {
 					<option value="31">31</option>
 				</select> <select name="hour2" style="width: 150px;">
 					<option value="" disabled selected>Hour</option>
+					<option selected="selected" value="<%=((((Shift)request.getAttribute("editShift")).getEndTime().getHours())%12) %>" ><%=(((Shift)request.getAttribute("editShift")).getEndTime().getHours()%12) %></option>
 
 					<option value="01">01</option>
 					<option value="02">02</option>
@@ -268,6 +274,8 @@ input[type=submit] {
 					<option value="12">12</option>
 				</select> <select name="minutes2" style="width: 150px;">
 					<option value="" disabled selected>Minutes</option>
+															<option selected="selected" value="<%=((Shift)request.getAttribute("editShift")).getEndTime().getMinutes() %>" ><%=((Shift)request.getAttribute("editShift")).getEndTime().getMinutes() %></option>
+					
 					<option value="00">00</option>
 					<option value="15">15</option>
 					<option value="30">30</option>
@@ -275,11 +283,13 @@ input[type=submit] {
 
 				</select> <select name="ampm2" style="width: 150px;">
 					<option value="" disabled selected>AM/PM</option>
-
-					<option value="am">AM</option>
-					<option value="pm">PM</option>
+	<%if (((Shift)request.getAttribute("editShift")).getEndTime().getHours()>=12){ %>
+						<option selected="selected" value="pm">PM</option>
+	<%}else{ %>
+					<option selected="selected" value="am">AM</option>
+					<%} %>
 				</select><br> <span class="requestoffheader">Position: </span><input
-					type="text" placeholder="Shift Position" name="shiftPosition" /> <br>
+					type="text" value="<%=((Shift)request.getAttribute("editShift")).getPosition() %>" placeholder="Shift Position" name="shiftPosition" /> <br>
 			<input align="center" type="submit" value="Edit Shift"/>
 			</form>
 			
