@@ -65,12 +65,15 @@ public class EditShift extends HttpServlet {
 				request.setAttribute("editShift",new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 			}
 			ArrayList<User> availableUsers = MakeSchedule.populateUsers(poolshift, startTime, endTime);
+			System.out.println("All Users Size:" +availableUsers.size());
 			for(int i=0; i<availableUsers.size(); i++){
 				if(!availableUsers.get(i).isAvailable((Shift)request.getAttribute("editShift"))){
 					availableUsers.remove(i);
 					i-=1;
 				}
 			}
+			System.out.println("Available Users Size:" +availableUsers.size());
+
 			request.setAttribute("avaiableUsers", availableUsers);
 			request.getRequestDispatcher("editShift.jsp").forward(request, response);
 			stmt.close();
