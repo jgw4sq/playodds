@@ -112,6 +112,7 @@ div.maindiv {
 					<th>Position</th>
 					<th>Start Time</th>
 					<th>End Time</th>
+					<th>Edit</th>
 				</tr>
 				<%  
 // retrieve your list from the request, with casting 
@@ -157,6 +158,7 @@ for(Shift shift : list) {
 					<td>
 						<%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth())]+" "+shift.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
 					</td>
+					<td><form action="EditShift" method="get"><input type="hidden" name="id" value="<%=shift.getId() %>"/><input type="submit" value="Edit"/></form></td>
 				</tr>
 				<%
 }
