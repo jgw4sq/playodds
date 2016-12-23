@@ -125,10 +125,11 @@ input[type=submit] {
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
 			<span class="fieldHeader">Currently Assigned To: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
 			<span class="fieldHeader">Other Available Employees: </span><select
-					style="width: 150px;" name="year">
+					style="width: 300px;" name="changeEmployee">
+					<option selected="selected" value="Select Other Option to Change Employee">Select Other Option to Change Employee</option>
 					<%ArrayList<User> availableEmployees = (ArrayList<User>)request.getAttribute("avaiableUsers"); 
 					for(int i=0; i<availableEmployees.size(); i++){%>
-					<option value="<%=availableEmployees.get(i).getFirstName()+availableEmployees.get(i).getLastName() %>"><%=availableEmployees.get(i).getFirstName()+availableEmployees.get(i).getLastName() %></option>
+					<option value="<%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %>"><%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %></option>
 					<%} %>
 					</select>			
 			
