@@ -116,6 +116,7 @@ input[type=submit] {
 		</div>
 	</section>
 	<!-- / .title -->
+					<%ArrayList<User> availableEmployees = (ArrayList<User>)request.getAttribute("avaiableUsers"); %>
 
 
 	<section>
@@ -125,10 +126,15 @@ input[type=submit] {
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
 			<span class="fieldHeader">Currently Assigned To: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
 			<span class="fieldHeader">Other Available Employees: </span><select
-					style="width: 350px;" name="changeEmployee">
+					style="width: 300px;" name="changeEmployee">
+					<%if(availableEmployees.size()>0){ %>
 					<option selected="selected" value="Select Other Option to Change Employee">Select Other Option to Change Employee</option>
-					<%ArrayList<User> availableEmployees = (ArrayList<User>)request.getAttribute("avaiableUsers"); 
-					for(int i=0; i<availableEmployees.size(); i++){%>
+					<%}else{ %>
+										<option selected="selected" value="There are no other avilable employees">No Other Available Employees!</option>
+					
+					
+					<%} %>
+					<%for(int i=0; i<availableEmployees.size(); i++){%>
 					<option value="<%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %>"><%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %></option>
 					<%} %>
 					</select>			
