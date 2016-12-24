@@ -2,18 +2,16 @@
 
 
 function changeEmployeeValue(newValue){
-	alert("hi");
+	var split = newValue.split(",");
+	var email = split[1];
 	if(newValue!="Select Other Option to Change Employee"){
-		alert("passed first");
 		if(newValue!="There are no other avilable employees"){
-			alert("passed second");
-			document.getElementById("employee").value = newValue;
+			document.getElementById("employee").value = split[0];
+			document.getElementById("employeeEmail").value=email;
 		}else{
-			alert("failed second");
 		}
 	}else{
 
-		alert("failed first");
 	}
 	
 

@@ -124,6 +124,7 @@ input[type=submit] {
 		<h1 class="scheduleheader">Edit Shift</h1>
 		<div class="form">
 		<form action="EditShift" method="post">
+		<input name="employeeEmail" type="hidden" id="employeeEmail" value="<%out.print(((Shift)request.getAttribute("editShift")).getEmail()); %>"/>
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
 			<span class="fieldHeader">Currently Assigned To: </span><input id="employee" name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
 			<span class="fieldHeader">Other Available Employees: </span><select
@@ -136,7 +137,7 @@ input[type=submit] {
 					
 					<%} %>
 					<%for(int i=0; i<availableEmployees.size(); i++){%>
-					<option value="<%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %>"><%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %></option>
+					<option value="<%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName()+","+availableEmployees.get(i).getEmail() %>"><%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %></option>
 					<%} %>
 					</select>			
 			
