@@ -127,7 +127,7 @@ input[type=submit] {
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
 			<span class="fieldHeader">Currently Assigned To: </span><input id="employee" name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
 			<span class="fieldHeader">Other Available Employees: </span><select
-					style="width: 300px;" name="changeEmployee" onchange="changeEmployee(this.value)">
+					style="width: 300px;" name="changeEmployee" onchange="changeEmployee()">
 					<%if(availableEmployees.size()>0){ %>
 					<option selected="selected" value="Select Other Option to Change Employee">Select Other Option to Change Employee</option>
 					<%}else{ %>
