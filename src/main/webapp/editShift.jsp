@@ -36,6 +36,7 @@ input[type=submit] {
 }
 </style>
 <head>
+ <script type="text/javascript" src="selectEmployeeForShift.js" ></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>Edit User | ScheduleMe</title>
@@ -124,9 +125,9 @@ input[type=submit] {
 		<div class="form">
 		<form action="EditShift" method="post">
 		<input type="hidden" value="<%out.print(((Shift)request.getAttribute("editShift")).getId()); %>" name="shiftid"/>
-			<span class="fieldHeader">Currently Assigned To: </span><input name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
+			<span class="fieldHeader">Currently Assigned To: </span><input id="employee" name ="employee" type="text" value="<%out.print(((Shift)request.getAttribute("editShift")).getGuard()); %>"/>
 			<span class="fieldHeader">Other Available Employees: </span><select
-					style="width: 300px;" name="changeEmployee">
+					style="width: 300px;" name="changeEmployee" onchange="changeEmployee(this.value)">
 					<%if(availableEmployees.size()>0){ %>
 					<option selected="selected" value="Select Other Option to Change Employee">Select Other Option to Change Employee</option>
 					<%}else{ %>
