@@ -152,14 +152,14 @@ public void setOtherpools(boolean otherpools) {
 }
 public boolean isAvailable(Shift shift){
 	for(int i=0; i<this.getApprovedtimeoff().size();i++){
-		if((this.getApprovedtimeoff().get(i).getEndTime().equals(shift.getEndTime()))||(this.getApprovedtimeoff().get(i).getStartTime().equals(shift.getStartTime()))||(this.getApprovedtimeoff().get(i).getStartTime().before(shift.getStartTime())&&this.getApprovedtimeoff().get(i).getEndTime().after(shift.getStartTime()))||(this.getApprovedtimeoff().get(i).getStartTime().before(shift.getEndTime())&&this.getApprovedtimeoff().get(i).getEndTime().after(shift.getEndTime()))){
+		if((this.getApprovedtimeoff().get(i).getEndTime().equals(shift.getEndTime()))||(this.getApprovedtimeoff().get(i).getStartTime().equals(shift.getStartTime()))||(this.getApprovedtimeoff().get(i).getStartTime().before(shift.getStartTime())&&this.getApprovedtimeoff().get(i).getEndTime().after(shift.getStartTime()))||(this.getApprovedtimeoff().get(i).getStartTime().before(shift.getEndTime())&&this.getApprovedtimeoff().get(i).getEndTime().after(shift.getEndTime()))||(this.getApprovedtimeoff().get(i).getStartTime().after(shift.getStartTime())&&this.getApprovedtimeoff().get(i).getEndTime().before(shift.getEndTime()))){
 			System.out.println(this.getFirstName()+" "+this.getLastName()+" has a conflict with time off");
 			return false;
 
 		}
 	}
 	for(int i=0; i<this.getShifts().size();i++){
-		if((this.getShifts().get(i).getEndTime().equals(shift.getEndTime()))||(this.getShifts().get(i).getStartTime().equals(shift.getStartTime()))||(this.getShifts().get(i).getStartTime().before(shift.getStartTime())&&this.getShifts().get(i).getEndTime().after(shift.getStartTime()))||(this.getShifts().get(i).getStartTime().before(shift.getEndTime())&&this.getShifts().get(i).getEndTime().after(shift.getEndTime()))){
+		if((this.getShifts().get(i).getEndTime().equals(shift.getEndTime()))||(this.getShifts().get(i).getStartTime().equals(shift.getStartTime()))||(this.getShifts().get(i).getStartTime().before(shift.getStartTime())&&this.getShifts().get(i).getEndTime().after(shift.getStartTime()))||(this.getShifts().get(i).getStartTime().before(shift.getEndTime())&&this.getShifts().get(i).getEndTime().after(shift.getEndTime()))||(this.getShifts().get(i).getStartTime().after(shift.getStartTime())&&this.getShifts().get(i).getEndTime().before(shift.getEndTime()))){
 			System.out.println(this.getFirstName()+" "+this.getLastName()+" has a conflict with shifts");
 			return false;
 
