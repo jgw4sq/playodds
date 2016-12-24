@@ -1,8 +1,8 @@
 
-alert("loaded");
 
-function changeEmployee(newValue){
+
+function changeEmployeeValue(){
 	alert("hi");
-	Document.getElementById("employee").value = newValue;
+	Document.getElementById("employee").value = "changed";
 
-}
+};
