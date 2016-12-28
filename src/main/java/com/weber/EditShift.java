@@ -89,6 +89,8 @@ public class EditShift extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Shift originalShift = (Shift)request.getAttribute("editShift");
+		Shift newShift = new Shift(originalShift);
 		String employee = request.getParameter("employee");
 		int id = Integer.parseInt(request.getParameter("shiftid"));
 		String employeeEmail = request.getParameter("employeeEmail");
@@ -175,6 +177,13 @@ public class EditShift extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		newShift.setStartTime(start);
+		newShift.setEndTime(end);
+		newShift.setGuard(employee);
+		newShift.setLength(length);
+		newShift.setEmail(employeeEmail);
+		newShift.setPosition(shiftPosition);
+		Notifications.sendShiftUpdateNotification(originalShift, newShift);
 		
 	}
 	}

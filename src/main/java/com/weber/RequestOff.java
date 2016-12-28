@@ -124,7 +124,9 @@ try{
 		if(ampm2.equals("pm")){
 			String hours = hoursminutes2.substring(0,2);
 			int inthours = Integer.parseInt(hours);
+			if(inthours<12){
 			inthours+=12;
+			}
 			hoursminutes2= String.valueOf(inthours)+hoursminutes2.substring(2,hoursminutes2.length());
 			System.out.println(hoursminutes);
 		}

@@ -13,6 +13,8 @@ public class Shift implements Comparable<Shift> {
 	private int Id;
 	private boolean managerRequired;
 	
+	
+	
 	public String getPosition() {
 		return position;
 	}
@@ -56,6 +58,19 @@ public class Shift implements Comparable<Shift> {
 		this.managerRequired=managerRequired;
 		this.position=position;
 		
+	}
+
+	public Shift(Shift originalShift) {
+		this.email= originalShift.getEmail();
+		this.endTime= originalShift.getEndTime();
+		this.startTime= originalShift.getStartTime();
+		this.guard = originalShift.getGuard();
+		this.Id = originalShift.getId();
+		this.length = originalShift.getLength();
+		this.managerRequired = originalShift.isManagerRequired();
+		this.pool= originalShift.getPool();
+		this.position= originalShift.getPosition();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Timestamp getStartTime() {
