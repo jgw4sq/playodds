@@ -11,15 +11,17 @@
 <!--<![endif]-->
 <style>
 div.oldShiftParent{
- width:30%;
+ width:25%;
  margin-right:50px;
  float:left;
+ background:white;
     
 }
 div.newShiftParent{
- width:63%;
+ width:70%;
  margin-right:50px;
  float:left;
+ background:white;
     
 }
 div.newShiftForm{
@@ -60,7 +62,7 @@ input[type=submit] {
 <script type="text/javascript" src="selectEmployeeForShift.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Edit User | ScheduleMe</title>
+<title>Edit Shift | ScheduleMe</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 
@@ -177,14 +179,14 @@ input[type=submit] {
 						out.print(((Shift) request.getSession().getAttribute("editShift"))
 								.getEmail());
 					%>
-				</span> <span class="fieldHeader">Start Time: </span> <span class="shiftInformation"><%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth())]+" "+shift.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
-				</span>
+				</span> <br><span class="fieldHeader">Start Time: </span> <span class="shiftInformation"><%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth())]+" "+shift.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
+				</span><br>
 				<span class="fieldHeader">End Time: </span> <span class="shiftInformation"> <%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth())]+" "+shift.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
 				</span>
 				<span class="fieldHeader">Position: </span> <span class="shiftInformation"><%
 						out.print(((Shift) request.getSession().getAttribute("editShift"))
 								.getPosition());
-					%></span>
+					%></span><br>
 
 			</div>
 		</div>
