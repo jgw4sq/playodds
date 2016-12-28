@@ -200,8 +200,7 @@ input[type=submit] {
 					<input type="hidden"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getId());%>"
-						name="shiftid" /> <span class="fieldHeader">Currently
-						Assigned To: </span><input id="employee" name="employee" type="text"
+						name="shiftid" /> <span class="fieldHeader">Employee: </span><input id="employee" name="employee" type="text"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getGuard());%>" />
 					<span class="fieldHeader">Other Available Employees: </span><select
@@ -347,7 +346,7 @@ input[type=submit] {
 							}
 						%>
 					</select><br> <span class="fieldHeader">End Time: </span><select
-						style="width: 150px;" name="year2">
+						style="width: 100px;" name="year2">
 						<option selected="selected"
 							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getEndTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
