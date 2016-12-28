@@ -99,7 +99,7 @@ public class Notifications extends HttpServlet {
 					if(newStartTime){
 						messageBody+= "\n Start Time Changed! \n Original Start Time: "+ originalShift.getStartTime().toString()+" \n New Start Time : "+newShift.getStartTime().toString()+"\n\n";
 					}
-					if(newStartTime){
+					if(newEndTime){
 						messageBody+= "\n End Time Changed! \n Original End Time: "+ originalShift.getEndTime().toString()+" \n New End Time : "+newShift.getEndTime().toString()+"\n\n";
 					}
 					if(newPosition){
