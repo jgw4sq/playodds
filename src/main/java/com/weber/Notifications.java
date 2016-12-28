@@ -59,38 +59,20 @@ public class Notifications extends HttpServlet {
 		System.out.println("Notification original end : "+ originalShift.getEndTime().toString());
 		System.out.println("Notification new end: "+ newShift.getEndTime().toString());
 		//changed employee
-		if(!originalShift.getEmail().equals(newShift.getEmail())){
-			System.out.println("Different employee");
-			sendAssignedNewShift(newShift, newShift.getEmail());
-			sendRemovedShift(originalShift, originalShift.getEmail());
-		}
-		//changed start time
-		else if(!originalShift.getStartTime().equals(newShift.getStartTime())){
-			System.out.println("Different start time");
-			sendChangedStartTime(originalShift, newShift, newShift.getEmail());
-			sendChangedPosition(originalShift, newShift, newShift.getEmail());
+		boolean newEmployee = (!originalShift.getEmail().equals(newShift.getEmail()));
+		boolean newStartTime = (!originalShift.getStartTime().equals(newShift.getStartTime()));
 
-		}
-		//changed end time
-		else if(!originalShift.getEndTime().equals(newShift.getEndTime())){
-			System.out.println("Different end time");
-			sendChangedEndTime(originalShift, newShift, newShift.getEmail());
+		boolean newEndTime = (!originalShift.getEndTime().equals(newShift.getEndTime()));
 
-		}
-		//
-		else if(!originalShift.getPosition().equalsIgnoreCase(newShift.getPosition())){
-			System.out.println("Different position");
-			sendChangedPosition(originalShift, newShift, newShift.getEmail());
-
-
-		}else{
-			System.out.println("no difference");
-		}
+		boolean newPosition = (!originalShift.getPosition().equalsIgnoreCase(newShift.getPosition()));
+		
+		
+		sendEmailShiftChange( originalShift,  newShift,  newEmployee, newStartTime, newEndTime, newPosition);
 		
 	}
 
-	private static void sendChangedPosition(Shift originalShift,
-			Shift newShift, String email) {
+	private static void sendEmailShiftChange(Shift originalShift,
+			Shift newShift, boolean newEmployee, boolean newStartTime, boolean newEndTime, boolean newPosition) {
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -109,13 +91,35 @@ public class Notifications extends HttpServlet {
 					Message message = new MimeMessage(session);
 					message.setFrom(new InternetAddress("username"));
 					message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(email));
+						InternetAddress.parse(newShift.getEmail()));
 					message.setSubject("Change in Shift on "+daysOfWeek[newShift.getStartTime().getDay()]+", "+monthsOfYear[newShift.getStartTime().getMonth()]+" "+newShift.getStartTime().getDate());
-					message.setText("The position of your shift was changed from: "+ originalShift.getPosition()+" to: "+newShift.getPosition());
+					
+					
+					String messageBody= "The following changes have been made to the shift you are assigned to: \n";
+					if(newStartTime){
+						messageBody+= "\n Start Time Changed! \n Original Start Time: "+ originalShift.getStartTime().toString()+" \n New Start Time : "+newShift.getStartTime().toString()+"\n\n";
+					}
+					if(newStartTime){
+						messageBody+= "\n End Time Changed! \n Original End Time: "+ originalShift.getEndTime().toString()+" \n New End Time : "+newShift.getEndTime().toString()+"\n\n";
+					}
+					if(newPosition){
+						messageBody+= "\n Position Changed! \n Original Position: "+ originalShift.getPosition()+" \n New Position : "+newShift.getPosition()+"\n\n";
+					}
+					
+					if(newEmployee){
+						messageBody = "You have been assigned a new shift with the following details: \n\n";
+						messageBody += "Location: "+ newShift.getPool()+"\n";
+						messageBody += "Start Time: "+ newShift.getStartTime().toString()+"\n";
+						messageBody += "End Time: "+ newShift.getEndTime().toString()+"\n";
+						messageBody += "Position: "+ newShift.getPosition()+"\n";
+						
+					}
+					
+					
+					message.setText(messageBody);
 
 					Transport.send(message);
 
-					System.out.println("Done");
 
 				} catch (MessagingException e) {
 					throw new RuntimeException(e);
@@ -123,26 +127,5 @@ public class Notifications extends HttpServlet {
 			}
 	
 
-	private static void sendChangedEndTime(Shift originalShift, Shift newShift,
-			String email) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void sendChangedStartTime(Shift originalShift,
-			Shift newShift, String email) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void sendRemovedShift(Shift shift, String email) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void sendAssignedNewShift(Shift shift, String email) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }
