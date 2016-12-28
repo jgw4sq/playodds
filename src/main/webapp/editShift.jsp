@@ -17,6 +17,10 @@ div.oldShiftParent{
  background:white;
     
 }
+div.superParent{
+ background:white;
+ width:100%;
+}
 div.newShiftParent{
  width:67%;
  margin-right:50px;
@@ -170,6 +174,7 @@ input[type=submit] {
 
 	<section>
 		<h1 class="scheduleheader">Edit Shift</h1>
+		<div class="superParent">
 		<div class="oldShiftParent">
 			<div class="oldShiftInformation">
 				<h1>Current Shift Information</h1>
@@ -473,6 +478,7 @@ input[type=submit] {
 				</form>
 				<br><br><br><br>
 			</div>
+		</div>
 		</div>
 	</section>
 
