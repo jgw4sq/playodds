@@ -136,16 +136,17 @@ public class EditShift extends HttpServlet {
 		Timestamp start = new Timestamp(timestamp.getTime());
 		Timestamp end = new Timestamp(timestamp.getTime());
 		start.setYear(Integer.parseInt(year)-1900);
-		start.setMonth(Integer.parseInt(month));
+		start.setMonth(Integer.parseInt(month)-1);
 		start.setDate(Integer.parseInt(day));
 		start.setHours(Integer.parseInt(hoursminutes.substring(0,2)));
 		start.setMinutes(Integer.parseInt(hoursminutes.substring(3, hoursminutes.length())));
 		end.setYear(Integer.parseInt(year2)-1900);
-		end.setMonth(Integer.parseInt(month2));
+		end.setMonth(Integer.parseInt(month2)-1);
 		end.setDate(Integer.parseInt(day2));
 		end.setHours(Integer.parseInt(hoursminutes2.substring(0,2)));
 		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
-		
+		System.out.println("Start: "+ start.toString());
+		System.out.println("End: "+ end.toString());
 		int length = ((int) (end.getTime()-start.getTime()))/(1000*60*60);
 		
 		try{
