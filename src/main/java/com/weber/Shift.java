@@ -6,7 +6,7 @@ public class Shift implements Comparable<Shift> {
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private String pool;
-	private int length;
+	private double length;
 	private String guard;
 	private String email;
 	private String position;
@@ -97,12 +97,12 @@ public class Shift implements Comparable<Shift> {
 		this.pool = pool;
 	}
 
-	public int getLength() {
+	public double getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
-		this.length = length;
+	public void setLength(double length2) {
+		this.length = length2;
 	}
 
 	public String getGuard() {

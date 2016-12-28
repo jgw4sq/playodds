@@ -21,15 +21,15 @@ private ArrayList<Shift> shifts;
 private ArrayList<TimeOff> approvedtimeoff;
 private ArrayList<TimeOff> notapprovedtimeoff;
 private int managerMinHours;
-private int hours;
+private double hours;
 
 
-public int getHours() {
+public double getHours() {
 	return hours;
 }
 
-public void setHours(int hours) {
-	this.hours = hours;
+public void setHours(double d) {
+	this.hours = d;
 }
 
 public int getManagerMinHours() {
@@ -198,8 +198,8 @@ public void addShift(Shift shift){
 public static Comparator<User> SortUserTimeRank = new Comparator<User>() {
 
 	public int compare(User user1, User user2) {
-		int hourDifference1= user1.getManagerMinHours()-user1.getHours();
-		int hourDifference2= user2.getManagerMinHours()-user2.getHours();
+		double hourDifference1= user1.getManagerMinHours()-user1.getHours();
+		double hourDifference2= user2.getManagerMinHours()-user2.getHours();
 if(hourDifference1>hourDifference2){
 	return -1;
 }
