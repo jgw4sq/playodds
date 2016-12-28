@@ -64,6 +64,8 @@ public class Notifications extends HttpServlet {
 		else if(!originalShift.getStartTime().equals(newShift.getStartTime())){
 			System.out.println("Different start time");
 			sendChangedStartTime(originalShift, newShift, newShift.getEmail());
+			sendChangedPosition(originalShift, newShift, newShift.getEmail());
+
 		}
 		//changed end time
 		else if(!originalShift.getEndTime().equals(newShift.getEndTime())){
