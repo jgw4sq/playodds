@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.weber.TimeOff"%>
-<%@ page import="com.weber.User" %>
-<%@ page import="com.weber.Shift" %>
+<%@ page import="com.weber.User"%>
+<%@ page import="com.weber.Shift"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,20 +10,41 @@
 <html class="no-js">
 <!--<![endif]-->
 <style>
-div.form{
-    display: block;
-    text-align: center;
+div.oldShiftParent{
+ width:30%;
+ margin-right:50px;
+ float:left;
+    
 }
+div.newShiftParent{
+ width:63%;
+ margin-right:50px;
+ float:left;
+    
+}
+div.newShiftForm{
+display: block;
+	text-align: center;
+}
+
+div.oldShiftInformation{
+   display: block;
+	text-align: center;
+}
+
+
 span.fieldHeader {
 	color: green;
 	font-size: 24px;
 }
+
 h1.scheduleheader {
 	font-size: 40px;
 	color: green;
 	font-weight: bold;
 	text-align: center;
 }
+
 input[type=submit] {
 	background-color: #4CAF50; /* Green */
 	border: none;
@@ -36,7 +57,7 @@ input[type=submit] {
 }
 </style>
 <head>
- <script type="text/javascript" src="selectEmployeeForShift.js" ></script>
+<script type="text/javascript" src="selectEmployeeForShift.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>Edit User | ScheduleMe</title>
@@ -66,7 +87,7 @@ input[type=submit] {
 <body>
 
 	<!--Header-->
-   	<header class="navbar navbar-fixed-top">
+	<header class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse"
@@ -81,11 +102,17 @@ input[type=submit] {
 						<li><a href="<%=request.getContextPath()%>/MySchedule">My
 								Schedule</a></li>
 						<li><a href="<%=request.getContextPath()%>/RequestOff">RequestOff</a></li>
-						<% User user = (User)request.getSession().getAttribute("user");
-			if(user!=null){
-				if(user.getPosition().equals("Manager")){%>
-						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule Manager</a></li>
-						<%}} %>
+						<%
+							User user = (User) request.getSession().getAttribute("user");
+							if (user != null) {
+								if (user.getPosition().equals("Manager")) {
+						%>
+						<li><a href="<%=request.getContextPath()%>/ScheduleManager">Schedule
+								Manager</a></li>
+						<%
+							}
+							}
+						%>
 						<li class="login"><a data-toggle="modal" href="#loginForm"><i
 								class="icon-lock"></i> Sign In</a></li>
 						<li><a href="<%=request.getContextPath()%>/Logout">Logout</a></li>
@@ -117,215 +144,332 @@ input[type=submit] {
 		</div>
 	</section>
 	<!-- / .title -->
-					<%ArrayList<User> availableEmployees = (ArrayList<User>)request.getAttribute("avaiableUsers"); %>
+	<%
+		ArrayList<User> availableEmployees = (ArrayList<User>) request
+				.getAttribute("avaiableUsers");
+	String [] days ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+	String [] months ={"January","February","March","April","May","June","July","August","September","October","November","December"};
+	Shift shift = (Shift)request.getSession().getAttribute("editShift");
+	String startampm ="AM";
+	String endampm ="AM";
+	int starthour= shift.getStartTime().getHours();
+	int endhour= shift.getEndTime().getHours();
+
+	if (shift.getStartTime().getHours()>=12){
+		startampm="PM";
+		starthour-=12;
+	}
+	if (shift.getEndTime().getHours()>=12){
+		endampm="PM";
+		endhour-=12;
+	}
+	%>
 
 
 	<section>
 		<h1 class="scheduleheader">Edit Shift</h1>
-		<div class="form">
-		<form action="EditShift" method="post">
-		<input name="employeeEmail" type="hidden" id="employeeEmail" value="<%out.print(((Shift)request.getSession().getAttribute("editShift")).getEmail()); %>"/>
-		<input type="hidden" value="<%out.print(((Shift)request.getSession().getAttribute("editShift")).getId()); %>" name="shiftid"/>
-			<span class="fieldHeader">Currently Assigned To: </span><input id="employee" name ="employee" type="text" value="<%out.print(((Shift)request.getSession().getAttribute("editShift")).getGuard()); %>"/>
-			<span class="fieldHeader">Other Available Employees: </span><select
-					style="width: 300px;" name="changeEmployee" onchange="changeEmployeeValue(this.value);">
-					<%if(availableEmployees.size()>0){ %>
-					<option selected="selected" value="Select Other Option to Change Employee">Select Other Option to Change Employee</option>
-					<%}else{ %>
-										<option selected="selected" value="There are no other avilable employees">No Other Available Employees!</option>
-					
-					
-					<%} %>
-					<%for(int i=0; i<availableEmployees.size(); i++){%>
-					<option value="<%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName()+","+availableEmployees.get(i).getEmail() %>"><%=availableEmployees.get(i).getFirstName()+" "+availableEmployees.get(i).getLastName() %></option>
-					<%} %>
-					</select>			
-			
-			
-			<br>
-			<span class="fieldHeader">Start Time:</span> <select
-					style="width: 150px;" name="year">
-					<option selected="selected" value="<%=(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getYear()+1900) %>" ><%=(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getYear()+1900) %></option>
-					<option value="2016">2016</option>
-				</select><select name="month" style="width: 150px;">
-					<option value="" disabled selected>Month</option>
-					<option selected="selected" value="<%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getMonth()+1)) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getMonth()+1)) %></option>
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-				</select> <select name="day" style="width: 150px;">
-					<option value="" disabled selected>Day</option>
-					<option selected="selected" value="<%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getDate())) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getDate())) %></option>
+		<div class="oldShiftParent">
+			<div class="oldShiftInformation">
+				<h1>Current Shift Information</h1>
+				<br> <span class="fieldHeader">Employee: </span><span
+					class="shiftInformation">
+					<%
+						out.print(((Shift) request.getSession().getAttribute("editShift"))
+								.getEmail());
+					%>
+				</span> <span class="fieldHeader">Start Time: </span> <span class="shiftInformation"><%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth())]+" "+shift.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
+				</span>
+				<span class="fieldHeader">End Time: </span> <span class="shiftInformation"> <%out.println(days[shift.getEndTime().getDay()]+", "+months[(shift.getEndTime().getMonth())]+" "+shift.getEndTime().getDate()+", "+endhour+":"+String.format("%02d", shift.getEndTime().getMinutes())+" "+endampm);%>
+				</span>
+				<span class="fieldHeader">Position: </span> <span class="shiftInformation"><%
+						out.print(((Shift) request.getSession().getAttribute("editShift"))
+								.getPosition());
+					%></span>
 
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
-				</select> <select name="hour" style="width: 150px;">
-					<option value="" disabled selected>Hour</option>
-					<option selected="selected" value="<%=String.format("%02d",((((Shift)request.getSession().getAttribute("editShift")).getStartTime().getHours())%12)) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getStartTime().getHours()%12)) %></option>
+			</div>
+		</div>
+		<div class="newShiftParent">
+			<div class="newShiftForm">
+				<h1>Change Shift Information</h1>
+				<br>
+				<form action="EditShift" method="post">
+					<input name="employeeEmail" type="hidden" id="employeeEmail"
+						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
+					.getEmail());%>" />
+					<input type="hidden"
+						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
+					.getId());%>"
+						name="shiftid" /> <span class="fieldHeader">Currently
+						Assigned To: </span><input id="employee" name="employee" type="text"
+						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
+					.getGuard());%>" />
+					<span class="fieldHeader">Other Available Employees: </span><select
+						style="width: 300px;" name="changeEmployee"
+						onchange="changeEmployeeValue(this.value);">
+						<%
+							if (availableEmployees.size() > 0) {
+						%>
+						<option selected="selected"
+							value="Select Other Option to Change Employee">Select
+							Other Option to Change Employee</option>
+						<%
+							} else {
+						%>
+						<option selected="selected"
+							value="There are no other avilable employees">No Other
+							Available Employees!</option>
 
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-				</select> <select name="minutes" style="width: 150px;">
-					<option value="" disabled selected>Minutes</option>
-															<option selected="selected" value="<%=String.format("%02d",((Shift)request.getSession().getAttribute("editShift")).getStartTime().getMinutes()) %>" ><%=String.format("%02d",((Shift)request.getSession().getAttribute("editShift")).getStartTime().getMinutes()) %></option>
-					
-					<option value="00">00</option>
-					<option value="15">15</option>
-					<option value="30">30</option>
-					<option value="45">45</option>
 
-				</select> <select name="ampm" style="width: 150px;">
-					<option value="" disabled selected>AM/PM</option>
-	<%if (((Shift)request.getSession().getAttribute("editShift")).getStartTime().getHours()>=12){ %>
+						<%
+							}
+						%>
+						<%
+							for (int i = 0; i < availableEmployees.size(); i++) {
+						%>
+						<option
+							value="<%=availableEmployees.get(i).getFirstName() + " "
+						+ availableEmployees.get(i).getLastName() + ","
+						+ availableEmployees.get(i).getEmail()%>"><%=availableEmployees.get(i).getFirstName() + " "
+						+ availableEmployees.get(i).getLastName()%></option>
+						<%
+							}
+						%>
+					</select> <br> <span class="fieldHeader">Start Time:</span> <select
+						style="width: 150px;" name="year">
+						<option selected="selected"
+							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
+					.getStartTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
+					.getStartTime().getYear() + 1900)%></option>
+						<option value="2016">2016</option>
+					</select><select name="month" style="width: 150px;">
+						<option value="" disabled selected>Month</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getMonth() + 1))%>"><%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getMonth() + 1))%></option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select> <select name="day" style="width: 150px;">
+						<option value="" disabled selected>Day</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getDate()))%>"><%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getDate()))%></option>
+
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select> <select name="hour" style="width: 150px;">
+						<option value="" disabled selected>Hour</option>
+						<option selected="selected"
+							value="<%=String.format("%02d",
+					((((Shift) request.getSession().getAttribute("editShift"))
+							.getStartTime().getHours()) % 12))%>"><%=String
+					.format("%02d", (((Shift) request.getSession()
+							.getAttribute("editShift")).getStartTime()
+							.getHours() % 12))%></option>
+
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select> <select name="minutes" style="width: 150px;">
+						<option value="" disabled selected>Minutes</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", ((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getMinutes())%>"><%=String.format("%02d", ((Shift) request.getSession()
+					.getAttribute("editShift")).getStartTime().getMinutes())%></option>
+
+						<option value="00">00</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+						<option value="45">45</option>
+
+					</select> <select name="ampm" style="width: 150px;">
+						<option value="" disabled selected>AM/PM</option>
+						<%
+							if (((Shift) request.getSession().getAttribute("editShift"))
+									.getStartTime().getHours() >= 12) {
+						%>
 						<option selected="selected" value="pm">PM</option>
-	<%}else{ %>
-					<option selected="selected" value="am">AM</option>
-					<%} %>
-				</select><br> <span class="fieldHeader">End Time: </span><select
-					style="width: 150px;" name="year2">
-										<option selected="selected" value="<%=(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getYear()+1900) %>" ><%=(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getYear()+1900) %></option>
-					
-					<option value="2016">2016</option>
-				</select><select name="month2" style="width: 150px;">
-					<option value="" disabled selected>Month</option>
-					<option selected="selected" value="<%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getMonth()+1)) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getMonth()+1)) %></option>
-					
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-				</select> <select name="day2" style="width: 150px;">
-					<option selected="selected" value="<%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getDate())) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getDate())) %></option>
+						<%
+							} else {
+						%>
+						<option selected="selected" value="am">AM</option>
+						<%
+							}
+						%>
+					</select><br> <span class="fieldHeader">End Time: </span><select
+						style="width: 150px;" name="year2">
+						<option selected="selected"
+							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
+					.getEndTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
+					.getEndTime().getYear() + 1900)%></option>
 
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
-				</select> <select name="hour2" style="width: 150px;">
-					<option value="" disabled selected>Hour</option>
-					<option selected="selected" value="<%=String.format("%02d",((((Shift)request.getSession().getAttribute("editShift")).getEndTime().getHours())%12)) %>" ><%=String.format("%02d",(((Shift)request.getSession().getAttribute("editShift")).getEndTime().getHours()%12)) %></option>
+						<option value="2016">2016</option>
+					</select><select name="month2" style="width: 150px;">
+						<option value="" disabled selected>Month</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getMonth() + 1))%>"><%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getMonth() + 1))%></option>
 
-					<option value="01">01</option>
-					<option value="02">02</option>
-					<option value="03">03</option>
-					<option value="04">04</option>
-					<option value="05">05</option>
-					<option value="06">06</option>
-					<option value="07">07</option>
-					<option value="08">08</option>
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-				</select> <select name="minutes2" style="width: 150px;">
-					<option value="" disabled selected>Minutes</option>
-															<option selected="selected" value="<%=String.format("%02d",((Shift)request.getSession().getAttribute("editShift")).getEndTime().getMinutes()) %>" ><%=String.format("%02d",((Shift)request.getSession().getAttribute("editShift")).getEndTime().getMinutes()) %></option>
-					
-					<option value="00">00</option>
-					<option value="15">15</option>
-					<option value="30">30</option>
-					<option value="45">45</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select> <select name="day2" style="width: 150px;">
+						<option selected="selected"
+							value="<%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getDate()))%>"><%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getDate()))%></option>
 
-				</select> <select name="ampm2" style="width: 150px;">
-					<option value="" disabled selected>AM/PM</option>
-	<%if (((Shift)request.getSession().getAttribute("editShift")).getEndTime().getHours()>=12){ %>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select> <select name="hour2" style="width: 150px;">
+						<option value="" disabled selected>Hour</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", ((((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getHours()) % 12))%>"><%=String.format("%02d", (((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getHours() % 12))%></option>
+
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select> <select name="minutes2" style="width: 150px;">
+						<option value="" disabled selected>Minutes</option>
+						<option selected="selected"
+							value="<%=String.format("%02d", ((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getMinutes())%>"><%=String.format("%02d", ((Shift) request.getSession()
+					.getAttribute("editShift")).getEndTime().getMinutes())%></option>
+
+						<option value="00">00</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+						<option value="45">45</option>
+
+					</select> <select name="ampm2" style="width: 150px;">
+						<option value="" disabled selected>AM/PM</option>
+						<%
+							if (((Shift) request.getSession().getAttribute("editShift"))
+									.getEndTime().getHours() >= 12) {
+						%>
 						<option selected="selected" value="pm">PM</option>
-	<%}else{ %>
-					<option selected="selected" value="am">AM</option>
-					<%} %>
-				</select><br> <span class="fieldHeader">Position: </span><input
-					type="text" value="<%=((Shift)request.getSession().getAttribute("editShift")).getPosition() %>" placeholder="Shift Position" name="shiftPosition" /> <br>
-			<input align="center" type="submit" value="Update Shift"/>
-			</form>
-			
-			<form action="DeleteShift" method="post">
-			<input name ="shiftid" type="hidden" value="<%out.print(((Shift)request.getSession().getAttribute("editShift")).getId()); %>"/><br>
-			
-			<input type="submit" value="Delete Shift"/>
-			</form>
+						<%
+							} else {
+						%>
+						<option selected="selected" value="am">AM</option>
+						<%
+							}
+						%>
+					</select><br> <span class="fieldHeader">Position: </span><input
+						type="text"
+						value="<%=((Shift) request.getSession().getAttribute("editShift"))
+					.getPosition()%>"
+						placeholder="Shift Position" name="shiftPosition" /> <br> <input
+						align="center" type="submit" value="Update Shift" />
+				</form>
+
+				<form action="DeleteShift" method="post">
+					<input name="shiftid" type="hidden"
+						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
+					.getId());%>" /><br>
+
+					<input type="submit" value="Delete Shift" />
+				</form>
+			</div>
 		</div>
 	</section>
 
