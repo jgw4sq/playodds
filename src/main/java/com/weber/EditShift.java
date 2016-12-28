@@ -62,12 +62,12 @@ public class EditShift extends HttpServlet {
 				String emailOfShift = rs.getString("email");
 				boolean managerRequired = rs.getBoolean("managerRequired");
 				String shiftPosition = rs.getString("position");
-				request.setAttribute("editShift",new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
+				request.getSession().setAttribute("editShift",new Shift(startTime,endTime,poolshift,length,guard,id,emailOfShift,managerRequired,shiftPosition));
 			}
 			ArrayList<User> availableUsers = MakeSchedule.populateUsers(poolshift, startTime, endTime);
 			System.out.println("All Users Size:" +availableUsers.size());
 			for(int i=0; i<availableUsers.size(); i++){
-				if(!availableUsers.get(i).isAvailable((Shift)request.getAttribute("editShift"))){
+				if(!availableUsers.get(i).isAvailable((Shift)request.getSession().getAttribute("editShift"))){
 					availableUsers.remove(i);
 					i-=1;
 				}
@@ -89,7 +89,7 @@ public class EditShift extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Shift originalShift = (Shift)request.getAttribute("editShift");
+		Shift originalShift = (Shift)request.getSession().getAttribute("editShift");
 		Shift newShift = new Shift(originalShift);
 		String employee = request.getParameter("employee");
 		int id = Integer.parseInt(request.getParameter("shiftid"));
