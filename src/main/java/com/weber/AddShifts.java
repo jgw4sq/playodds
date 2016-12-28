@@ -102,7 +102,7 @@ public class AddShifts extends HttpServlet {
 		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
 		
 		double length = ((end.getTime()-start.getTime()))/(1000*60*60);
-		
+		System.out.println(length);
 		try{
 			int numberofRepeat=1;
 			if(repeat.equals("Yes")){
