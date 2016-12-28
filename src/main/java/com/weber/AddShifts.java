@@ -115,15 +115,17 @@ public class AddShifts extends HttpServlet {
 			 Connection con = ds.getConnection();
 			stmt = con.createStatement();
 						
-		for(int i=0;i<numberofEmployees;i++){
-			for(int j=0;j<numberofRepeat; j++){
+		for(int i=0;i<numberofRepeat;i++){
+			for(int j=0;j<numberofEmployees; j++){
 		 String sql = "INSERT INTO SHIFTS  (startTime, endTime,pool,length,position)VALUES ('"+startTime+"', '"+endTime+"','"+pool+"',"+length+",'"+shiftPosition+"');";
 		int rs2 = stmt.executeUpdate(sql);
-		start.setDate(start.getDate()+7);
-		end.setDate(end.getDate()+7);
-		 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
-		 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
-		}}
+		}
+			start.setDate(start.getDate()+7);
+			end.setDate(end.getDate()+7);
+			 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
+			 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
+				
+		}
         request.getRequestDispatcher("addshifts.jsp").forward(request, response);
         con.close();
 		}catch(Exception e){
