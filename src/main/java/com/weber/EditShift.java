@@ -167,14 +167,10 @@ public class EditShift extends HttpServlet {
 		//	for(int j=0;j<numberofRepeat; j++){
 		 String sql = "UPDATE SHIFTS SET startTime='"+startTime+"', endTime='"+endTime+"', guard='"+employee+"', length="+length+", email='"+employeeEmail+"', position='"+shiftPosition+"'"+" WHERE id="+id+";";
 		int rs2 = stmt.executeUpdate(sql);
-		start.setDate(start.getDate()+7);
-		end.setDate(end.getDate()+7);
-		 startTime = (start.getYear()+1900)+"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getMinutes()+":00";
-		 endTime = (end.getYear()+1900)+"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getMinutes()+":00";
-		//}}
+		  	stmt.close();
+	        con.close();
         request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
-        stmt.close();
-        con.close();
+      
 		}catch(Exception e){
 			e.printStackTrace();
 		}
