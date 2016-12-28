@@ -52,6 +52,8 @@ public class Notifications extends HttpServlet {
 	
 	
 	public static void sendShiftUpdateNotification(Shift originalShift, Shift newShift){
+		System.out.println("attempting to send generic shift update");
+
 		//changed employee
 		if(!originalShift.getEmail().equals(newShift.getEmail())){
 			sendAssignedNewShift(newShift, newShift.getEmail());
@@ -69,6 +71,7 @@ public class Notifications extends HttpServlet {
 		//
 		else if(!originalShift.getPosition().equalsIgnoreCase(newShift.getPosition())){
 			sendChangedPosition(originalShift, newShift, newShift.getEmail());
+
 
 		}
 		
@@ -90,7 +93,7 @@ public class Notifications extends HttpServlet {
 				  });
 
 				try {
-
+					System.out.println("attempting to send Message of new position");
 					Message message = new MimeMessage(session);
 					message.setFrom(new InternetAddress("username"));
 					message.setRecipients(Message.RecipientType.TO,
