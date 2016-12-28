@@ -172,7 +172,7 @@ input[type=submit] {
 	%>
 
 
-	<section>
+	<section class="container main">
 		<h1 class="scheduleheader">Edit Shift</h1>
 		<div class="superParent">
 		<br>
