@@ -149,7 +149,7 @@ public class EditShift extends HttpServlet {
 		end.setMinutes(Integer.parseInt(hoursminutes2.substring(3, hoursminutes2.length())));
 		end.setSeconds(0);
 		end.setNanos(0);
-		int length = ((int) (end.getTime()-start.getTime()))/(1000*60*60);
+		double length = ( (end.getTime()-start.getTime()))/(1000*60*60);
 		
 		try{
 			int numberofRepeat=1;
