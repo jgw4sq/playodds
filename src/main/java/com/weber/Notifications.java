@@ -53,7 +53,8 @@ public class Notifications extends HttpServlet {
 	
 	public static void sendShiftUpdateNotification(Shift originalShift, Shift newShift){
 		System.out.println("attempting to send generic shift update");
-
+		System.out.println("Notification original: "+ originalShift.toString());
+		System.out.println("Notification new: "+ newShift.toString());
 		//changed employee
 		if(!originalShift.getEmail().equals(newShift.getEmail())){
 			System.out.println("Different employee");
