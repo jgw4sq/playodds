@@ -18,7 +18,7 @@ div.oldShiftParent{
     
 }
 div.newShiftParent{
- width:70%;
+ width:67%;
  margin-right:50px;
  float:left;
  background:white;
@@ -37,7 +37,7 @@ div.oldShiftInformation{
 
 span.fieldHeader {
 	color: green;
-	font-size: 24px;
+	font-size: 20px;
 }
 
 h1.scheduleheader {
@@ -177,7 +177,7 @@ input[type=submit] {
 					class="shiftInformation">
 					<%
 						out.print(((Shift) request.getSession().getAttribute("editShift"))
-								.getEmail());
+								.getGuard());
 					%>
 				</span> <br><span class="fieldHeader">Start Time: </span> <span class="shiftInformation"><%out.println(days[shift.getStartTime().getDay()]+", "+months[(shift.getStartTime().getMonth())]+" "+shift.getStartTime().getDate()+", "+starthour+":"+String.format("%02d", shift.getStartTime().getMinutes())+" "+startampm);%>
 				</span><br>
@@ -471,6 +471,7 @@ input[type=submit] {
 
 					<input type="submit" value="Delete Shift" />
 				</form>
+				<br><br><br><br>
 			</div>
 		</div>
 	</section>
