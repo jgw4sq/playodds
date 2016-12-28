@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Notifications")
 public class Notifications extends HttpServlet {
-	public static final String ACCOUNT_SID = "AC4e3c68dfa43b870497b841c8f83992d2";
-	  public static final String AUTH_TOKEN = "97a41ac9350a752f082ceb100cd0696e";
+	public static final String ACCOUNT_SID = "AC7d3da15ef1438d3c0cd9fafddbbb213b";
+	  public static final String AUTH_TOKEN = "3a5b1659856310ae3bfd7a0b377a7495";
 	  public static final String twilioNumber = "+18045062007";
 	private static final String emailUsername = "schedulemepronotifications@gmail.com";
 	private static final String emailPassword = "apples1290";
