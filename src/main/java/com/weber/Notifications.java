@@ -1,5 +1,8 @@
 package com.weber;
 
+import com.twilio.Twilio;
+import com.twilio.type.PhoneNumber;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -21,9 +24,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Notifications")
 public class Notifications extends HttpServlet {
-	
-	private static final String username = "schedulemepronotifications@gmail.com";
-	private static final String password = "apples1290";
+	public static final String ACCOUNT_SID = "AC4e3c68dfa43b870497b841c8f83992d2";
+	  public static final String AUTH_TOKEN = "97a41ac9350a752f082ceb100cd0696e";
+	  public static final String twilioNumber = "+18045062007";
+	private static final String emailUsername = "schedulemepronotifications@gmail.com";
+	private static final String emailPassword = "apples1290";
 	private static final long serialVersionUID = 1L;
 	private static final String [] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 	private static final String [] monthsOfYear = {"January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"};
@@ -50,14 +55,35 @@ public class Notifications extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 	
-	
-	public static void sendShiftUpdateNotification(Shift originalShift, Shift newShift){
-		System.out.println("attempting to send generic shift update");
-		System.out.println("Notification original start : "+ originalShift.getStartTime().toString());
-		System.out.println("Notification new start: "+ newShift.getStartTime().toString());
+	public static void sendShiftUpdateTextNotification(Shift originalShift, Shift newShift){
+		boolean newEmployee = (!originalShift.getEmail().equals(newShift.getEmail()));
+		boolean newStartTime = (!originalShift.getStartTime().equals(newShift.getStartTime()));
 
-		System.out.println("Notification original end : "+ originalShift.getEndTime().toString());
-		System.out.println("Notification new end: "+ newShift.getEndTime().toString());
+		boolean newEndTime = (!originalShift.getEndTime().equals(newShift.getEndTime()));
+
+		boolean newPosition = (!originalShift.getPosition().equalsIgnoreCase(newShift.getPosition()));
+		
+		
+		sendTextShiftChange( originalShift,  newShift,  newEmployee, newStartTime, newEndTime, newPosition);
+		
+		
+	}
+	private static void sendTextShiftChange(Shift originalShift,
+			Shift newShift, boolean newEmployee, boolean newStartTime,
+			boolean newEndTime, boolean newPosition) {
+		// TODO Auto-generated method stub
+		 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+		 com.twilio.rest.api.v2010.account.Message message =  com.twilio.rest.api.v2010.account.Message.creator(new PhoneNumber("+18046178850"), new PhoneNumber(twilioNumber),
+		            "This is the ship that made the Kessel Run in fourteen parsecs?")
+		        .create();
+
+		    System.out.println(message.getSid());
+		
+	}
+
+	public static void sendShiftUpdateEmailNotification(Shift originalShift, Shift newShift){
+		
 		//changed employee
 		boolean newEmployee = (!originalShift.getEmail().equals(newShift.getEmail()));
 		boolean newStartTime = (!originalShift.getStartTime().equals(newShift.getStartTime()));
@@ -82,7 +108,7 @@ public class Notifications extends HttpServlet {
 		Session session = Session.getInstance(props,
 				  new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(username, password);
+						return new PasswordAuthentication(emailUsername, emailPassword);
 					}
 				  });
 

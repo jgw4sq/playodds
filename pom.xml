@@ -46,6 +46,11 @@
     <artifactId>mail</artifactId>
     <version>1.4</version>
 </dependency>
+<dependency>
+  <groupId>com.twilio.sdk</groupId>
+  <artifactId>twilio</artifactId>
+  <version>(7.0,7.9)</version>
+</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
