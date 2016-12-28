@@ -175,6 +175,7 @@ input[type=submit] {
 	<section>
 		<h1 class="scheduleheader">Edit Shift</h1>
 		<div class="superParent">
+		<br>
 		<div class="oldShiftParent">
 			<div class="oldShiftInformation">
 				<h1>Current Shift Information</h1>
