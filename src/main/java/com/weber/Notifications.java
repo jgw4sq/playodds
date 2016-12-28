@@ -56,23 +56,29 @@ public class Notifications extends HttpServlet {
 
 		//changed employee
 		if(!originalShift.getEmail().equals(newShift.getEmail())){
+			System.out.println("Different employee");
 			sendAssignedNewShift(newShift, newShift.getEmail());
 			sendRemovedShift(originalShift, originalShift.getEmail());
 		}
 		//changed start time
 		else if(!originalShift.getStartTime().equals(newShift.getStartTime())){
+			System.out.println("Different start time");
 			sendChangedStartTime(originalShift, newShift, newShift.getEmail());
 		}
 		//changed end time
 		else if(!originalShift.getEndTime().equals(newShift.getEndTime())){
+			System.out.println("Different end time");
 			sendChangedEndTime(originalShift, newShift, newShift.getEmail());
 
 		}
 		//
 		else if(!originalShift.getPosition().equalsIgnoreCase(newShift.getPosition())){
+			System.out.println("Different position");
 			sendChangedPosition(originalShift, newShift, newShift.getEmail());
 
 
+		}else{
+			System.out.println("no difference");
 		}
 		
 	}
