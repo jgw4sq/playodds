@@ -38,6 +38,8 @@ span.fieldHeader {
 	color: green;
 	font-size: 20px;
 	width: 200px;
+	float:left;
+	text-align: right;
 }
 
 h1.scheduleheader {
