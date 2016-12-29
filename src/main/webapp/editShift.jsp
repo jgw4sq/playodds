@@ -17,6 +17,9 @@ div.oldShiftParent{
  float:left;
     
 }
+p.paraWrapper{
+width:475px;
+}
 select.dateInfo{
 width:75px;
 }
@@ -207,10 +210,10 @@ input[type=submit] {
 					<input type="hidden"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getId());%>"
-						name="shiftid" /> <span class="fieldHeader">Employee: </span><input id="employee" name="employee" type="text"
+						name="shiftid" /> <span class="fieldHeader">Employee: </span><p class="paraWrapper"><input id="employee" name="employee" type="text"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
-					.getGuard());%>" /><br>
-					<span class="fieldHeader">Other Available Employees: </span><select
+					.getGuard());%>" /></p><br>
+					<span class="fieldHeader">Other Available Employees: </span><p class="paraWrapper"><select
 						style="width: 300px;" name="changeEmployee"
 						onchange="changeEmployeeValue(this.value);">
 						<%
@@ -241,7 +244,7 @@ input[type=submit] {
 						<%
 							}
 						%>
-					</select> <br> <span class="fieldHeader">Start Time:</span> <select
+					</select></p> <br> <span class="fieldHeader">Start Time:</span> <select
 						class ="dateInfo" name="year">
 						<option selected="selected"
 							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
@@ -353,7 +356,7 @@ input[type=submit] {
 							}
 						%>
 					</select><br> <span class="fieldHeader">End Time: </span><select
-						style="width: 50px;" name="year2">
+						class="dateInfo" name="year2">
 						<option selected="selected"
 							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getEndTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
@@ -461,11 +464,11 @@ input[type=submit] {
 						<%
 							}
 						%>
-					</select><br> <span class="fieldHeader">Position: </span><input
+					</select><br> <span class="fieldHeader">Position: </span><p class="paraWrapper"><input
 						type="text"
 						value="<%=((Shift) request.getSession().getAttribute("editShift"))
 					.getPosition()%>"
-						placeholder="Shift Position" name="shiftPosition" /> <br> <input
+						placeholder="Shift Position" name="shiftPosition" /></p> <br> <input
 						align="center" type="submit" value="Update Shift" />
 						</fieldset>
 				</form>
