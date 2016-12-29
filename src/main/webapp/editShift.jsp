@@ -37,6 +37,7 @@ div.oldShiftInformation{
 span.fieldHeader {
 	color: green;
 	font-size: 20px;
+	width: 200px;
 }
 
 h1.scheduleheader {
@@ -194,6 +195,7 @@ input[type=submit] {
 				<h1>Change Shift Information</h1>
 				<br>
 				<form action="EditShift" method="post">
+				<fieldset>
 					<input name="employeeEmail" type="hidden" id="employeeEmail"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getEmail());%>" />
@@ -202,7 +204,7 @@ input[type=submit] {
 					.getId());%>"
 						name="shiftid" /> <span class="fieldHeader">Employee: </span><input id="employee" name="employee" type="text"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
-					.getGuard());%>" />
+					.getGuard());%>" /><br>
 					<span class="fieldHeader">Other Available Employees: </span><select
 						style="width: 300px;" name="changeEmployee"
 						onchange="changeEmployeeValue(this.value);">
@@ -460,6 +462,7 @@ input[type=submit] {
 					.getPosition()%>"
 						placeholder="Shift Position" name="shiftPosition" /> <br> <input
 						align="center" type="submit" value="Update Shift" />
+						</fieldset>
 				</form>
 
 				<form action="DeleteShift" method="post">
@@ -468,6 +471,7 @@ input[type=submit] {
 					.getId());%>" /><br>
 
 					<input type="submit" value="Delete Shift" />
+					
 				</form>
 				<br><br><br><br>
 			</div>
