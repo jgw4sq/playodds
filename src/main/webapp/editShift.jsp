@@ -10,6 +10,9 @@
 <html class="no-js">
 <!--<![endif]-->
 <style>
+fieldset.shiftFieldSet{
+width:63%;
+}
 div.oldShiftParent{
  width:25%;
  margin-right:50px;
@@ -197,7 +200,7 @@ input[type=submit] {
 				<h1>Change Shift Information</h1>
 				<br>
 				<form action="EditShift" method="post">
-				<fieldset>
+				<fieldset class="shiftFieldSet">
 					<input name="employeeEmail" type="hidden" id="employeeEmail"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getEmail());%>" />
@@ -239,13 +242,13 @@ input[type=submit] {
 							}
 						%>
 					</select> <br> <span class="fieldHeader">Start Time:</span> <select
-						style="width: 100px;" name="year">
+						style="width: 50px;" name="year">
 						<option selected="selected"
 							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getStartTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getStartTime().getYear() + 1900)%></option>
 						<option value="2016">2016</option>
-					</select><select name="month" style="width: 100px;">
+					</select><select name="month" style="width: 50px;">
 						<option value="" disabled selected>Month</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", (((Shift) request.getSession()
@@ -263,7 +266,7 @@ input[type=submit] {
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-					</select> <select name="day" style="width: 100px;">
+					</select> <select name="day" style="width: 50px;">
 						<option value="" disabled selected>Day</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", (((Shift) request.getSession()
@@ -301,7 +304,7 @@ input[type=submit] {
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-					</select> <select name="hour" style="width: 100px;">
+					</select> <select name="hour" style="width: 50px;">
 						<option value="" disabled selected>Hour</option>
 						<option selected="selected"
 							value="<%=String.format("%02d",
@@ -323,7 +326,7 @@ input[type=submit] {
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-					</select> <select name="minutes" style="width: 100px;">
+					</select> <select name="minutes" style="width: 50px;">
 						<option value="" disabled selected>Minutes</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", ((Shift) request.getSession()
@@ -335,7 +338,7 @@ input[type=submit] {
 						<option value="30">30</option>
 						<option value="45">45</option>
 
-					</select> <select name="ampm" style="width: 100px;">
+					</select> <select name="ampm" style="width: 50px;">
 						<option value="" disabled selected>AM/PM</option>
 						<%
 							if (((Shift) request.getSession().getAttribute("editShift"))
@@ -350,14 +353,14 @@ input[type=submit] {
 							}
 						%>
 					</select><br> <span class="fieldHeader">End Time: </span><select
-						style="width: 100px;" name="year2">
+						style="width: 50px;" name="year2">
 						<option selected="selected"
 							value="<%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getEndTime().getYear() + 1900)%>"><%=(((Shift) request.getSession().getAttribute("editShift"))
 					.getEndTime().getYear() + 1900)%></option>
 
 						<option value="2016">2016</option>
-					</select><select name="month2" style="width: 100px;">
+					</select><select name="month2" style="width: 50px;">
 						<option value="" disabled selected>Month</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", (((Shift) request.getSession()
@@ -376,7 +379,7 @@ input[type=submit] {
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-					</select> <select name="day2" style="width: 100px;">
+					</select> <select name="day2" style="width: 50px;">
 						<option selected="selected"
 							value="<%=String.format("%02d", (((Shift) request.getSession()
 					.getAttribute("editShift")).getEndTime().getDate()))%>"><%=String.format("%02d", (((Shift) request.getSession()
@@ -413,7 +416,7 @@ input[type=submit] {
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-					</select> <select name="hour2" style="width: 100px;">
+					</select> <select name="hour2" style="width: 50px;">
 						<option value="" disabled selected>Hour</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", ((((Shift) request.getSession()
@@ -432,7 +435,7 @@ input[type=submit] {
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-					</select> <select name="minutes2" style="width: 100px;">
+					</select> <select name="minutes2" style="width: 50px;">
 						<option value="" disabled selected>Minutes</option>
 						<option selected="selected"
 							value="<%=String.format("%02d", ((Shift) request.getSession()
@@ -444,7 +447,7 @@ input[type=submit] {
 						<option value="30">30</option>
 						<option value="45">45</option>
 
-					</select> <select name="ampm2" style="width: 100px;">
+					</select> <select name="ampm2" style="width: 50px;">
 						<option value="" disabled selected>AM/PM</option>
 						<%
 							if (((Shift) request.getSession().getAttribute("editShift"))
