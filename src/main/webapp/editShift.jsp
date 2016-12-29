@@ -17,8 +17,8 @@ div.oldShiftParent{
  float:left;
     
 }
-p.paraWrapper{
-width:475px;
+input.textField{
+width:450px;
 }
 select.dateInfo{
 width:75px;
@@ -210,11 +210,11 @@ input[type=submit] {
 					<input type="hidden"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getId());%>"
-						name="shiftid" /> <span class="fieldHeader">Employee: </span><p class="paraWrapper"><input id="employee" name="employee" type="text"
+						name="shiftid" /> <span class="fieldHeader">Employee: </span><p class="paraWrapper"><input class="textField"id="employee" name="employee" type="text"
 						value="<%out.print(((Shift) request.getSession().getAttribute("editShift"))
 					.getGuard());%>" /></p><br>
 					<span class="fieldHeader">Other Available Employees: </span><p class="paraWrapper"><select
-						style="width: 300px;" name="changeEmployee"
+						style="width: 450px;" name="changeEmployee"
 						onchange="changeEmployeeValue(this.value);">
 						<%
 							if (availableEmployees.size() > 0) {
@@ -465,7 +465,7 @@ input[type=submit] {
 							}
 						%>
 					</select><br> <span class="fieldHeader">Position: </span><p class="paraWrapper"><input
-						type="text"
+						type="text" class="textField"
 						value="<%=((Shift) request.getSession().getAttribute("editShift"))
 					.getPosition()%>"
 						placeholder="Shift Position" name="shiftPosition" /></p> <br> <input
