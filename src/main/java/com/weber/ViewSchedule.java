@@ -36,12 +36,12 @@ public class ViewSchedule extends HttpServlet {
 
 		}else{
 			Date date = new Date();
-			request.setAttribute("year", date.getYear()+1900);
-			request.setAttribute("month", date.getMonth()+1);
+			request.setAttribute("year", (date.getYear()+1900));
+			request.setAttribute("month", (date.getMonth()+1));
 			request.setAttribute("day", date.getDate());
-			request.setAttribute("year2", date.getYear()+1900);
-			request.setAttribute("month3", date.getMonth()+1);
-			request.setAttribute("day2", date.getDate()+30);
+			request.setAttribute("year2", (date.getYear()+1900));
+			request.setAttribute("month3", (date.getMonth()+2));
+			request.setAttribute("day2", (date.getDate()));
 		//	request.setAttribute("year", arg1);
 			doPost(request,response);
 		//request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
@@ -54,18 +54,18 @@ public class ViewSchedule extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pool = ((User)request.getSession().getAttribute("user")).getPool();
-		int year = (int)request.getAttribute("year");
-		int month = (int)request.getAttribute("month");
-		int day = (int)request.getAttribute("day");
+		int year = (int) request.getAttribute("year");
+		int month = (int) request.getAttribute("month");
+		int day = (int) request.getAttribute("day");
 		Timestamp startDate = new Timestamp(0,0,0,0,0,0,0);
 		startDate.setYear((year)-1900);
 		startDate.setMonth((month)-1);
 		startDate.setDate((day));
 		
 	
-		int year2 = (int)request.getAttribute("year2");
-		int month2 = (int)request.getAttribute("month2");
-		int day2 = (int)request.getAttribute("day2");
+		int year2 = (int) request.getAttribute("year2");
+		int month2 = (int) request.getAttribute("month2");
+		int day2 = (int) request.getAttribute("day2");
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
 		endDate.setYear(year2-1900);
 		endDate.setMonth((month2)-1);
