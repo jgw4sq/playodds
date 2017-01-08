@@ -54,18 +54,18 @@ public class ViewSchedule extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pool = ((User)request.getSession().getAttribute("user")).getPool();
-		String year = request.getParameter("year");
-		String month = request.getParameter("month");
-		String day = request.getParameter("day");
+		String year = (String)request.getAttribute("year");
+		String month = (String)request.getAttribute("month");
+		String day = (String)request.getAttribute("day");
 		Timestamp startDate = new Timestamp(0,0,0,0,0,0,0);
 		startDate.setYear(Integer.parseInt(year)-1900);
 		startDate.setMonth(Integer.parseInt(month)-1);
 		startDate.setDate(Integer.parseInt(day));
 		
 	
-		String year2 = request.getParameter("year2");
-		String month2 = request.getParameter("month2");
-		String day2 = request.getParameter("day2");
+		String year2 = (String) request.getAttribute("year2");
+		String month2 = (String)request.getAttribute("month2");
+		String day2 = (String)request.getAttribute("day2");
 		Timestamp endDate = new Timestamp(0,0,0,0,0,0,0);
 		endDate.setYear(Integer.parseInt(year2)-1900);
 		endDate.setMonth(Integer.parseInt(month2)-1);
