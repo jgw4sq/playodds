@@ -40,7 +40,7 @@ public class ViewSchedule extends HttpServlet {
 			request.setAttribute("month", (date.getMonth()+1));
 			request.setAttribute("day", date.getDate());
 			request.setAttribute("year2", (date.getYear()+1900));
-			request.setAttribute("month3", (date.getMonth()+2));
+			request.setAttribute("month2", (date.getMonth()+2));
 			request.setAttribute("day2", (date.getDate()));
 		//	request.setAttribute("year", arg1);
 			doPost(request,response);
