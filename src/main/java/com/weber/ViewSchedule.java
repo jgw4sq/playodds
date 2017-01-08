@@ -3,6 +3,7 @@ package com.weber;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +35,16 @@ public class ViewSchedule extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Login");
 
 		}else{
-		request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
+			Date date = new Date();
+			request.setAttribute("year", date.getYear()+1900);
+			request.setAttribute("month", date.getMonth()+1);
+			request.setAttribute("day", date.getDate());
+			request.setAttribute("year2", date.getYear()+1900);
+			request.setAttribute("month3", date.getMonth()+1);
+			request.setAttribute("day2", date.getDate()+30);
+		//	request.setAttribute("year", arg1);
+			doPost(request,response);
+		//request.getRequestDispatcher("viewschedule.jsp").forward(request, response);
 		
 	}}
 
