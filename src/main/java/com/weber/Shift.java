@@ -12,9 +12,27 @@ public class Shift implements Comparable<Shift> {
 	private String position;
 	private int Id;
 	private boolean managerRequired;
+	private boolean wantsToBeTraded;
+	private boolean wantsToBeTaken;
 	
 	
 	
+	public boolean isWantsToBeTraded() {
+		return wantsToBeTraded;
+	}
+
+	public void setWantsToBeTraded(boolean wantsToBeTraded) {
+		this.wantsToBeTraded = wantsToBeTraded;
+	}
+
+	public boolean isWantsToBeTaken() {
+		return wantsToBeTaken;
+	}
+
+	public void setWantsToBeTaken(boolean wantsToBeTaken) {
+		this.wantsToBeTaken = wantsToBeTaken;
+	}
+
 	public String getPosition() {
 		return position;
 	}
