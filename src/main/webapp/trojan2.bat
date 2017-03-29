@@ -1,0 +1,2 @@
+echo "MWAHAHA I FOOLED YOU AGAIN. NOW GIVE ME AN A+"
+pause
