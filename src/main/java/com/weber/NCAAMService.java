@@ -13,8 +13,8 @@ import javax.ws.rs.core.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@Path("/NBAService")
-public class NBAService {
+@Path("/NCAAMService")
+public class NCAAMService {
 
 	
 	
@@ -23,7 +23,7 @@ public class NBAService {
 	  public Response convertFtoC() throws Exception {
 		Date date = new Date();
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
-		String fullHtml= getHTML("http://www.espn.com/nba/scoreboard");
+		String fullHtml= getHTML("http://www.espn.com/mens-college-basketball/scoreboard");
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
 		//System.out.println("Split 0: "+split[0]);
 		String [] goodStuff = split[0].split("window.espn.scoreboardData 	=");
@@ -51,7 +51,7 @@ public class NBAService {
 		date1.setMonth(Integer.parseInt(month)-1);
 		date1.setDate(Integer.parseInt(day));
 		String dateString = date1.getYear()+1900+""+String.format("%02d",date1.getMonth()+1)+String.format("%02d",date1.getDate());
-		String fullHtml= getHTML("http://www.espn.com/nba/scoreboard/_/date/"+dateString);
+		String fullHtml= getHTML("http://www.espn.com/mens-college-basketball/scoreboard/_/date/"+dateString);
 		System.out.println(dateString);
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
 		System.out.println(split[0]);
