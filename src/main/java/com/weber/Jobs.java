@@ -76,7 +76,9 @@ public class Jobs implements Job {
 						JSONArray odds = competition.getJSONArray("odds");
 						if (odds.length() >= 1) {
 							JSONObject odd = new JSONObject(odds.get(0).toString());
+							if(odd.has("details")){
 							game.setSpread(odd.getString("details"));
+							}
 							if(odd.has("overUnder")){
 							game.setOverUnder(Double.parseDouble(odd.getString("overUnder")));
 							}
