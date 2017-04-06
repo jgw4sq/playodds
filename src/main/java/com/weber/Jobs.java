@@ -80,7 +80,7 @@ public class Jobs implements Job {
 							game.setSpread(odd.getString("details"));
 							}
 							if(odd.has("overUnder")){
-							game.setOverUnder(Double.parseDouble(odd.getString("overUnder")));
+							game.setOverUnder((double)(odd.getDouble(("overUnder"))));
 							}
 
 						}
