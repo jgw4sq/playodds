@@ -129,19 +129,7 @@ public class Jobs implements Job {
 						}
 					}
 				}
-				game.setAwayTeamPrice(.21);
-				game.setHomeTeamPrice(.79);
-				game.setPeriod(2);
-				if (i % 2 == 0) {
-					game.setCompleted(true);
-				} else {
-					game.setCompleted(false);
-					game.setDisplayclock("3:25");
-
-					if (i % 3 == 0) {
-						game.setPeriod(0);
-					}
-				}
+				
 
 				games.add(game);
 
