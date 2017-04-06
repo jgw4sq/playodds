@@ -77,7 +77,7 @@ public class DataJob extends HttpServlet {
 		}
 		}
 
-		response.getWriter().write("<form action=\"DataJob\" method=\"post\"><input type=\"submit\" value=\"Stop\" /></form>"+"<form action=\"DataJob\" method=\"get\"><input type=\"submit\" value=\"Start\" /></form>");
+		response.getWriter().write("<html><form action=\"DataJob\" method=\"post\"><input type=\"submit\" value=\"Stop\" /></form>"+"<form action=\"DataJob\" method=\"get\"><input type=\"submit\" value=\"Start\" /></form></html>");
 	
 		
 		
@@ -113,7 +113,7 @@ public class DataJob extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.getWriter().write("<form action=\"DataJob\" method=\"post\"><input type=\"submit\" value=\"Stop\" /></form>"+"<form action=\"DataJob\" method=\"get\"><input type=\"submit\" value=\"Start\" /></form>");
+		response.getWriter().write("<html><form action=\"DataJob\" method=\"post\"><input type=\"submit\" value=\"Stop\" /></form>"+"<form action=\"DataJob\" method=\"get\"><input type=\"submit\" value=\"Start\" /></form></html>");
 
 
 	}

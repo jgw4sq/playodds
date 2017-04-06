@@ -55,7 +55,7 @@ public class StopJob extends HttpServlet {
 			e.printStackTrace();
 		}
 
-			response.getWriter().write("<a href=\"DataJob\"> Start Job </a>");
+			response.getWriter().write("<html><a href=\"DataJob\"> Start Job </a></html>");
 	}
 
 	/**
