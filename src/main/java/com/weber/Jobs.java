@@ -55,7 +55,7 @@ public class Jobs implements Job {
 		String actualGoodStuff = goodStuff[1].trim();
 		System.out.println(actualGoodStuff);
 		try {
-			JSONObject jsonObject = new JSONObject(fullHtml);
+			JSONObject jsonObject = new JSONObject(actualGoodStuff);
 			//System.out.println(jsonObject.getJSONArray("leagues"));
 			JSONArray events = jsonObject.getJSONArray("events");
 			//System.out.println(events.toString());
@@ -151,7 +151,8 @@ public class Jobs implements Job {
 				stmt = con.createStatement();
 				for( int index=0; index<games.size(); index++){
 					Competition comp = games.get(index);
-					
+					System.out.println("Checking: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+
 					String sql= "SELECT COUNT(id) as total FROM Games WHERE id="+comp.getId()+";";
 					stmt= con.createStatement();
 					ResultSet rs = stmt.executeQuery(sql);
