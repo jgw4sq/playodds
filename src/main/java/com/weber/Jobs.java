@@ -160,7 +160,10 @@ public class Jobs implements Job {
 					String sql= "SELECT COUNT(id) as total FROM Games WHERE id="+comp.getId()+";";
 					stmt= con.createStatement();
 					ResultSet rs = stmt.executeQuery(sql);
-					int total = rs.getInt("total");
+					int total=0;
+					if(rs.next()){
+					 total = rs.getInt("total");
+					}
 					
 					if(total==0){
 						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
