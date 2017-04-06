@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -148,10 +149,9 @@ public class Jobs implements Job {
 			}
 			Statement stmt =null;
 			
-				Context initContext = new InitialContext();
-				 Context envContext  = (Context)initContext.lookup("java:/comp/env");
-				 DataSource ds = (DataSource)envContext.lookup("jdbc/MySQLDS");
-				 Connection con = ds.getConnection();
+			Class.forName("com.mysql.jdbc.Driver");  
+			 Connection con=DriverManager.getConnection(  
+						"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
 				stmt = con.createStatement();
 				for( int index=0; index<games.size(); index++){
 					Competition comp = games.get(index);
