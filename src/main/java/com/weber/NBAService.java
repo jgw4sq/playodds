@@ -75,7 +75,7 @@ public class NBAService {
 		}
 			
 			
-		return Response.status(200).entity(array).build();
+		return Response.status(200).entity(array.toString()).build();
 		
 		/**
 		Date date = new Date();
