@@ -54,6 +54,9 @@ public class NBAService {
 			String gameTime = rs.getString("gameTime");
 			int homeTeamId = rs.getInt("homeTeamId");
 			int awayTeamId = rs.getInt("awayTeamId");
+			String homeTeamAbbreviation = rs.getString("homeTeamAbbreviation");
+
+			String awayTeamAbbreviation = rs.getString("awayTeamAbbreviation");
 		
 			object.put("homeTeam", homeTeam);
 			object.put("awayTeam", awayTeam);
@@ -68,6 +71,8 @@ public class NBAService {
 			object.put("gameTime", gameTime);
 			object.put("homeTeamId", homeTeamId);
 			object.put("awayTeamId", awayTeamId);
+			object.put("homeTeamAbbreviation", homeTeamAbbreviation);
+			object.put("awayTeamAbbreviation", awayTeamAbbreviation);
 			array.put(object);
 
 		
