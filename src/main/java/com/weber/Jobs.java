@@ -164,7 +164,7 @@ public class Jobs implements Job {
 
 					}else{
 						System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
-
+						System.out.println("home: "+comp.getHomeCompetitor().getScore() + ", away: "+comp.getAwayCompetitor().getScore());
 						sql = "UPDATE Games SET completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
