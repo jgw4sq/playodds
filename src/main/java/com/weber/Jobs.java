@@ -201,7 +201,7 @@ public class Jobs implements Job {
 		String [] goodStuff = split[0].split("window.espn.scoreboardData 	=");
 		//System.out.println("Length: "+goodStuff.length);
 		String actualGoodStuff = goodStuff[1].trim();
-		System.out.println(actualGoodStuff);
+		//System.out.println(actualGoodStuff);
 		try {
 			JSONObject jsonObject = new JSONObject(actualGoodStuff);
 			//System.out.println(jsonObject.getJSONArray("leagues"));
@@ -302,19 +302,19 @@ public class Jobs implements Job {
 					}
 					
 					if(total==0){
-						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+//						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"')";
 						stmt.execute(sql);
-						System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}else{
-						System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 						sql = "UPDATE Games SET completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
-						System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}
 					
