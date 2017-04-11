@@ -57,6 +57,12 @@ public class NBAService {
 			String homeTeamAbbreviation = rs.getString("homeTeamAbbreviation");
 
 			String awayTeamAbbreviation = rs.getString("awayTeamAbbreviation");
+			String homeTeamTotalRecord = rs.getString("homeTeamTotalRecord");
+			String homeTeamHomeRecord = rs.getString("homeTeamHomeRecord");
+			String homeTeamAwayRecord = rs.getString("homeTeamAwayRecord");
+			String awayTeamTotalRecord = rs.getString("awayTeamTotalRecord");
+			String awayTeamHomeRecord = rs.getString("awayTeamHomeRecord");
+			String awayTeamAwayRecord = rs.getString("awayTeamAwayRecord");
 		
 			object.put("homeTeam", homeTeam);
 			object.put("awayTeam", awayTeam);
@@ -73,6 +79,12 @@ public class NBAService {
 			object.put("awayTeamId", awayTeamId);
 			object.put("homeTeamAbbreviation", homeTeamAbbreviation);
 			object.put("awayTeamAbbreviation", awayTeamAbbreviation);
+			object.put("homeTeamTotalRecord", homeTeamTotalRecord);
+			object.put("homeTeamHomeRecord", homeTeamHomeRecord);
+			object.put("homeTeamAwayRecord", homeTeamAwayRecord);
+			object.put("awayTeamTotalRecord", awayTeamTotalRecord);
+			object.put("awayTeamHomeRecord", awayTeamHomeRecord);
+			object.put("awayTeamAwayRecord", awayTeamAwayRecord);
 			array.put(object);
 
 		
