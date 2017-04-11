@@ -93,7 +93,7 @@ public class Jobs implements Job {
 					String displayClock = status.getString("displayClock");
 					JSONObject type = status.getJSONObject("type");
 					boolean completed = type.getBoolean("completed");
-					String state = status.getString("state");
+					String state = type.getString("state");
 					if (state.equals("pre")){
 						game.setStarted(false);
 					}else{
@@ -244,7 +244,7 @@ public class Jobs implements Job {
 					int period = status.getInt("period");
 					String displayClock = status.getString("displayClock");
 					JSONObject type = status.getJSONObject("type");
-					String state = status.getString("state");
+					String state = type.getString("state");
 					if (state.equals("pre")){
 						game.setStarted(false);
 					}else{
