@@ -44,7 +44,7 @@ public class SignUpService {
 	  public Response signUpUser(@PathParam("username") String userName,@PathParam("email") String email,@PathParam("password") String password,@PathParam("firstName") String firstName,@PathParam("lastName") String lastName ) throws Exception {
 
 		Statement stmt =null;
-		
+		JSONObject object = new JSONObject();
 		Class.forName("com.mysql.jdbc.Driver");  
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
@@ -55,12 +55,15 @@ public class SignUpService {
 			double used =0.0;
 			if(rs.next()){
 				//user already exists
+				object.put("result", "userExists");
 			}else{
 				sql = "INSERT INTO STOCKUSERS (username,email,password,firstName,lastName,availableBalance,accountBalance,usedBalance) VALUES ('"+userName+"','"+email+"','"+password+"','"+firstName+"','"+lastName+"',"+balance+","+balance+","+used+")";
 				stmt.execute(sql);
+				object.put("result", "success");
+
 			}
 			
-			return null;
+			return Response.status(200).entity(object.toString()).build();
 
 		
 	}
