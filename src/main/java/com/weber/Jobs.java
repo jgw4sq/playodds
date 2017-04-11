@@ -49,7 +49,7 @@ public class Jobs implements Job {
 	public static void getNBA() throws Exception{
 		Date date = new Date();
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
-		String fullHtml= getHTML("http://www.espn.com/nba/scoreboard");
+		String fullHtml= getHTML("http://www.espn.com/nba/scoreboard/_/date/"+dateString);
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
 		//System.out.println("Split 0: "+split[0]);
 		String [] goodStuff = split[0].split("window.espn.scoreboardData 	=");
@@ -201,7 +201,7 @@ public class Jobs implements Job {
 	public static void getMLB() throws Exception{
 		Date date = new Date();
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
-		String fullHtml= getHTML("http://www.espn.com/mlb/scoreboard");
+		String fullHtml= getHTML("http://www.espn.com/mlb/scoreboard/_/date/"+dateString);
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
 		//System.out.println("Split 0: "+split[0]);
 		String [] goodStuff = split[0].split("window.espn.scoreboardData 	=");
