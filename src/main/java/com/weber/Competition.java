@@ -18,6 +18,23 @@ public class Competition  {
 	private String date;
 	private String displayclock;
 	private String gameTime;
+	private boolean started;
+
+	public Competitor[] getCompetitors() {
+		return competitors;
+	}
+
+	public void setCompetitors(Competitor[] competitors) {
+		this.competitors = competitors;
+	}
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	public void setStarted(boolean started) {
+		this.started = started;
+	}
 
 	public String getGameTime() {
 		return gameTime;

@@ -93,6 +93,12 @@ public class Jobs implements Job {
 					String displayClock = status.getString("displayClock");
 					JSONObject type = status.getJSONObject("type");
 					boolean completed = type.getBoolean("completed");
+					String state = status.getString("state");
+					if (state.equals("pre")){
+						game.setStarted(false);
+					}else{
+						game.setStarted(true);
+					}
 					game.setPeriod(period);
 					game.setDisplayclock(displayClock);
 					game.setCompleted(completed);
@@ -158,14 +164,14 @@ public class Jobs implements Job {
 					if(total==0){
 						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
-						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"')";
+						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation,started) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"',"+comp.isStarted()+")";
 						stmt.execute(sql);
 						System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}else{
 						System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 						System.out.println("home: "+comp.getHomeCompetitor().getScore() + ", away: "+comp.getAwayCompetitor().getScore());
-						sql = "UPDATE Games SET completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
+						sql = "UPDATE Games SET started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
 						System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
@@ -238,6 +244,12 @@ public class Jobs implements Job {
 					int period = status.getInt("period");
 					String displayClock = status.getString("displayClock");
 					JSONObject type = status.getJSONObject("type");
+					String state = status.getString("state");
+					if (state.equals("pre")){
+						game.setStarted(false);
+					}else{
+						game.setStarted(true);
+					}
 					boolean completed = type.getBoolean("completed");
 					game.setPeriod(period);
 					game.setDisplayclock(displayClock);
@@ -304,14 +316,14 @@ public class Jobs implements Job {
 					if(total==0){
 //						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
-						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"')";
+						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation,started) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"',"+comp.isStarted()+")";
 						stmt.execute(sql);
 						//System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}else{
 						//System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
-						sql = "UPDATE Games SET completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
+						sql = "UPDATE Games SET started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
 						//System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
