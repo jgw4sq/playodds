@@ -59,7 +59,7 @@ public class Jobs implements Job {
 		String [] goodStuff = split[0].split("window.espn.scoreboardData 	=");
 		//System.out.println("Length: "+goodStuff.length);
 		String actualGoodStuff = goodStuff[1].trim();
-		System.out.println(actualGoodStuff);
+		//System.out.println(actualGoodStuff);
 		try {
 			JSONObject jsonObject = new JSONObject(actualGoodStuff);
 			//System.out.println(jsonObject.getJSONArray("leagues"));
