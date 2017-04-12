@@ -77,7 +77,7 @@ public class Jobs implements Job {
 				for (int j = 0; j < competitions.length(); j++) {
 
 					JSONObject competition = new JSONObject(competitions.get(j).toString());
-					System.out.println(competition.toString());
+					//System.out.println(competition.toString());
 					if (competition.has("odds")) {
 						JSONArray odds = competition.getJSONArray("odds");
 						if (odds.length() >= 1) {
@@ -229,7 +229,7 @@ public class Jobs implements Job {
 				for (int j = 0; j < competitions.length(); j++) {
 
 					JSONObject competition = new JSONObject(competitions.get(j).toString());
-					System.out.println(competition.toString());
+					//System.out.println(competition.toString());
 					if (competition.has("odds")) {
 						JSONArray odds = competition.getJSONArray("odds");
 						if (odds.length() >= 1) {
