@@ -27,8 +27,12 @@ public class Jobs implements Job {
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 			try {
-				getNBA();
-				getMLB();
+				Date date = new Date();
+				getNBA(date);
+				getMLB(date);
+				date.setDate(date.getDate()-1);
+				getNBA(date);
+				getMLB(date);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,8 +50,8 @@ public class Jobs implements Job {
 	}
 	
 	
-	public static void getNBA() throws Exception{
-		Date date = new Date();
+	public static void getNBA(Date date) throws Exception{
+		
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
 		String fullHtml= getHTML("http://www.espn.com/nba/scoreboard/_/date/"+dateString);
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
@@ -198,8 +202,8 @@ public class Jobs implements Job {
 		}
 	}
 	
-	public static void getMLB() throws Exception{
-		Date date = new Date();
+	public static void getMLB(Date date) throws Exception{
+		
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
 		String fullHtml= getHTML("http://www.espn.com/mlb/scoreboard/_/date/"+dateString);
 		String [] split = fullHtml.split(";window.espn.scoreboardSettings");
