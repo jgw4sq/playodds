@@ -63,7 +63,7 @@ public class NBAService {
 			String awayTeamTotalRecord = rs.getString("awayTeamTotalRecord");
 			String awayTeamHomeRecord = rs.getString("awayTeamHomeRecord");
 			String awayTeamAwayRecord = rs.getString("awayTeamAwayRecord");
-		
+			String gameType = rs.getString("gameType");
 			object.put("homeTeam", homeTeam);
 			object.put("awayTeam", awayTeam);
 			object.put("id", id);
@@ -85,6 +85,7 @@ public class NBAService {
 			object.put("awayTeamTotalRecord", awayTeamTotalRecord);
 			object.put("awayTeamHomeRecord", awayTeamHomeRecord);
 			object.put("awayTeamAwayRecord", awayTeamAwayRecord);
+			object.put("gameType", gameType);
 			array.put(object);
 
 		
