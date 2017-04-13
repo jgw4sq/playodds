@@ -42,11 +42,13 @@ public class BetService {
 	  @GET
 	  @Produces("application/json")
 	  public Response signUpUser(@PathParam("email") String email,@PathParam("gameId") String gameId,@PathParam("teamName") String teamName,@PathParam("pointsToRisk") String pointsToRisk,@PathParam("pointsToWin") String pointsToWin,@PathParam("gameType") String gameType,@PathParam("odds") String odds ) throws Exception {
+		JSONObject object = new JSONObject();
+
+		try{
 		int intGameId = Integer.parseInt(gameId);
 		int intPointsToRisk = Integer.parseInt(pointsToRisk);
 		int intPointsToWin = Integer.parseInt(pointsToWin);
 		Statement stmt =null;
-		JSONObject object = new JSONObject();
 		Class.forName("com.mysql.jdbc.Driver");  
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
@@ -58,6 +60,10 @@ public class BetService {
 			}else{
 				object.put("result", "error");
 			}
+		}catch(Exception e){
+			e.printStackTrace();
+			object.put("result","error");
+		}
 			
 			
 			
