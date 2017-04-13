@@ -52,8 +52,8 @@ public class BetService {
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
 			stmt = con.createStatement();
 			String sql = "INSERT INTO Bets (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"')";
-			boolean rs = stmt.execute(sql);
-			if(rs){
+			int rs = stmt.executeUpdate(sql);
+			if(rs>0){
 				object.put("result", "success");
 			}else{
 				object.put("result", "error");
