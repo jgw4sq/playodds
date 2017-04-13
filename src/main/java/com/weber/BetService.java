@@ -46,8 +46,8 @@ public class BetService {
 
 		try{
 		int intGameId = Integer.parseInt(gameId);
-		int intPointsToRisk = Integer.parseInt(pointsToRisk);
-		int intPointsToWin = Integer.parseInt(pointsToWin);
+		double intPointsToRisk = Double.parseDouble(pointsToRisk);
+		double intPointsToWin = Double.parseDouble(pointsToWin);
 		Statement stmt =null;
 		Class.forName("com.mysql.jdbc.Driver");  
 		 Connection con=DriverManager.getConnection(  
