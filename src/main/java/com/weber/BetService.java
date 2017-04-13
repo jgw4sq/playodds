@@ -51,7 +51,7 @@ public class BetService {
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
 			stmt = con.createStatement();
-			String sql = "INSERT INTO BETS (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"')";
+			String sql = "INSERT INTO Bets (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"')";
 			boolean rs = stmt.execute(sql);
 			if(rs){
 				object.put("result", "success");
