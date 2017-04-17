@@ -14,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONArray;
@@ -27,7 +28,7 @@ public class NBAService {
 	
 	@GET
 	  @Produces("application/json")
-	  public String todaysGames() throws Exception {
+	  public Response todaysGames() throws Exception {
 		Statement stmt =null;
 		
 		Class.forName("com.mysql.jdbc.Driver");  
@@ -93,7 +94,7 @@ public class NBAService {
 		}
 			
 			
-		return array.toString();
+		return Response.ok(array.toString(), MediaType.APPLICATION_JSON).build();
 		
 		/**
 		Date date = new Date();
