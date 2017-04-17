@@ -27,7 +27,7 @@ public class NBAService {
 	
 	@GET
 	  @Produces("application/json")
-	  public Response todaysGames() throws Exception {
+	  public JSONArray todaysGames() throws Exception {
 		Statement stmt =null;
 		
 		Class.forName("com.mysql.jdbc.Driver");  
@@ -93,7 +93,7 @@ public class NBAService {
 		}
 			
 			
-		return Response.status(200).entity(array.toString()).build();
+		return array;
 		
 		/**
 		Date date = new Date();
