@@ -27,7 +27,7 @@ public class NBAService {
 	
 	@GET
 	  @Produces("application/json")
-	  public JSONArray todaysGames() throws Exception {
+	  public String todaysGames() throws Exception {
 		Statement stmt =null;
 		
 		Class.forName("com.mysql.jdbc.Driver");  
@@ -93,7 +93,7 @@ public class NBAService {
 		}
 			
 			
-		return array;
+		return array.toString();
 		
 		/**
 		Date date = new Date();
