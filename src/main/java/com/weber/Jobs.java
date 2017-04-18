@@ -33,6 +33,9 @@ public class Jobs implements Job {
 				date.setDate(date.getDate()-1);
 				getNBA(date);
 				getMLB(date);
+				date.setDate(date.getDate()+2);
+				getNBA(date);
+				getMLB(date);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
