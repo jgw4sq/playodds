@@ -73,7 +73,26 @@ public class BetService {
 				rs = stmt.executeUpdate(sql);
 				if (rs>0){
 					object.put("result", "success");
+					 sql = "SELECT * FROM STOCKUSERS WHERE email ='"+email+"'";
+					 rs1 = stmt.executeQuery(sql);
+					
+					if(rs1.next()){
+						//user already exists
+						object.put("result", "success");
+						JSONObject user = new JSONObject();
+						user.put("email", rs1.getString("email"));
+						user.put("username", rs1.getString("username"));
+						user.put("password", rs1.getString("password"));
+						user.put("accountBalance", rs1.getDouble("accountBalance"));
 
+						user.put("availableBalance", rs1.getDouble("availableBalance"));
+
+						user.put("usedBalance", rs1.getDouble("usedBalance"));
+						user.put("firstName", rs1.getString("firstName"));
+						user.put("lastName", rs1.getString("lastName"));
+						object.put("user", user);
+
+				}
 				}
 
 
