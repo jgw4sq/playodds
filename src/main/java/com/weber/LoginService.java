@@ -56,6 +56,23 @@ public class LoginService {
 			if(rs.next()){
 				//user already exists
 				object.put("result", "success");
+				JSONObject user = new JSONObject();
+				user.put("email", rs.getString("email"));
+				user.put("username", rs.getString("username"));
+				user.put("password", rs.getString("password"));
+				user.put("accountBalance", rs.getDouble("accountBalance"));
+
+				user.put("availableBalance", rs.getDouble("availableBalace"));
+
+				user.put("usedBalance", rs.getDouble("usedBalance"));
+				user.put("firstName", rs.getString("firstName"));
+				user.put("lastName", rs.getString("lastName"));
+				object.put("user", user);
+
+
+
+
+
 			}else{
 				
 				object.put("result", "error");
