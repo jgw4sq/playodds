@@ -62,7 +62,7 @@ public class LoginService {
 				user.put("password", rs.getString("password"));
 				user.put("accountBalance", rs.getDouble("accountBalance"));
 
-				user.put("availableBalance", rs.getDouble("availableBalace"));
+				user.put("availableBalance", rs.getDouble("availableBalance"));
 
 				user.put("usedBalance", rs.getDouble("usedBalance"));
 				user.put("firstName", rs.getString("firstName"));
