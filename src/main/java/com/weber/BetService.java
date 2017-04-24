@@ -56,7 +56,30 @@ public class BetService {
 			String sql = "INSERT INTO Bets (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"')";
 			int rs = stmt.executeUpdate(sql);
 			if(rs>0){
-				object.put("result", "success");
+				sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+				ResultSet rs1 = stmt.executeQuery(sql);
+				double balance = 200.0;
+				double used =0.0;
+				double available= 0.0;
+				if(rs1.next()){
+					 balance = rs1.getDouble("accountBalance");
+					used = rs1.getDouble("usedBalance");
+					available = rs1.getDouble("availableBalance");
+					available-= intPointsToRisk;
+					used += intPointsToRisk;
+					
+				}
+				sql = "UPDATE STOCKUSERS SET availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+				rs = stmt.executeUpdate(sql);
+				if (rs>0){
+					object.put("result", "success");
+
+				}
+
+
+				
+				
+				
 			}else{
 				object.put("result", "error");
 			}
