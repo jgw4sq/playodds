@@ -175,11 +175,69 @@ public class BetService {
 				betObject.put("homeTeamAbbreviation", homeTeamAbbreviation);
 
 				betObject.put("awayTeamAbbreviation", awayTeamAbbreviation);
-				array.put(betObject);
 				
+				sql = "SELECT * FROM Games where id="+gameId;
+				Statement stmt2 = con.createStatement();
+				ResultSet rs2= stmt2.executeQuery(sql);
+				if(rs2.next()){
+					JSONObject gameObject = new JSONObject();
+					String homeTeam = rs2.getString("homeTeam");
+					String awayTeam = rs2.getString("awayTeam");
+					int id = rs2.getInt("id");
+					String spread = rs2.getString("spread");
+					boolean completed = rs2.getBoolean("completed");
+					boolean started = rs2.getBoolean("started");
+					String date = rs2.getString("date");
+					String displayClock = rs2.getString("displayClock");
+					int gamehomeTeamScore = rs2.getInt("homeTeamScore");
+					int gameawayTeamScore = rs2.getInt("awayTeamScore");
+					String gameTime = rs2.getString("gameTime");
+					int homeTeamId = rs2.getInt("homeTeamId");
+					int awayTeamId = rs2.getInt("awayTeamId");
+					String gamehomeTeamAbbreviation = rs2.getString("homeTeamAbbreviation");
+
+					String gameawayTeamAbbreviation = rs2.getString("awayTeamAbbreviation");
+					String homeTeamTotalRecord = rs2.getString("homeTeamTotalRecord");
+					String homeTeamHomeRecord = rs2.getString("homeTeamHomeRecord");
+					String homeTeamAwayRecord = rs2.getString("homeTeamAwayRecord");
+					String awayTeamTotalRecord = rs2.getString("awayTeamTotalRecord");
+					String awayTeamHomeRecord = rs2.getString("awayTeamHomeRecord");
+					String awayTeamAwayRecord = rs2.getString("awayTeamAwayRecord");
+					String gamegameType = rs2.getString("gameType");
+					gameObject.put("homeTeam", homeTeam);
+					gameObject.put("awayTeam", awayTeam);
+					gameObject.put("id", id);
+					gameObject.put("spread", spread);
+					gameObject.put("completed", completed);
+					gameObject.put("started", started);
+					gameObject.put("date", date);
+					gameObject.put("displayClock", displayClock);
+					gameObject.put("homeTeamScore", gamehomeTeamScore);
+					gameObject.put("awayTeamScore", gameawayTeamScore);
+					gameObject.put("gameTime", gameTime);
+					gameObject.put("homeTeamId", homeTeamId);
+					gameObject.put("awayTeamId", awayTeamId);
+					gameObject.put("homeTeamAbbreviation", gamehomeTeamAbbreviation);
+					gameObject.put("awayTeamAbbreviation", gameawayTeamAbbreviation);
+					gameObject.put("homeTeamTotalRecord", homeTeamTotalRecord);
+					gameObject.put("homeTeamHomeRecord", homeTeamHomeRecord);
+					gameObject.put("homeTeamAwayRecord", homeTeamAwayRecord);
+					gameObject.put("awayTeamTotalRecord", awayTeamTotalRecord);
+					gameObject.put("awayTeamHomeRecord", awayTeamHomeRecord);
+					gameObject.put("awayTeamAwayRecord", awayTeamAwayRecord);
+					gameObject.put("gameType", gamegameType);
+					betObject.put("associatedGame", gameObject);
+
+					
+				}
+				
+				array.put(betObject);
+				stmt2.close();
 				
 				
 			}
+			stmt.close();
+
 		object.put("result", "success");
 		object.put("betArray", array);
 	}catch(Exception e){
