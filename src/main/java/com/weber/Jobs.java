@@ -98,12 +98,13 @@ public class Jobs implements Job {
 				//System.out.println("updated bet data:, hometeam: "+homeTeamAbbreviation+", awayteam: "+awayTeamAbbreviation+ "hometeamscore: "+homeTeamScore+", awayTeamScore: "+awayTeamScore+" , complete: "+complete);
 				
 				if(complete){
+					Statement stmt4 = con.createStatement();
 					if(gameType.equals("MLB")){
 						if(team.equals(betHomeTeamAbbreviaiton)){
 							if(homeTeamScore>awayTeamScore){
-								System.out.println("Chenging account balance: MLB Bet Won");
+								System.out.println("Chenging account balance: MLB Bet home team Won");
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -118,14 +119,14 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 								
 								
 							}else if(homeTeamScore==awayTeamScore){
-								System.out.println("Chenging account balance: MLB Bet draw");
+								System.out.println("Chenging account balance: MLB Bet home team draw");
 
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -140,12 +141,12 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 							}else{
-								System.out.println("Chenging account balance: MLB Bet lost");
+								System.out.println("Chenging account balance: MLB Bet home team lost");
 
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -160,14 +161,14 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 							}
 						}else{
 							if(awayTeamScore>homeTeamScore){
-								System.out.println("Chenging account balance: MLB Bet won");
+								System.out.println("Chenging account balance: MLB Bet away team won");
 
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -182,13 +183,13 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 								
 							}else if(awayTeamScore==homeTeamScore){
-								System.out.println("Chenging account balance: MLB Bet draw");
+								System.out.println("Chenging account balance: MLB Bet away team draw");
 
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -203,12 +204,12 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 							}else{
-								System.out.println("Chenging account balance: MLB Bet lost");
+								System.out.println("Chenging account balance: MLB Bet away team lost");
 
 								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
-								ResultSet rs3 = stmt.executeQuery(sql);
+								ResultSet rs3 = stmt4.executeQuery(sql);
 								double balance = 0.0;
 								double used =0.0;
 								double available= 0.0;
@@ -223,7 +224,7 @@ public class Jobs implements Job {
 									
 								}
 								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
-								int rs4 = stmt.executeUpdate(sql);
+								int rs4 = stmt4.executeUpdate(sql);
 							}
 						}
 					}else{
