@@ -36,6 +36,7 @@ public class Jobs implements Job {
 				date.setDate(date.getDate()+2);
 				getNBA(date);
 				getMLB(date);
+				updateBets();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,6 +75,7 @@ public class Jobs implements Job {
 				boolean complete= false;
 				
 				while(rs1.next()){
+					System.out.println("Getting game data");
 					homeTeamAbbreviation = rs1.getString("homeTeamAbbreviation");
 					awayTeamAbbreviation = rs1.getString("awayTeamAbbreviation");
 					homeTeamScore = rs1.getInt("homeTeamScore");
@@ -82,10 +84,11 @@ public class Jobs implements Job {
 					
 					
 				}
-				
 				sql = "UPDATE Bets SET homeTeamScore="+homeTeamScore+", awayTeamScore="+awayTeamScore+", homeTeamAbbreviation='"+homeTeamAbbreviation+"', awayTeamAbbreviation='"+awayTeamAbbreviation+"', gameComplete="+complete+" WHERE gameId="+gameId;
 				Statement stmt3 = con.createStatement();
 				stmt3.executeUpdate(sql);
+				System.out.println("updated bet data:, hometeam: "+homeTeamAbbreviation+", awayteam: "+awayTeamAbbreviation+ "hometeamscore: "+homeTeamScore+", awayTeamScore: "+awayTeamScore+" , complete: "+complete);
+
 				stmt3.close();
 				stmt2.close();
 				
