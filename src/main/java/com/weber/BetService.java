@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -133,6 +134,60 @@ public class BetService {
 	    return result.toString();
 	 }
 
+	@Path("{email}")
+	  @GET
+	  @Produces("application/json")
+	  public Response signUpUser(@PathParam("email") String email) throws Exception {
+		JSONObject object = new JSONObject();
+
+		try{
 	
+		Statement stmt =null;
+		Class.forName("com.mysql.jdbc.Driver");  
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM Bets WHERE email='"+email+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			JSONArray array = new JSONArray();
+			while(rs.next()){
+				JSONObject betObject = new JSONObject();
+				int gameId = rs.getInt("gameId");
+				String teamName = rs.getString("teamName");
+				double pointsToRisk = rs.getDouble("pointsToRisk");
+				double pointsToWin = rs.getDouble("pointsToWin");
+				String gameType = rs.getString("gameType");
+				String odds = rs.getString("odds");
+				boolean gameComplete = rs.getBoolean("gameComplete");
+				int homeTeamScore = rs.getInt("homeTeamScore");
+				int awayTeamScore = rs.getInt("awayTeamScore");
+				String homeTeamAbbreviation = rs.getString("homeTeamAbbreviation");
+				String awayTeamAbbreviation = rs.getString("awayTeamAbbreviation");
+				betObject.put("gameId", gameId);
+				betObject.put("teamName", teamName);
+				betObject.put("pointsToRisk", pointsToRisk);
+				betObject.put("pointsToWin", pointsToWin);
+				betObject.put("gameType", gameType);
+				betObject.put("odds", odds);
+				betObject.put("gameComplete", gameComplete);
+				betObject.put("homeTeamScore", homeTeamScore);
+				betObject.put("awayTeamScore", awayTeamScore);
+				betObject.put("homeTeamAbbreviation", homeTeamAbbreviation);
+
+				betObject.put("awayTeamAbbreviation", awayTeamAbbreviation);
+				array.put(betObject);
+				
+				
+				
+			}
+		object.put("result", "success");
+		object.put("betArray", array);
+	}catch(Exception e){
+		e.printStackTrace();
+		object.put("result", "error");
+	}
 	
+		return Response.status(200).entity(object.toString()).build();
+	
+}
 }
