@@ -65,6 +65,14 @@ public class Jobs implements Job {
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				int gameId = rs.getInt("gameId");
+				String team = rs.getString("teamName");
+				String betHomeTeamAbbreviaiton = rs.getString("homeTeamAbbreviation");
+				String betAwayTeamAbbreviaiton = rs.getString("awayTeamAbbreviation");
+				String odds = rs.getString("odds");
+				String gameType = rs.getString("gameType");
+				double pointsToRisk = rs.getDouble("pointsToRisk");
+				double pointsToWin = rs.getDouble("pointsToWin");
+				String email = rs.getString("email");
 				sql = "SELECT * FROM Games WHERE id="+gameId;
 				Statement stmt2 = con.createStatement();
 				ResultSet rs1 = stmt2.executeQuery(sql);
@@ -75,7 +83,7 @@ public class Jobs implements Job {
 				boolean complete= false;
 				
 				while(rs1.next()){
-					System.out.println("Getting game data");
+					//System.out.println("Getting game data");
 					homeTeamAbbreviation = rs1.getString("homeTeamAbbreviation");
 					awayTeamAbbreviation = rs1.getString("awayTeamAbbreviation");
 					homeTeamScore = rs1.getInt("homeTeamScore");
@@ -87,8 +95,146 @@ public class Jobs implements Job {
 				sql = "UPDATE Bets SET homeTeamScore="+homeTeamScore+", awayTeamScore="+awayTeamScore+", homeTeamAbbreviation='"+homeTeamAbbreviation+"', awayTeamAbbreviation='"+awayTeamAbbreviation+"', gameComplete="+complete+" WHERE gameId="+gameId;
 				Statement stmt3 = con.createStatement();
 				stmt3.executeUpdate(sql);
-				System.out.println("updated bet data:, hometeam: "+homeTeamAbbreviation+", awayteam: "+awayTeamAbbreviation+ "hometeamscore: "+homeTeamScore+", awayTeamScore: "+awayTeamScore+" , complete: "+complete);
+				//System.out.println("updated bet data:, hometeam: "+homeTeamAbbreviation+", awayteam: "+awayTeamAbbreviation+ "hometeamscore: "+homeTeamScore+", awayTeamScore: "+awayTeamScore+" , complete: "+complete);
+				
+				if(complete){
+					if(gameType.equals("MLB")){
+						if(team.equals(betHomeTeamAbbreviaiton)){
+							if(homeTeamScore>awayTeamScore){
+								System.out.println("Chenging account balance: MLB Bet Won");
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+								
+								
+							}else if(homeTeamScore==awayTeamScore){
+								System.out.println("Chenging account balance: MLB Bet draw");
 
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: MLB Bet lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+							}
+						}else{
+							if(awayTeamScore>homeTeamScore){
+								System.out.println("Chenging account balance: MLB Bet won");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+								
+							}else if(awayTeamScore==homeTeamScore){
+								System.out.println("Chenging account balance: MLB Bet draw");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: MLB Bet lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt.executeUpdate(sql);
+							}
+						}
+					}else{
+						if(team.equals(betHomeTeamAbbreviaiton)){
+							
+						}else{
+							
+						}
+					}
+				}
+				
 				stmt3.close();
 				stmt2.close();
 				
@@ -181,7 +327,7 @@ public class Jobs implements Job {
 						competitorToAdd.setName(name);
 						competitorToAdd.setScore(Double.parseDouble(competitor.getString("score")));
 						competitorToAdd.setAbbreviation(team.getString("abbreviation"));
-						System.out.println(team.getString("abbreviation"));
+						//System.out.println(team.getString("abbreviation"));
 						//System.out.println(name);
 						if (competitor.getString("homeAway").equals("home")) {
 							game.setHomeCompetitor(competitorToAdd);
@@ -204,7 +350,7 @@ public class Jobs implements Job {
 				stmt = con.createStatement();
 				for( int index=0; index<games.size(); index++){
 					Competition comp = games.get(index);
-					System.out.println("Checking: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+					//System.out.println("Checking: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					String sql= "SELECT COUNT(id) as total FROM Games WHERE id="+comp.getId()+";";
 					stmt= con.createStatement();
@@ -215,19 +361,19 @@ public class Jobs implements Job {
 					}
 					
 					if(total==0){
-						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation,started,homeTeamTotalRecord,homeTeamHomeRecord,homeTeamAwayRecord,awayTeamTotalRecord,awayTeamHomeRecord,awayTeamAwayRecord,gameType) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"',"+comp.isStarted()+",'"+comp.getHomeCompetitor().getTotalRecord()+"','"+comp.getHomeCompetitor().getHomeRecord()+"','"+comp.getHomeCompetitor().getAwayRecord()+"','"+comp.getAwayCompetitor().getTotalRecord()+"','"+comp.getAwayCompetitor().getHomeRecord()+"','"+comp.getAwayCompetitor().getAwayRecord()+"','NBA')";
 						stmt.execute(sql);
-						System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}else{
-						System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
-						System.out.println("home: "+comp.getHomeCompetitor().getScore() + ", away: "+comp.getAwayCompetitor().getScore());
+						//System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("home: "+comp.getHomeCompetitor().getScore() + ", away: "+comp.getAwayCompetitor().getScore());
 						sql = "UPDATE Games SET started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
-						System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+						//System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					}
 					
@@ -333,7 +479,7 @@ public class Jobs implements Job {
 						competitorToAdd.setName(name);
 						competitorToAdd.setScore(Double.parseDouble(competitor.getString("score")));
 						competitorToAdd.setAbbreviation(team.getString("abbreviation"));
-						System.out.println(team.getString("abbreviation"));
+						//System.out.println(team.getString("abbreviation"));
 						//System.out.println(name);
 						if (competitor.getString("homeAway").equals("home")) {
 							game.setHomeCompetitor(competitorToAdd);
@@ -356,7 +502,7 @@ public class Jobs implements Job {
 				stmt = con.createStatement();
 				for( int index=0; index<games.size(); index++){
 					Competition comp = games.get(index);
-					System.out.println("Checking: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
+					//System.out.println("Checking: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
 					String sql= "SELECT COUNT(id) as total FROM Games WHERE id="+comp.getId()+";";
 					stmt= con.createStatement();
