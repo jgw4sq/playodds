@@ -53,6 +53,49 @@ public class Jobs implements Job {
 	}
 	
 	
+	public static void updateBets() throws Exception{
+		Statement stmt =null;
+		
+		Class.forName("com.mysql.jdbc.Driver");  
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM Bets WHERE gameComplete=0";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()){
+				int gameId = rs.getInt("gameId");
+				sql = "SELECT * FROM Games WHERE gameId="+gameId;
+				Statement stmt2 = con.createStatement();
+				ResultSet rs1 = stmt2.executeQuery(sql);
+				String homeTeamAbbreviation = null;
+				String awayTeamAbbreviation = null;
+				int homeTeamScore = 0;
+				int awayTeamScore = 0;
+				boolean complete= false;
+				
+				while(rs1.next()){
+					homeTeamAbbreviation = rs1.getString("homeTeamAbbreviation");
+					awayTeamAbbreviation = rs1.getString("awayTeamAbbreviation");
+					homeTeamScore = rs1.getInt("homeTeamScore");
+					awayTeamScore = rs1.getInt("awayTeamScore");
+					complete = rs1.getBoolean("completed");
+					
+					
+				}
+				
+				sql = "UPDATE Bets SET homeTeamScore="+homeTeamScore+", awayTeamScore="+awayTeamScore+", homeTeamAbbreviation='"+homeTeamAbbreviation+"', awayTeamAbbreviation='"+awayTeamAbbreviation+"', gameComplete="+complete+" WHERE gameId="+gameId;
+				Statement stmt3 = con.createStatement();
+				stmt3.executeUpdate(sql);
+				stmt3.close();
+				stmt2.close();
+				
+			}
+			stmt.close();
+			con.close();
+		
+	}
+	
+	
 	public static void getNBA(Date date) throws Exception{
 		
 		String dateString = date.getYear()+1900+""+String.format("%02d",date.getMonth()+1)+String.format("%02d",date.getDate());
