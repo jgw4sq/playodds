@@ -65,7 +65,7 @@ public class Jobs implements Job {
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				int gameId = rs.getInt("gameId");
-				sql = "SELECT * FROM Games WHERE gameId="+gameId;
+				sql = "SELECT * FROM Games WHERE id="+gameId;
 				Statement stmt2 = con.createStatement();
 				ResultSet rs1 = stmt2.executeQuery(sql);
 				String homeTeamAbbreviation = null;
