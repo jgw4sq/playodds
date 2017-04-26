@@ -19,6 +19,15 @@ public class Competition  {
 	private String displayclock;
 	private String gameTime;
 	private boolean started;
+	private String venue;
+
+	public String getVenue() {
+		return venue;
+	}
+
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
 
 	public Competitor[] getCompetitors() {
 		return competitors;
