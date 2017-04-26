@@ -53,18 +53,43 @@ public class UserService {
 			ResultSet rs = stmt.executeQuery(sql);
 			double balance = 200.0;
 			double used =0.0;
+			double available=0.0;
 			if(rs.next()){
 				//user already exists
+				
+				sql="SELECT * FROM Bets WHERE email='"+email+"'";
+				Statement stmt2 = con.createStatement();
+				ResultSet rs2 = stmt2.executeQuery(sql);
+				while(rs2.next()){
+					boolean gameComplete = rs2.getBoolean("gameComplete");
+					if(!gameComplete){
+						used+= rs2.getDouble("pointsToRisk");
+					}
+					
+				}
+				
+				stmt2.close();
+				balance= rs.getDouble("accountBalance");
+				available = balance-used;
+				
+				
+				sql = "UPDATE STOCKUSERS set accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+				Statement stmt3 = con.createStatement();
+				int rs3 = stmt3.executeUpdate(sql);
+				
+				
+				
+				
 				object.put("result", "success");
 				JSONObject user = new JSONObject();
 				user.put("email", rs.getString("email"));
 				user.put("username", rs.getString("username"));
 				user.put("password", rs.getString("password"));
-				user.put("accountBalance", rs.getDouble("accountBalance"));
+				user.put("accountBalance", balance);
 
-				user.put("availableBalance", rs.getDouble("availableBalance"));
+				user.put("availableBalance", available);
 
-				user.put("usedBalance", rs.getDouble("usedBalance"));
+				user.put("usedBalance", used);
 				user.put("firstName", rs.getString("firstName"));
 				user.put("lastName", rs.getString("lastName"));
 				object.put("user", user);
@@ -80,6 +105,7 @@ public class UserService {
 			}
 			
 			return Response.status(200).entity(object.toString()).build();
+
 
 		
 	}
