@@ -39,10 +39,10 @@ public class BetService {
 	  }
 	
 	
-	@Path("{email}/{gameId}/{teamName}/{pointsToRisk}/{pointsToWin}/{gameType}/{odds}")
+	@Path("{email}/{gameId}/{teamName}/{pointsToRisk}/{pointsToWin}/{gameType}/{odds}/{awayTeamAbbreviation}/{homeTeamAbbreviation}")
 	  @GET
 	  @Produces("application/json")
-	  public Response signUpUser(@PathParam("email") String email,@PathParam("gameId") String gameId,@PathParam("teamName") String teamName,@PathParam("pointsToRisk") String pointsToRisk,@PathParam("pointsToWin") String pointsToWin,@PathParam("gameType") String gameType,@PathParam("odds") String odds ) throws Exception {
+	  public Response signUpUser(@PathParam("email") String email,@PathParam("gameId") String gameId,@PathParam("teamName") String teamName,@PathParam("pointsToRisk") String pointsToRisk,@PathParam("pointsToWin") String pointsToWin,@PathParam("gameType") String gameType,@PathParam("odds") String odds,@PathParam("awayTeamAbbreviation") String awayTeamAbbreviation,@PathParam("homeTeamAbbreviation") String homeTeamAbbreviation ) throws Exception {
 		JSONObject object = new JSONObject();
 
 		try{
@@ -54,7 +54,7 @@ public class BetService {
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
 			stmt = con.createStatement();
-			String sql = "INSERT INTO Bets (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"')";
+			String sql = "INSERT INTO Bets (email,gameId,teamName,pointsToRisk,pointsToWin,gameType,odds,awayTeamAbbreviation,homeTeamAbbreviation) VALUES ('"+email+"',"+intGameId+",'"+teamName+"',"+intPointsToRisk+","+intPointsToWin+",'"+gameType+"','"+odds+"','"+awayTeamAbbreviation+"','"+homeTeamAbbreviation+"')";
 			int rs = stmt.executeUpdate(sql);
 			if(rs>0){
 				sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
