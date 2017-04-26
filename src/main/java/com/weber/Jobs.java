@@ -402,6 +402,8 @@ public class Jobs implements Job {
 							JSONObject odd = new JSONObject(odds.get(0).toString());
 							if(odd.has("details")){
 							game.setSpread(odd.getString("details"));
+
+							System.out.println("game spread: "+ game.getSpread());
 							}
 							if(odd.has("overUnder")){
 							game.setOverUnder((double)(odd.getDouble(("overUnder"))));
@@ -559,6 +561,7 @@ public class Jobs implements Job {
 							if(odd.has("details")){
 								//System.out.println("getting mlb odds");
 							game.setSpread(odd.getString("details"));
+							System.out.println("game spread: "+ game.getSpread());
 							}
 							if(odd.has("overUnder")){
 							game.setOverUnder((double)(odd.getDouble(("overUnder"))));
@@ -606,10 +609,10 @@ public class Jobs implements Job {
 						String name = team.getString("displayName");
 						competitorToAdd.setName(name);
 						if(competitor.has("score")){
-							System.out.println("GAME HAS SCORE");
+							//System.out.println("GAME HAS SCORE");
 						competitorToAdd.setScore(Double.parseDouble(competitor.getString("score")));
 						}else{
-							System.out.println("game doesn't have score");
+							//System.out.println("game doesn't have score");
 						}
 						competitorToAdd.setAbbreviation(team.getString("abbreviation"));
 						//System.out.println(team.getString("abbreviation"));
