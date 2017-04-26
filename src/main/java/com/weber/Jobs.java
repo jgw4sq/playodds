@@ -487,7 +487,7 @@ public class Jobs implements Job {
 					
 					if(total==0){
 						//System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
-						System.out.println(comp.getSpread());
+						System.out.println("spread: "+comp.getSpread());
 
 						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation,started,homeTeamTotalRecord,homeTeamHomeRecord,homeTeamAwayRecord,awayTeamTotalRecord,awayTeamHomeRecord,awayTeamAwayRecord,gameType) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"',"+comp.isStarted()+",'"+comp.getHomeCompetitor().getTotalRecord()+"','"+comp.getHomeCompetitor().getHomeRecord()+"','"+comp.getHomeCompetitor().getAwayRecord()+"','"+comp.getAwayCompetitor().getTotalRecord()+"','"+comp.getAwayCompetitor().getHomeRecord()+"','"+comp.getAwayCompetitor().getAwayRecord()+"','NBA')";
 						stmt.execute(sql);
@@ -651,7 +651,7 @@ public class Jobs implements Job {
 					
 					if(total==0){
 //						System.out.println("Adding: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
-						System.out.println(comp.getSpread());
+						System.out.println("spread: "+comp.getSpread());
 						sql = "INSERT INTO Games (homeTeam,awayTeam,id,spread,completed,date,displayClock,homeTeamScore,awayTeamScore,gameTime,homeTeamAbbreviation,awayTeamAbbreviation,started,homeTeamTotalRecord,homeTeamHomeRecord,homeTeamAwayRecord,awayTeamTotalRecord,awayTeamHomeRecord,awayTeamAwayRecord,gameType) VALUES ('"+comp.getHomeCompetitor().getName()+"','"+comp.getAwayCompetitor().getName()+"',"+comp.getId()+",'"+comp.getSpread()+"',"+comp.isCompleted()+",'"+comp.getDate()+"','"+comp.getDisplayclock()+"',"+comp.getHomeCompetitor().getScore()+","+comp.getAwayCompetitor().getScore()+",'"+comp.getGameTime()+"','"+comp.getHomeCompetitor().getAbbreviation()+"','"+comp.getAwayCompetitor().getAbbreviation()+"',"+comp.isStarted()+",'"+comp.getHomeCompetitor().getTotalRecord()+"','"+comp.getHomeCompetitor().getHomeRecord()+"','"+comp.getHomeCompetitor().getAwayRecord()+"','"+comp.getAwayCompetitor().getTotalRecord()+"','"+comp.getAwayCompetitor().getHomeRecord()+"','"+comp.getAwayCompetitor().getAwayRecord()+"','MLB')";
 						stmt.execute(sql);
 						//System.out.println("Added: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
