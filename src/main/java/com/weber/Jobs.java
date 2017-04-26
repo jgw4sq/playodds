@@ -605,7 +605,9 @@ public class Jobs implements Job {
 						}
 						String name = team.getString("displayName");
 						competitorToAdd.setName(name);
+						if(competitor.has("score")){
 						competitorToAdd.setScore(Double.parseDouble(competitor.getString("score")));
+						}
 						competitorToAdd.setAbbreviation(team.getString("abbreviation"));
 						//System.out.println(team.getString("abbreviation"));
 						//System.out.println(name);
