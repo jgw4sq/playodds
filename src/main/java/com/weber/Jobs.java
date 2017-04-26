@@ -549,10 +549,15 @@ public class Jobs implements Job {
 					JSONObject competition = new JSONObject(competitions.get(j).toString());
 					//System.out.println(competition.toString());
 					if (competition.has("odds")) {
+						System.out.println("competition has odds");
+
 						JSONArray odds = competition.getJSONArray("odds");
 						if (odds.length() >= 1) {
+							System.out.println("odds>1");
+
 							JSONObject odd = new JSONObject(odds.get(0).toString());
 							if(odd.has("details")){
+								System.out.println("getting mlb odds");
 							game.setSpread(odd.getString("details"));
 							}
 							if(odd.has("overUnder")){
