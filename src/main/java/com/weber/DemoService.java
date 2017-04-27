@@ -104,9 +104,10 @@ public class DemoService {
 			
 			
 			else if(instruction.equals("reset")){
-				sql = "DELETE FROM GAMES WHERE id=1111";
+				sql = "DELETE FROM Games WHERE id=1111";
 				stmt.execute(sql);
-				sql="DELETE FROM BETS WHERE gameId=1111";
+				sql="DELETE FROM Bets WHERE gameId=1111";
+				stmt.execute(sql);
 				object.put("result", "success");
 				
 				return Response.status(200).entity(object.toString()).build();
