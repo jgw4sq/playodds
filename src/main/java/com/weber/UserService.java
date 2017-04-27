@@ -162,6 +162,9 @@ public class UserService {
 				object.put("result", "error");
 
 			}
+			}else{
+				object.put("result", "error");
+
 			}
 			
 			return Response.status(200).entity(object.toString()).build();
