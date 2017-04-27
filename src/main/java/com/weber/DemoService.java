@@ -91,6 +91,26 @@ public class DemoService {
 				return Response.status(200).entity(object.toString()).build();
 
 				
+			}else if(instruction.equals("finishGame")){
+				sql = "UPDATE Games set completed=1, homeTeamScore=99, awayTeamScore=66 WHERE id=1111";
+				
+				
+
+				updateBets();
+				object.put("result", "success");
+				
+				return Response.status(200).entity(object.toString()).build();
+			}
+			
+			
+			else if(instruction.equals("reset")){
+				sql = "DELETE FROM GAMES WHERE id=1111";
+				stmt.execute(sql);
+				sql="DELETE FROM BETS WHERE gameId=1111";
+				object.put("result", "success");
+				
+				return Response.status(200).entity(object.toString()).build();
+				
 			}
 					
 		
@@ -99,6 +119,323 @@ public class DemoService {
 			return null;
 	
 }
+	
+	
+	public static void updateBets() throws Exception{
+		Statement stmt =null;
+		
+		Class.forName("com.mysql.jdbc.Driver");  
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM Bets WHERE gameComplete=0";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()){
+				int gameId = rs.getInt("gameId");
+				String team = rs.getString("teamName");
+				String betHomeTeamAbbreviaiton = rs.getString("homeTeamAbbreviation");
+				String betAwayTeamAbbreviaiton = rs.getString("awayTeamAbbreviation");
+				String odds = rs.getString("odds");
+				String gameType = rs.getString("gameType");
+				double pointsToRisk = rs.getDouble("pointsToRisk");
+				double pointsToWin = rs.getDouble("pointsToWin");
+				String email = rs.getString("email");
+				sql = "SELECT * FROM Games WHERE id="+gameId;
+				Statement stmt2 = con.createStatement();
+				ResultSet rs1 = stmt2.executeQuery(sql);
+				String homeTeamAbbreviation = null;
+				String awayTeamAbbreviation = null;
+				int homeTeamScore = 0;
+				int awayTeamScore = 0;
+				boolean complete= false;
+				
+				while(rs1.next()){
+					//System.out.println("Getting game data");
+					homeTeamAbbreviation = rs1.getString("homeTeamAbbreviation");
+					awayTeamAbbreviation = rs1.getString("awayTeamAbbreviation");
+					homeTeamScore = rs1.getInt("homeTeamScore");
+					awayTeamScore = rs1.getInt("awayTeamScore");
+					complete = rs1.getBoolean("completed");
+					
+					
+				}
+				sql = "UPDATE Bets SET homeTeamScore="+homeTeamScore+", awayTeamScore="+awayTeamScore+", homeTeamAbbreviation='"+homeTeamAbbreviation+"', awayTeamAbbreviation='"+awayTeamAbbreviation+"', gameComplete="+complete+" WHERE gameId="+gameId;
+				Statement stmt3 = con.createStatement();
+				stmt3.executeUpdate(sql);
+				//System.out.println("updated bet data:, hometeam: "+homeTeamAbbreviation+", awayteam: "+awayTeamAbbreviation+ "hometeamscore: "+homeTeamScore+", awayTeamScore: "+awayTeamScore+" , complete: "+complete);
+				
+				if(complete){
+					Statement stmt4 = con.createStatement();
+					if(gameType.equals("MLB")){
+						if(team.equals(betHomeTeamAbbreviaiton)){
+							if(homeTeamScore>awayTeamScore){
+								System.out.println("Chenging account balance: MLB Bet home team Won");
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+								
+								
+							}else if(homeTeamScore==awayTeamScore){
+								System.out.println("Chenging account balance: MLB Bet home team draw");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: MLB Bet home team lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}
+						}else{
+							if(awayTeamScore>homeTeamScore){
+								System.out.println("Chenging account balance: MLB Bet away team won");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+								
+							}else if(awayTeamScore==homeTeamScore){
+								System.out.println("Chenging account balance: MLB Bet away team draw");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: MLB Bet away team lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}
+						}
+					}else{
+						double spread = Double.parseDouble(odds);
+						if(team.equals(betHomeTeamAbbreviaiton)){
+							if(homeTeamScore+spread>awayTeamScore){
+								System.out.println("Chenging account balance: NBA Bet home team Won");
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else if(homeTeamScore+spread==awayTeamScore){
+								System.out.println("Chenging account balance: NBA Bet home team draw");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: NBA Bet home team lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}
+							
+							
+						}else{
+							if(awayTeamScore+spread>homeTeamScore){
+								System.out.println("Chenging account balance: NBA Bet away team won");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									available+=pointsToWin;
+									used -= pointsToRisk;
+									balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else if(awayTeamScore+spread==homeTeamScore){
+								System.out.println("Chenging account balance: NBA Bet away team draw");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									available+= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									//balance+=pointsToWin;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}else{
+								System.out.println("Chenging account balance: NBA Bet away team lost");
+
+								sql= " SELECT * FROM STOCKUSERS WHERE email='"+email+"'";
+								ResultSet rs3 = stmt4.executeQuery(sql);
+								double balance = 0.0;
+								double used =0.0;
+								double available= 0.0;
+								if(rs3.next()){
+									 balance = rs3.getDouble("accountBalance");
+									used = rs3.getDouble("usedBalance");
+									available = rs3.getDouble("availableBalance");
+									//available-= pointsToRisk;
+									//available+=pointsToWin;
+									used -= pointsToRisk;
+									balance-=pointsToRisk;
+									
+								}
+								sql = "UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+								int rs4 = stmt4.executeUpdate(sql);
+							}
+						}
+					}
+				}
+				
+				stmt3.close();
+				stmt2.close();
+				
+			}
+			stmt.close();
+			con.close();
+		
+	}
+
+	
+	
 	
 	public static String getHTML(String urlToRead) throws Exception {
 	    StringBuilder result = new StringBuilder();
