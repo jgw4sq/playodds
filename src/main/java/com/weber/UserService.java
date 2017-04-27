@@ -41,7 +41,7 @@ public class UserService {
 	@Path("{email}")
 	  @GET
 	  @Produces("application/json")
-	  public Response signUpUser(@PathParam("email") String email) throws Exception {
+	  public Response updateUser(@PathParam("email") String email) throws Exception {
 
 		Statement stmt =null;
 		JSONObject object = new JSONObject();
@@ -109,6 +109,74 @@ public class UserService {
 
 		
 	}
+	
+	
+	
+	@Path("{email}/{replenish}")
+	  @GET
+	  @Produces("application/json")
+	  public Response replenishUser(@PathParam("email") String email,@PathParam("replenish") String replenish) throws Exception {
+
+		Statement stmt =null;
+		JSONObject object = new JSONObject();
+		Class.forName("com.mysql.jdbc.Driver");  
+		 Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM STOCKUSERS WHERE email ='"+email+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			double balance = 200.0;
+			double used =0.0;
+			double available=200.0;
+			if(rs.next()){
+				//user already exists
+				
+				sql="UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", usedBalance="+used+" WHERE email='"+email+"'";
+				Statement stmt2 = con.createStatement();
+				int rs2 = stmt2.executeUpdate(sql);
+				
+				if(rs2>0){
+				
+				
+				
+				object.put("result", "success");
+				JSONObject user = new JSONObject();
+				user.put("email", rs.getString("email"));
+				user.put("username", rs.getString("username"));
+				user.put("password", rs.getString("password"));
+				user.put("accountBalance", balance);
+
+				user.put("availableBalance", available);
+
+				user.put("usedBalance", used);
+				user.put("firstName", rs.getString("firstName"));
+				user.put("lastName", rs.getString("lastName"));
+				object.put("user", user);
+
+
+
+
+
+			}else{
+				
+				object.put("result", "error");
+
+			}
+			}
+			
+			return Response.status(200).entity(object.toString()).build();
+
+
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public static String getHTML(String urlToRead) throws Exception {
 	    StringBuilder result = new StringBuilder();
 	    URL url = new URL(urlToRead);
