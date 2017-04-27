@@ -94,7 +94,7 @@ public class DemoService {
 			}else if(instruction.equals("finishGame")){
 				sql = "UPDATE Games set completed=1, homeTeamScore=99, awayTeamScore=66 WHERE id=1111";
 				
-				
+				stmt.execute(sql);
 
 				updateBets();
 				object.put("result", "success");
