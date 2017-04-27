@@ -92,7 +92,7 @@ public class DemoService {
 
 				
 			}else if(instruction.equals("finishGame")){
-				sql = "UPDATE Games set completed=1, homeTeamScore=99, awayTeamScore=66 WHERE id=1111";
+				sql = "UPDATE Games set completed=1, homeTeamScore=99, awayTeamScore=99 WHERE id=1111";
 				
 				stmt.execute(sql);
 
