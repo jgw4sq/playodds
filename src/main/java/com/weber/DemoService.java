@@ -113,9 +113,16 @@ public class DemoService {
 				return Response.status(200).entity(object.toString()).build();
 				
 			}else if(instruction.equals("zeroOutUser")){
+				sql="DELETE FROM Bets WHERE email='gradedemo@gmail.com'";
+				stmt.execute(sql);
+
 				sql="UPDATE STOCKUSERS set accountBalance=0, availableBalance=0, usedBalance=0 WHERE email='gradedemo@gmail.com'";
 				stmt.execute(sql);
+				sql="DELETE FROM Bets WHERE email='classdemo@gmail.com'";
+				stmt.execute(sql);
 				sql="UPDATE STOCKUSERS set accountBalance=0, availableBalance=0, usedBalance=0 WHERE email='classdemo@gmail.com'";
+				stmt.execute(sql);
+				sql="DELETE FROM Bets WHERE email='wx'";
 				stmt.execute(sql);
 				sql="UPDATE STOCKUSERS set accountBalance=0, availableBalance=0, usedBalance=0 WHERE email='wx'";
 				stmt.execute(sql);
