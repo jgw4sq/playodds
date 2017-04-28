@@ -199,7 +199,7 @@ public class UserService {
 				 available-=doubleamount;
 				 used = rs.getDouble("usedBalance");
 				
-				sql="UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+", WHERE email='"+email+"'";
+				sql="UPDATE STOCKUSERS SET accountBalance="+balance+", availableBalance="+available+" WHERE email='"+email+"'";
 				Statement stmt2 = con.createStatement();
 				int rs2 = stmt2.executeUpdate(sql);
 				
