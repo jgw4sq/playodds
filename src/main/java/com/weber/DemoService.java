@@ -108,6 +108,15 @@ public class DemoService {
 				stmt.execute(sql);
 				sql="DELETE FROM Bets WHERE gameId=1111";
 				stmt.execute(sql);
+				
+				sql="DELETE FROM STOCKUSERS WHERE email='gradedemo@gmail.com'";
+				stmt.execute(sql);
+				
+				
+				sql= "INSERT INTO STOCKUSERS (username,email,password,accountBalance,availableBalance,usedBalance,firstName,lastName) VALUES ('gradedemo','gradedemo@gmail.com','password',200,200,0,'grade','demo')";
+				stmt.execute(sql);
+				
+				
 				object.put("result", "success");
 				
 				return Response.status(200).entity(object.toString()).build();
