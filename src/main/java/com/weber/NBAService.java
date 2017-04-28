@@ -35,7 +35,7 @@ public class NBAService {
 		 Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://127.9.167.130:3306/jake","adminnHxi4B8","fWUk7PSKVlcV");
 			stmt = con.createStatement();
-		String sql = "Select * From Games WHERE timeStamp > DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
+		String sql = "Select * From Games WHERE timeStamp > DATE_SUB(CURDATE(), INTERVAL 3 DAY)";
 		ResultSet rs = stmt.executeQuery(sql);
 		String returnString = "";
 		JSONArray array= new JSONArray();

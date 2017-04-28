@@ -501,7 +501,7 @@ public class Jobs implements Job {
 					}else{
 						//System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 						//System.out.println("home: "+comp.getHomeCompetitor().getScore() + ", away: "+comp.getAwayCompetitor().getScore());
-						sql = "UPDATE Games SET started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
+						sql = "UPDATE Games SET spread='"+comp.getSpread()+"', started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
 						//System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
@@ -670,7 +670,7 @@ public class Jobs implements Job {
 					}else{
 						//System.out.println("Updating: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
 
-						sql = "UPDATE Games SET started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
+						sql = "UPDATE Games SET spread='"+comp.getSpread()+"', started="+comp.isStarted()+", completed="+comp.isCompleted()+", displayClock='"+comp.getDisplayclock()+"', homeTeamScore="+comp.getHomeCompetitor().getScore()+", awayTeamScore="+comp.getAwayCompetitor().getScore()+", gameTime='"+comp.getGameTime()+"' WHERE id="+comp.getId();
 					
 						stmt.execute(sql);
 						//System.out.println("Updated: "+comp.getHomeCompetitor().getName()+" vs. "+comp.getAwayCompetitor().getName());
